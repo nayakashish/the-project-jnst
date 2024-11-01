@@ -5,17 +5,22 @@
 
  This application will be a user-focused weather platform offering real-time weather updates and a 5-day forecast for selected locations. The platform will allow users to create accounts, allowing them to access, personalize, and share their dashboards with other users. The system will support search functionality, enabling users to retrieve weather details by city name. For each selected location, it will display current temperature, weather conditions, and an appropriate weather icon, with user-selectable display formats for personalization. Users will also benefit from quick access to saved favorite locations on their dashboards and can share this information with others once they have created an account. In addition, the application will maintain a simple and intuitive interface, ensuring accessibility across multiple web screen sizes and browser environments like Chrome and Safari. It will adhere to data privacy standards, disclosing only necessary user information. Users can expect seamless login and logout functionality to protect their accounts. The platform will also notify users of any errors in retrieving weather data, managing accounts, or sharing features, making the experience smooth and user-friendly.
 
-**You must have:**
+**Functional Requirements**
 
-* Unit tests and integration tests to ensure code quality and functionality
-* A CI to automatically test
-* Set of user requirements, identified user groups, and developed use-cases
-* Identified what design patterns you are using and describe why
-* Dockerized deployment
-* Continual and ongoing work using TDD 
-* A team between 3-5 people (no more, no less) - target for 4
+1. Users must be able to create, edit, and delete accounts.
+2. Users will be able to log in to access their personal dashboard.
+3. Users can personalize their dashboard (e.g., select favorite locations or adjust themes).
+4. Logged-in users will be able to save favorite locations for quick access on the dashboard.
+5. Logged-in users will be able to share their dashboard with other users.
+6. The system will allow users to search for weather information by city name.
+7. The system will display current weather for the selected location, including temperature, weather conditions (e.g., cloudy, rainy), and an icon representing the current weather condition.
+8. The system will display a 5-day weather forecast, showing daily temperatures, weather conditions.
+9. Users will be able to choose how to display temperature (Celsius/Fahrenheit) and weather formats (e.g., detailed/summary view).
+10. Shared dashboards will be view-only for other users.
+11. he system will notify the user of any errors in retrieving weather, account management, or sharing, if they occur.
 
-**Stretch goals:**
+
+**Non-functional Requirements**
 
 * CD pipeline to deploy changes to the codebase
   

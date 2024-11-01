@@ -32,14 +32,14 @@
   
 ## Proto-personas:
 
-![Proto-person 1](/the-project-jnst/images/protoPersona1.png)
-![Proto-person 2](/the-project-jnst/images/protoPersona2.png)
-![Proto-person 3](/the-project-jnst/images/protoPersona3.png)
-![Proto-person 4](/the-project-jnst/images/protoPersona4.png)
+![Proto-person 1](the-project-jnst/images/protoPersona1.png)
+![Proto-person 2](the-project-jnst/images/protoPersona2.png)
+![Proto-person 3](the-project-jnst/images/protoPersona3.png)
+![Proto-person 4](the-project-jnst/images/protoPersona4.png)
 
 ## Use-case Diagram:
 
-![Proto-person 1](/the-project-jnst/images/useCaseDiagram.png)
+![Proto-person 1](the-project-jnst/images/useCaseDiagram.png)
 
 
 

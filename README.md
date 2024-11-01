@@ -22,7 +22,13 @@
 
 **Non-functional Requirements**
 
-* CD pipeline to deploy changes to the codebase
+1. The user interface should be simple and intuitive, allowing users to quickly access weather information.
+2. The system will support multiple active users simultaneously. 
+3. The system must not disclose any personal information about users apart from their name and shared dashboards to users of the system.
+4. The app must work on common browsers like Chrome and Safari.
+5. Basic login and logout functionality should be implemented to protect accounts.
+6. The application must adapt to various screen sizes (web), so that it displays content properly depending on how large the browser screen size is.
+
   
 ## Project Goals:
 

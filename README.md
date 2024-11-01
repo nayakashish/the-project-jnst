@@ -57,6 +57,8 @@ The application must adapt to various screen sizes (web), so that it displays co
 
 ## Use Cases
 
+![Alt text](Images\useCaseDiagram.png "UseCaseDiagram")
+
 ### OpenWeatherAPI
 **Actor**: OpenWeatherAPI (Secondary)  
 **Description**: The OpenWeatherAPI receives requests from the application to provide weather data for viewing by users.
@@ -231,16 +233,4 @@ The application must adapt to various screen sizes (web), so that it displays co
 
 ---
 
-## Setup
 
-1. Clone the repository.
-2. Install dependencies: `npm install`
-3. Obtain an API key from OpenWeather API.
-4. Set up environment variables for API key and server configuration.
-5. Start the server: `npm start`
-
----
-
-## License
-
-This project is licensed under the MIT License.

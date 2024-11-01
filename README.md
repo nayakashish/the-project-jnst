@@ -2,6 +2,12 @@
 
 This project is a web-based weather application that provides users with real-time weather data, location-specific forecasts, and a customizable dashboard. Users can view, share, and customize their weather data and dashboards, all powered by the OpenWeather API.
 
+#### Project Members
+ - Jan Suratos
+ - Tawana Ndlovu
+ - Syed Saad Ali
+ - Ashish Nayak
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -14,7 +20,7 @@ This project is a web-based weather application that provides users with real-ti
 
 ## Overview
 
-Project Description & Scope -  
+**Project Description & Scope -** \
  This application will be a user-focused weather platform offering real-time weather updates and a 5-day forecast for selected locations. The platform will allow users to create accounts, allowing them to access, personalize, and share their dashboards with other users. The system will support search functionality, enabling users to retrieve weather details by city name. For each selected location, it will display current temperature, weather conditions, and an appropriate weather icon, with user-selectable display formats for personalization. Users will also benefit from quick access to saved favorite locations on their dashboards and can share this information with others once they have created an account. In addition, the application will maintain a simple and intuitive interface, ensuring accessibility across multiple web screen sizes and browser environments like Chrome and Safari. It will adhere to data privacy standards, disclosing only necessary user information. Users can expect seamless login and logout functionality to protect their accounts. The platform will also notify users of any errors in retrieving weather data, managing accounts, or sharing features, making the experience smooth and user-friendly.
 
 
@@ -23,9 +29,7 @@ Project Description & Scope -
 
 ## Requirements
 
-Requirements - 
-
-Functional:
+**Functional:**
 Users must be able to create, edit, and delete accounts.
 Users will be able to log in to access their personal dashboard.
 Users can personalize their dashboard (e.g., select favorite locations or adjust themes).
@@ -38,7 +42,7 @@ Users will be able to choose how to display temperature (Celsius/Fahrenheit) and
 Shared dashboards will be view-only for other users.
 The system will notify the user of any errors in retrieving weather, account management, or sharing, if they occur.
 
-Non-Functional:
+**Non-Functional:**
 The user interface should be simple and intuitive, allowing users to quickly access weather information.
 The system will support multiple active users simultaneously. 
 The system must not disclose any personal information about users apart from their name and shared dashboards to users of the system.
@@ -50,17 +54,39 @@ The application must adapt to various screen sizes (web), so that it displays co
 ---
 
 ## Proto Personas
-![Alt text](Images\Persona1.png "Persona1")
-![Alt text](Images\Persona2.png "Persona2")
-![Alt text](Images\Persona3.png "Persona3")
-![Alt text](Images\Persona4.png "Persona4")
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+
+  <div style="flex: 1 1 45%; margin: 5px;">
+    <img src="images/Persona1.png" alt="Image 1" title="Persona 1" width="100%">
+  </div>
+  
+  <div style="flex: 1 1 45%; margin: 5px;">
+    <img src="images/Persona2.png" alt="Image 2" title="Persona 2" width="100%">
+  </div>
+  
+  <div style="flex: 1 1 45%; margin: 5px;">
+    <img src="images/Persona3.png" alt="Image 3" title="Persona 3" width="100%">
+  </div>
+  
+  <div style="flex: 1 1 45%; margin: 5px;">
+    <img src="images/Persona4.png" alt="Image 4" title="Persona 4" width="100%">
+  </div>
+
+</div>
+
 
 ## Use Cases
 
-![Alt text](Images\useCaseDiagram.png "UseCaseDiagram")
+<img src="images/useCaseDiagram.png" alt="UseCase Diagram" title="UseCaseDiagram" style="width: 50%;">
 
-### OpenWeatherAPI
-**Actor**: OpenWeatherAPI (Secondary)  
+
+
+### Actors
+**Actor**: Users (Primary) \
+**Description**: Users are our primary actors in this application. They will be using the system most utilizing various use cases. Users will be able to view the weather, set locations, favorite locations to their dashboard, and share their dashboard with others. 
+
+**Actor**: OpenWeatherAPI (Secondary)  \
 **Description**: The OpenWeatherAPI receives requests from the application to provide weather data for viewing by users.
 
 ---

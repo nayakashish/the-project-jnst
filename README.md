@@ -12,6 +12,7 @@ This project is a web-based weather application that provides users with real-ti
 
 - [Overview](#overview)
 - [Requirements](#requirements)
+- [Proto Personas](#proto-personas)
 - [Use Cases](#use-cases)
 - [Setup](#setup)
 - [License](#license)

@@ -9,7 +9,7 @@
 - [Test plan](#test-plan)
 
 
-<img src="/the-project-jnst/images/architectureDiagram.png" alt="architectureDiagram" title="architectureDiagram" style="width: 50%;">
+![architectureDiagram](../images/architectureDiagram.png)
 
 ## Architecture diagram
 Presentation Layer (Manages front end):
@@ -33,14 +33,5 @@ Data Layer: Handles data storage
 ---
 
 ## Test plan
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
-
-  <div style="flex: 1 1 45%; margin: 5px;">
-    <img src="images/TestPlan1.png" alt="Image 1" title="Persona 1" width="100%">
-  </div>
-  
-  <div style="flex: 1 1 45%; margin: 5px;">
-    <img src="images/TestPlan2.png" alt="Image 2" title="Persona 2" width="100%">
-  </div>
-
-</div>
+![testPlan1](../images/TestPlan1.png)
+![testPlan2](../images/TestPlan2.png)

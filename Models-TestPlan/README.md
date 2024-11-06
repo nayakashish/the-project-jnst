@@ -32,7 +32,7 @@ Data Layer: Handles data storage
 
 ---
 ## Sequence Diagram:
-![SequenceDiagram](/Users/blacboy26/Desktop/Sequence Diagram for Weather App.png)
+![SequenceDiagram](../images/Sequence Diagram for Weather App.png)
 
 ## Test plan
 ![testPlan1](../images/TestPlan1.png)

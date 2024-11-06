@@ -33,3 +33,14 @@ Data Layer: Handles data storage
 ---
 
 ## Test plan
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+
+  <div style="flex: 1 1 45%; margin: 5px;">
+    <img src="images/TestPlan1.png" alt="Image 1" title="Persona 1" width="100%">
+  </div>
+  
+  <div style="flex: 1 1 45%; margin: 5px;">
+    <img src="images/TestPlan2.png" alt="Image 2" title="Persona 2" width="100%">
+  </div>
+
+</div>

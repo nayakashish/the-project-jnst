@@ -31,6 +31,8 @@ Data Layer: Handles data storage
     Database: Weather data is stored in a database upon saving or sharing the weather.
 
 ---
+## Sequence Diagram:
+![SequenceDiagram](/Users/blacboy26/Desktop/Sequence Diagram for Weather App.png)
 
 ## Test plan
 ![testPlan1](../images/TestPlan1.png)

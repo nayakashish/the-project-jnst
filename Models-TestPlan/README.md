@@ -34,6 +34,11 @@ Data Layer: Handles data storage
 ## Sequence Diagram:
 ![SequenceDiagram](../images/SequenceDiagram.png)
 
+---
+
+## DFD
+![SequenceDiagram](../images/dataFlowDiagram.png)
+---
 ## Test plan
 ![testPlan1](../images/TestPlan1.png)
 ![testPlan2](../images/TestPlan2.png)

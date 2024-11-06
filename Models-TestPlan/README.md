@@ -28,7 +28,7 @@ Communication Layer (Handles external communication):
 
 Data Layer: Handles data storage 
 
-    Weather JSON File: Weather data is stored in a JSON file upon saving or sharing the weather.
+    Database: Weather data is stored in a database upon saving or sharing the weather.
 
 ---
 

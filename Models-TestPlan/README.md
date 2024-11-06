@@ -11,7 +11,7 @@
 
 <img src="/the-project-jnst/images/architectureDiagram.png" alt="architectureDiagram" title="architectureDiagram" style="width: 50%;">
 
-
+## Architecture diagram
 Presentation Layer (Manages front end):
 
     UI: The main interface where the user interacts with. Sends and receives data from the server. 
@@ -29,3 +29,7 @@ Communication Layer (Handles external communication):
 Data Layer: Handles data storage 
 
     Weather JSON File: Weather data is stored in a JSON file upon saving or sharing the weather.
+
+---
+
+## Test plan

@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../src/styles/styles.css">
 </head>
 <body>
+    <script src="../src/scripts/main.js"></script>
     <div class="container">
         <!-- Header Section -->
         <header>
@@ -23,25 +24,39 @@
         <!-- Current Weather Section -->
         <section class="current-weather">
             <div class="time-info">
-                <h2>Athens</h2>
-                <h1>09:03</h1>
-                <p>Thursday, 31 Aug</p>
+                <!-- This element will display the city name -->
+                <h2 id="cityName">Athens</h2>
+        
+                <!-- This element will display the time -->
+                <h1 id="time">09:03</h1>
+        
+                <!-- This element will display the current date -->
+                <p id="date">Thursday, 31 Aug</p>
             </div>
+        
             <div class="weather-info">
-                <h2>24°C</h2>
-                <p>Feels like: 22°C</p>
+                <!-- This element will display the temperature -->
+                <h2 id="temperature">24°C</h2>
+        
+                <!-- This element will display the "feels like" temperature -->
+                <p id="feelsLike">Feels like: 22°C</p>
+        
                 <div class="sun-info">
-                    <p>Sunrise: 06:37 AM</p>
-                    <p>Sunset: 20:37 PM</p>
+                    <!-- These elements will display the sunrise and sunset times -->
+                    <p id="sunrise">Sunrise: 06:37 AM</p>
+                    <p id="sunset">Sunset: 20:37 PM</p>
                 </div>
+        
                 <div class="extra-info">
-                    <p>Humidity: 41%</p>
-                    <p>Wind Speed: 2 km/h</p>
-                    <p>Pressure: 997 hPa</p>
-                    <p>UV Index: 8</p>
+                    <!-- These elements will display the humidity, wind speed, pressure, and UV index -->
+                    <p id="humidity">Humidity: 41%</p>
+                    <p id="windSpeed">Wind Speed: 2 km/h</p>
+                    <p id="pressure">Pressure: 997 hPa</p>
+                    <p id="uvIndex">UV Index: 8</p>
                 </div>
             </div>
         </section>
+        
 
         <!-- 5-Day Forecast -->
         <section class="forecast">

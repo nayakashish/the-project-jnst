@@ -18,6 +18,15 @@ def get_weather():
     city = request.args.get("city")
     if not city:
         return jsonify({"error": "City is required"}), 400
+# Fetch weather data from OpenWeather API
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        return jsonify({"error": "Failed to fetch weather data"}), 500
+
+    weather_data = response.json()
+    return jsonify(weather_data)
 
 if __name__ == "__main__":
     app.run(debug=True)

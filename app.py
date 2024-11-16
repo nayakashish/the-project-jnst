@@ -11,7 +11,13 @@ API_KEY = ""
 
 @app.route("/")
 def home():
-    return "<h1>Welcome to My Flask Web Server!</h1>"
+    return render_template("index.html")
+
+@app.route("/weather", methods=["GET"])
+def get_weather():
+    city = request.args.get("city")
+    if not city:
+        return jsonify({"error": "City is required"}), 400
 
 if __name__ == "__main__":
     app.run(debug=True)

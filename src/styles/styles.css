@@ -8,6 +8,7 @@
 
 body {
     background-color: #1c1c1c;
+    padding-top: 3rem;
     color: #fff;
     display: flex;
     justify-content: center;
@@ -18,6 +19,7 @@ body {
 .container {
     width: 80%;
     max-width: 900px;
+    height: 43rem;
     background: #333;
     padding: 20px;
     border-radius: 20px;
@@ -175,6 +177,8 @@ a {
 .settings-icon {
     grid-area: settings;
     display: flex;
+    position: relative;
+    top: -10rem;
     justify-content: center;
     align-items: center;
 }

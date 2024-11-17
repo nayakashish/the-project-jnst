@@ -9,15 +9,15 @@ def client():
 
 def test_view_weather_on_open(client):
     """
-    Test that the app allows users to iew wather when connected to a network.
+    Test that the app allows users to view weather when connected to a network.
     """
     response = client.get("/") #Sends a GET request to the route ("/") of the app
-    assert response.status_code == 200 #Checks if the HTTP request code is 200 (OK), indicating that erver succesfully processed the request
+    assert response.status_code == 200 #Checks if the HTTP request code is 200 (OK), indicating that server succesfully processed the request
     assert b"Current Weather" in response.data #Verifies that the response contains "Current Weather" text
 
 def test_view_five_day_forecast(client):
     """
-    Test that the app provides a 5 day forecast
+    Test that the app provides a 5 day weather forecast.
     """
     response = client.get("/") #Sends a GET request to the "/forecast" route
     assert response.status_code == 200
@@ -25,7 +25,7 @@ def test_view_five_day_forecast(client):
 
 def test_search_location(client):
     """
-    Test that the app allows searching for location by name
+    Test that the app allows searching for location by name.
     """
     response = client.get("/weather?city=Kelowna") #Sends a GET request with a city parameter
     assert response.status_code == 200
@@ -33,9 +33,9 @@ def test_search_location(client):
 
 def test_user_login(client):
     """
-    Test that users must log in to access specific features
+    Test that users must log in to access specific features.
     """
     #Sends a POST (used when submitting data) request to "/login" with mock credentials
-    response = client.get("/login", json = {"username": "test_user", "password": "test_pass"}) 
+    response = client.post("/login", json = {"username": "test_user", "password": "test_pass"}) 
     assert response.status_code == 200
     assert b"Welcome test_user" in response.data #Verify that the response includes a welcome message

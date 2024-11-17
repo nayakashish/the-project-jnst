@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
 }
 
 body {
@@ -139,6 +139,7 @@ header {
     padding: 20px;
     background: #444;
     border-radius: 20px;
+    height: 13rem;
 }
 
 .saved-locations h3 {
@@ -150,6 +151,7 @@ header {
     display: grid;
     grid-template-columns: 1fr;
     gap: 10px;
+    padding-bottom: 0.5rem;
 }
 
 .saved-locations li {
@@ -157,7 +159,16 @@ header {
     background: #555;
     border-radius: 10px;
 }
+.saved-locations__viewMore {
+    padding-top: 5rem;
+    padding-left: 1rem;
+    font-size: 1rem;
+}
 
+a {
+  text-decoration: none;  /* Removes the underline */
+  color: inherit;         /* Makes the link color the same as the surrounding text */
+}
 /* Settings Icon */
 .settings-icon {
     grid-area: settings;

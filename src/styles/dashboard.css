@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+body {
+  background-color: #1c1c1c;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+}

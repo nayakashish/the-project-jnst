@@ -83,4 +83,10 @@ Collectively we believe that we had chalenges in terms of communicating with eac
 
 ---
 
+## **6. Testing Report**
+
+ Create basic testing framework (including CI)     is compelted
+ 
+---
+
 **Reminder:** Book a time with the TA during lab sessions to present this report.

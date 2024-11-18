@@ -45,6 +45,7 @@
 
 - **What’s Working:**
   - Kanban board keeps tasks visible and manageable.
+  - Iterative work on the project everyday.
 
 - **Challenges:**
   - Lack of communication due to the reading break.
@@ -53,6 +54,8 @@
 - **Proposed Changes:**
   - Regular meetings to improve task hand-offs.
   - Define clearer priorities in the Kanban board, some were redundant.
+  - Adopt a workflow style such as agile or scrum for organized planing.
+  - Rotate on roles so everyone understands each part of the project.
 
 ---
 
@@ -61,7 +64,7 @@
 | **Branch Name**        | **Task**                            | **Merged**  | **Notes**                      |
 |-------------------------|-------------------------------------|-------------|---------------------------------|
 | `development`   | Development Progress        | No         | branch for merging features   |
-| `milestone-4--dashboard`   | Create dashboard UI        | No         | branch for creating the dashboard      |
+| `milestone-4--dashboard`   | Summarize milestone 4 work        | No         | branch for displaying milestone 4 update      |
 | `requirementsEngineering`      | Requirements Analysis        | Yes         | branch for specifying requirements         |
 | `server-development`           | End to end communication           | No         | branch for developing server       |
 | `test_Authentication`           | Testing            | No         | branch for testing authentication      |

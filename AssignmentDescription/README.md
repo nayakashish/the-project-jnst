@@ -1,81 +1,267 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/HWOPiRJG)
-[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=16748306)
+<<<<<<< HEAD
+# Milestone 4
+=======
+# Weather App
 
-# Project Description
+This project is a web-based weather application that provides users with real-time weather data, location-specific forecasts, and a customizable dashboard. Users can view, share, and customize their weather data and dashboards, all powered by the OpenWeather API.
 
+#### Project Members
+ - Jan Suratos
+ - Tawana Ndlovu
+ - Syed Saad Ali
+ - Ashish Nayak
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Requirements](#requirements)
+- [Proto Personas](#proto-personas)
+- [Use Cases](#use-cases)
+- [Setup](#setup)
+- [License](#license)
+
+---
+
+## Overview
+
+**Project Description & Scope -** \
  This application will be a user-focused weather platform offering real-time weather updates and a 5-day forecast for selected locations. The platform will allow users to create accounts, allowing them to access, personalize, and share their dashboards with other users. The system will support search functionality, enabling users to retrieve weather details by city name. For each selected location, it will display current temperature, weather conditions, and an appropriate weather icon, with user-selectable display formats for personalization. Users will also benefit from quick access to saved favorite locations on their dashboards and can share this information with others once they have created an account. In addition, the application will maintain a simple and intuitive interface, ensuring accessibility across multiple web screen sizes and browser environments like Chrome and Safari. It will adhere to data privacy standards, disclosing only necessary user information. Users can expect seamless login and logout functionality to protect their accounts. The platform will also notify users of any errors in retrieving weather data, managing accounts, or sharing features, making the experience smooth and user-friendly.
 
-**Functional Requirements**
-
-1. Users must be able to create, edit, and delete accounts.
-2. Users will be able to log in to access their personal dashboard.
-3. Users can personalize their dashboard (e.g., select favorite locations or adjust themes).
-4. Logged-in users will be able to save favorite locations for quick access on the dashboard.
-5. Logged-in users will be able to share their dashboard with other users.
-6. The system will allow users to search for weather information by city name.
-7. The system will display current weather for the selected location, including temperature, weather conditions (e.g., cloudy, rainy), and an icon representing the current weather condition.
-8. The system will display a 5-day weather forecast, showing daily temperatures, weather conditions.
-9. Users will be able to choose how to display temperature (Celsius/Fahrenheit) and weather formats (e.g., detailed/summary view).
-10. Shared dashboards will be view-only for other users.
-11. he system will notify the user of any errors in retrieving weather, account management, or sharing, if they occur.
 
 
-**Non-functional Requirements**
+---
 
-1. The user interface should be simple and intuitive, allowing users to quickly access weather information.
-2. The system will support multiple active users simultaneously. 
-3. The system must not disclose any personal information about users apart from their name and shared dashboards to users of the system.
-4. The app must work on common browsers like Chrome and Safari.
-5. Basic login and logout functionality should be implemented to protect accounts.
-6. The application must adapt to various screen sizes (web), so that it displays content properly depending on how large the browser screen size is.
+## Requirements
 
+**Functional:**
+Users must be able to create, edit, and delete accounts.
+Users will be able to log in to access their personal dashboard.
+Users can personalize their dashboard (e.g., select favorite locations or adjust themes).
+Logged-in users will be able to save favorite locations for quick access on the dashboard.
+Logged-in users will be able to share their dashboard with other users.
+The system will allow users to search for weather information by city name.
+The system will display current weather for the selected location, including temperature, weather conditions (e.g., cloudy, rainy), and an icon representing the current weather condition.
+The system will display a 5-day weather forecast, showing daily temperatures, weather conditions.
+Users will be able to choose how to display temperature (Celsius/Fahrenheit) and weather formats (e.g., detailed/summary view).
+Shared dashboards will be view-only for other users.
+The system will notify the user of any errors in retrieving weather, account management, or sharing, if they occur.
+
+**Non-Functional:**
+The user interface should be simple and intuitive, allowing users to quickly access weather information.
+The system will support multiple active users simultaneously. 
+The system must not disclose any personal information about users apart from their name and shared dashboards to users of the system.
+The app must work on common browsers like Chrome and Safari.
+Basic login and logout functionality should be implemented to protect accounts.
+The application must adapt to various screen sizes (web), so that it displays content properly depending on how large the browser screen size is.
+
+
+---
+
+## Proto Personas
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+
+  <div style="flex: 1 1 45%; margin: 5px;">
+    <img src="images/Persona1.png" alt="Image 1" title="Persona 1" width="100%">
+  </div>
   
-## Project Goals:
+  <div style="flex: 1 1 45%; margin: 5px;">
+    <img src="images/Persona2.png" alt="Image 2" title="Persona 2" width="100%">
+  </div>
+  
+  <div style="flex: 1 1 45%; margin: 5px;">
+    <img src="images/Persona3.png" alt="Image 3" title="Persona 3" width="100%">
+  </div>
+  
+  <div style="flex: 1 1 45%; margin: 5px;">
+    <img src="images/Persona4.png" alt="Image 4" title="Persona 4" width="100%">
+  </div>
 
-* To deepen the students' understanding of software engineering principles, tools, and techniques.
-* To enable students to apply software engineering principles, tools, and techniques to the development of complex software systems.
-* To introduce students to agile development methodologies, software metrics, and software quality assurance.
-* To foster collaboration and teamwork among students in the development of software systems.
+</div>
 
-The goal is to be able to build good code quickly (using the proper processes).  Remember: **Perfect is the enemy of good**
 
-Build incrementally with this in mind, making small and incremental improvements.   
+## Use Cases
 
-## Project Objectives:
+<img src="images/useCaseDiagram.png" alt="UseCase Diagram" title="UseCaseDiagram" style="width: 50%;">
 
-By the end of this project, students will be able to:
 
-* Apply the software development process model, to the development of a software system
-* Design software systems using appropriate design patterns and principles
-* Develop software architectures for complex software systems
-* Use software testing techniques to ensure the quality of software systems
-* Apply agile development methodologies to the development of software systems
-* Apply software metrics to evaluate the quality of software systems
-* Develop software quality assurance plans to ensure the quality of software systems
-* Apply and develop a CI/CD pipeline for automated testing and deployment
-* Utilize dockerization to containerize your application
-* Work collaboratively in teams to develop software systems
 
-**Peer Evaluation:** see [Peer Evaluation](https://canvas.ubc.ca/courses/150415/pages/peer-evaluation?wrap=1)
+### Actors
+**Actor**: Users (Primary) \
+**Description**: Users are our primary actors in this application. They will be using the system most utilizing various use cases. Users will be able to view the weather, set locations, favorite locations to their dashboard, and share their dashboard with others. 
 
-## Evaluation: 
+**Actor**: OpenWeatherAPI (Secondary)  \
+**Description**: The OpenWeatherAPI receives requests from the application to provide weather data for viewing by users.
 
-See Canvas for [details](https://canvas.ubc.ca/courses/150415/pages/the-project).
+---
 
-## The Projects (all are web apps):
+### Use Case 1. View Weather
+**Primary Actor**: User  
+**Description**: Users view the weather for a default location upon opening the app.  
+**Pre-condition**: Successful API connection.  
+**Post-condition**: Accurate weather data is displayed, including forecast and summary.
 
-**Your team MUST select one of the these projects.**  Please take the time to review the details for each.
+**Main Scenario**:
+1. User opens the application.
+2. Application requests data from the API.
+3. API provides weather data.
+4. Application displays the data.
 
-**Todo App:**  Develop a basic to-do list app that allows users to manage tasks. Users can add, edit, delete tasks, and organize them by categories or due dates.  Users will also be able to share (view/edit) with other users.  The system needs to allow tasks to be organized into custom categories (e.g., Work, Personal) as well as support optional due dates with simple reminders or alerts.  Users will be able to ssign priority to tasks (e.g., High, Medium, Low) as well as view tasks based on categories, priorities, or due dates.  The platform should incorporate the Command Pattern to implement undo and redo functionalities for task actions, the Observer Pattern to update task lists dynamically when changes occur and the Strategy Pattern for sorting algorithms based on different criteria. Additionally, the platform should incorporate Continuous Integration (CI) and automated testing.
+**Extension**:
+- 1a. Process completes within seconds.
+- 2a. API connection fails.
+    - 2a1. Application notifies the user of an error.
 
-**Flashcard Study App:**  Create a simple flashcard application that allows users to create, edit, and review flashcards for studying. The app supports text-based cards and simple categorization into decks.  With the online system,  users will be able to create and organize flashcards into decks by subject or topic.  They will be able to create flashcards but adding questions and answers to flashcards.   The system will have a study mode that will allow flashcards to be reviewed in order or in a randomized fashion.   The system will also allow for progress tracking, allowing users to  mark flashcards as known or unknown so progress can be tracked.  Users will also allow their flashcards to be shared with other users or publicly as well as having the ability to share decks with others via simple file formats.  The platform should incorporate the Factory Pattern for creating different types of flashcards or decks, the Iterator Pattern to  navigate through flashcards efficiently and the Singleton Pattern to manage user settings or session data.  Additionally, the platform should incorporate Continuous Integration (CI) and automated testing.
+---
 
-**Weather Forecast Application:** Build a simple application that displays current weather information and a 5-day forecast for a user-selected location using a public weather API.  Users will need to create an account so they can access and edit  their dashboard as well as being able to share it with other users.  The system must support location search where users can search for weather information by city name as well as display the current weather showing temperature, weather conditions, and an icon representing the weather (with the user being able to select formats/options for how data is displayed).  The system will also show a 5-day forecast which will display basic forecast information for the next five days.  Users will also be able to save favourite locations for quick access on their dashboard as well as being able to save and share with other users.   The platform should incorporate the Adapter Pattern to interface with the external weather API. the Singleton Pattern to  manage a single instance of the API client and the Facade Pattern to simplify the interface for fetching and displaying weather data.   Additionally, the platform should incorporate Continuous Integration (CI) and automated testing.
+### Use Case 2. Set Location
+**Primary Actor**: User  
+**Description**: Users select a location to view weather data.  
+**Pre-condition**: User has a location in mind.  
+**Post-condition**: Application refreshes with accurate data for the selected location.
 
-**Discord Clone:** This project involves the development of a web-based platform for online communication and collaboration, similar to the popular chat app, Discord. The platform should incorporate the Observer design pattern to notify users of new messages, and the Mediator design pattern to manage communication between users and channels. The platform should also implement the Singleton design pattern to ensure that only one instance of the chat server is running at any given time, and the Command design pattern to enable users to execute commands (e.g. change username, join channel). Additionally, the platform should incorporate Continuous Integration (CI) and automated testing.
+**Main Scenario**:
+1. User inputs a location in the search bar.
+2. System requests data for the location from OpenWeatherAPI.
+3. API responds with weather data for the location.
+4. System updates displayed information.
 
-## Statement on the Use of GitHub Copilot and Generative AI Tools
+**Extension**:
+- 1a. User misspells location.
+    - 1a1. System notifies of invalid input.
+- 1b. User selects location from dashboard if logged in.
+- 2a. API request fails.
+    - 2a1. System notifies of an error.
 
-Students are permitted and encouraged to utilize AI-powered tools such as GitHub Copilot and other generative AI assistants for coding, user interface (UI), and user experience (UX) design aspects of their projects. These tools can serve as valuable resources to enhance productivity, inspire creativity, and assist in overcoming technical challenges.  The focus of the project is to develop and improve skills surrounding the process of developing software BUT the team must observe the process and work in an iterative fashion using TDD.  
+---
 
-Please see further detals on Canvas in for [Guidelines for Responsible Use](https://canvas.ubc.ca/courses/150415/pages/the-project)
+### Use Case 3. Login
+**Primary Actor**: User  
+**Description**: User logs into the application.  
+**Pre-condition**: User has an account.  
+**Post-condition**: User is logged in and sees saved dashboard.
+
+**Main Scenario**:
+1. System prompts login details.
+2. User inputs username and password.
+3. System validates credentials.
+4. System logs user in and displays saved dashboard.
+
+**Extension**:
+- 2a. User does not have an account.
+    - 2a1. System prompts to create an account.
+- 2b. Invalid username or password.
+    - 2b1. System notifies of error.
+
+---
+
+### Use Case 4. View Dashboard
+**Primary Actor**: User  
+**Description**: User views active dashboard.  
+**Pre-condition**: User is logged in.  
+**Post-condition**: Correct dashboard displayed.
+
+**Main Scenario**:
+1. System starts with a blank dashboard.
+2. System verifies the user.
+3. Dashboard is updated to display saved locations.
+
+**Extension**:
+- 2a. User not logged in.
+    - 2a1. System prompts for login.
+    - 2a2. Dashboard remains blank until login.
+- 3a. No saved dashboard found.
+    - 3a1. System displays default dashboard.
+
+---
+
+### Use Case 5. View Shared Dashboard
+**Primary Actor**: User  
+**Description**: User views a shared dashboard.  
+**Pre-condition**: User is authenticated.  
+**Post-condition**: Shared dashboard displayed in view-only mode.
+
+**Main Scenario**:
+1. User requests to view another user’s shared dashboard.
+2. System authenticates the user.
+3. System displays shared dashboard.
+
+**Extension**:
+- 2a. User not logged in.
+    - 2a1. System prompts for login.
+
+---
+
+### Use Case 6. Add Locations to Dashboard
+**Primary Actor**: User  
+**Description**: User adds a selected location to their dashboard.  
+**Pre-condition**: User is logged in with a selected location.  
+**Post-condition**: Location added to dashboard and page updated.
+
+**Main Scenario**:
+1. User favorites the current location.
+2. System authenticates the user.
+3. System adds location to the dashboard.
+
+**Extension**:
+- 2a. User not logged in.
+    - 2a1. System prompts for login.
+- 3a. Location already favorited.
+    - 3a1. System notifies location is already saved.
+
+---
+
+### Use Case 7. Share Dashboard
+**Primary Actor**: User  
+**Description**: User shares their dashboard.  
+**Pre-condition**: User is logged in.  
+**Post-condition**: Application generates a shareable link to the dashboard.
+
+**Main Scenario**:
+1. User requests to share dashboard.
+2. System authenticates the user.
+3. System generates and shares a link to the dashboard.
+
+**Extension**:
+- 2a. User not logged in.
+    - 2a1. System prompts for login.
+
+---
+
+### Use Case 8. Customize Dashboard
+**Primary Actor**: User  
+**Description**: User customizes their dashboard layout.  
+**Pre-condition**: User is logged in.  
+**Post-condition**: Dashboard saved with custom layout.
+
+**Main Scenario**:
+1. User edits dashboard.
+2. System authenticates user.
+3. User rearranges locations as desired.
+4. System saves changes.
+
+**Extension**:
+- 2a. User not logged in.
+    - 2a1. System prompts for login.
+
+---
+
+### Use Case 9. Fetch Weather Data
+**Primary Actor**: OpenWeather API  
+**Description**: Requests weather data from API.  
+**Pre-condition**: System has an authenticated API key.  
+**Post-condition**: System receives weather data from API.
+
+**Main Scenario**:
+1. System requests data from API.
+2. API responds with weather data.
+3. System displays data to user.
+
+**Extension**:
+- 1a. API request fails.
+    - 1a1. System notifies user of an error.
+
+---
+
+
+>>>>>>> development

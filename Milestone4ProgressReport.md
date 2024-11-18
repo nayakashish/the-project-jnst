@@ -60,14 +60,14 @@
 
 | **Branch Name**        | **Task**                            | **Merged**  | **Notes**                      |
 |-------------------------|-------------------------------------|-------------|---------------------------------|
-| `development`   | Backend API Implementation        | No         | branch for merging features   |
-| `milestone-4--dashboard`   | Frontend UI Implementation        | No         | branch for creating the dashboard      |
-| `requirementsEngineering`      | Bug Fixes for Feature Z        | Yes         | branch for specifying requirements         |
-| `server-development`           | CI/CD Pipeline Setup           | No         | branch for developing server       |
-| `test_Authentication`           | CI/CD Pipeline Setup            | No         | branch for testing authentication      |
-| `test_DashboardConfiguration`           | CI/CD Pipeline Setup            | No         | branch for testing dashboard features      |
-| `test_UserFeatures`           | CI/CD Pipeline Setup             | No         | branch for testing user features      |
-| `test_WeatherDataAPI`           | CI/CD Pipeline Setup            | No         | branch for testing weather data api      |
+| `development`   | Development Progress        | No         | branch for merging features   |
+| `milestone-4--dashboard`   | Create dashboard UI        | No         | branch for creating the dashboard      |
+| `requirementsEngineering`      | Requirements Analysis        | Yes         | branch for specifying requirements         |
+| `server-development`           | End to end communication           | No         | branch for developing server       |
+| `test_Authentication`           | Testing            | No         | branch for testing authentication      |
+| `test_DashboardConfiguration`           | Testing            | No         | branch for testing dashboard features      |
+| `test_UserFeatures`           | Testing             | No         | branch for testing user features      |
+| `test_WeatherDataAPI`           | Testing            | No         | branch for testing weather data api      |
 
 
 

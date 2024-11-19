@@ -11,8 +11,8 @@
 |                    | - Create basic testing framework (including CI)          | In progress           |
 | **Jan Suratos** | - Create dashboard UI                            | Completed           |
 |                    | - Manage connection to Open Weather Map API                          | Completed           |
-| **Ashish Nayak** | - Database ER/UML Diagram            | In progress           |
-
+| **Ashish Nayak** | - Database ER/UML Diagram            | Review        |
+|                 | - Create Docker Database Connection | In progress |
 ---
 
 ## **2. Progress Summary**
@@ -28,18 +28,19 @@
   - Server for end to end communication
   - Basic testing framework (including CI)
   - Database ER/UML Diagram
+  - Configure database and connect to server
+  - Ongoing Project Documentation
 
 - **Remaining:**
   - Create login/sign up UI
-  - Configure database and connect to server
   - Manage connection to RestAPI
   - Manage connection to FirebaseAPI
   - Implement dashboard functionality
   - Implement login functionality
   - Implement dashboard sharing
-  - Complete documentation
 
 ---
+
 
 ## **3. Comments on Process**
 

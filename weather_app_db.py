@@ -217,10 +217,66 @@ class app_DB:
             return False
 
     def add_dashboardLocation(self, user_id, location_id):
-        return False
+        """Adds a location to the user's dashboard in the database or returns True if it already exists"""
+        try:
+            # Check if the location already exists in the user's dashboard
+            dashboard_locations = self.get_dashboardLocations(user_id)
+            if dashboard_locations:
+                for location in dashboard_locations:
+                    if location['id'] == location_id:
+                        print(f"Location ID {location_id} already exists in user ID {user_id}'s dashboard.")
+                        return True
+                
+            # Add the new location to the dashboard
+            cursor = self.cnx.cursor()
+            query = "INSERT INTO dashboard_locations (user_id, location_id) VALUES (%s, %s)"
+            cursor.execute(query, (user_id, location_id))
+            self.cnx.commit()  # Commit the transaction
+            print(f"Location ID {location_id} added to user ID {user_id}'s dashboard successfully.")
+            return True
+
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+            return False
         
     def get_dashboardLocations(self, user_id):
-        return False
+        """Fetches a list of locations from the user's dashboard based on user_id"""
+        try:
+            cursor = self.cnx.cursor(dictionary=True)
+            query = """
+                SELECT location.id, location.name 
+                FROM dashboard_locations as dashboard
+                JOIN location ON dashboard.location_id = location.id 
+                WHERE dashboard.user_id = %s
+            """
+            cursor.execute(query, (user_id,))
+            locations = cursor.fetchall()
+            
+            if locations:
+                return locations
+            else:
+                print(f"No locations found for user ID {user_id}")
+                return False
+
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+            return False
         
     def delete_dashboardLocation(self, user_id, location_id):
-        return False
+        """Deletes a location from the user's dashboard based on user_id and location_id"""
+        try:
+            cursor = self.cnx.cursor()
+            query = "DELETE FROM dashboard_locations WHERE user_id = %s AND location_id = %s"
+            cursor.execute(query, (user_id, location_id))
+            self.cnx.commit()
+
+            if cursor.rowcount > 0:
+                print(f"Location ID {location_id} deleted from user ID {user_id}'s dashboard successfully.")
+                return True
+            else:
+                print(f"No entry found for user ID {user_id} with location ID {location_id}")
+                return False
+
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+            return False

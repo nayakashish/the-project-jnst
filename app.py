@@ -11,7 +11,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
-# OpenWeather API key (To be added)
+# OpenWeather API key 
 API_KEY = os.getenv("OPENWEATHER_API_KEY")
 
 @app.route("/")
@@ -20,18 +20,18 @@ def home():
 
 @app.route("/weather", methods=["GET"])
 def get_weather():
-    city = request.args.get("city")
+    city = request.args.get("city") #city in arg
     if not city:
-        return jsonify({"error": "City is required"}), 400
+        return jsonify({"error": "City is required"}), 400 # throw error
 # Fetch weather data from OpenWeather API
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
-    response = requests.get(url)
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric" #api url
+    response = requests.get(url) # the response from the api, gets data from the api call
 
     if response.status_code != 200:
         return jsonify({"error": "Failed to fetch weather data"}), 500
 
     weather_data = response.json()
-    return jsonify(weather_data)
+    return jsonify(weather_data) # return the data in json format
 
 if __name__ == "__main__":
     app.run(debug=True)

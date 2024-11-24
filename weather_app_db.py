@@ -158,10 +158,60 @@ class app_DB:
             return False
         
     def get_locationName(self, location_id):
-        return False
+        """Fetches location name from the database based on location_id"""
+        try:
+            cursor = self.cnx.cursor() 
+            query = "SELECT name FROM location WHERE id = %s"
+            cursor.execute(query, (location_id,)) 
+            location_info = cursor.fetchone() 
+            
+            if location_info:
+                return location_info[0]  
+            else:
+                print(f"No location found with ID {location_id}")
+                return False
+
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+            return False
 
     def get_locationID(self, location_name):
-        return False
+        """Fetches location ID from the database based on location_name"""
+        try:
+            cursor = self.cnx.cursor()  
+            query = "SELECT id FROM location WHERE name = %s"
+            cursor.execute(query, (location_name,))  
+            location_info = cursor.fetchone()  
+            
+            if location_info:
+                return location_info[0]  
+            else:
+                print(f"No location found with name {location_name}")
+                return False
+
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+            return False
         
-    def add_location(self, location_name): 
-        return False
+    def add_location(self, location_name): #singleton pattern found here! :D
+        """Adds a new location to the database or returns the ID if it already exists"""
+        try:
+            # Check if the location already exists
+            location_id = self.get_locationID(location_name)
+            
+            if location_id:
+                print(f"Location '{location_name}' already exists with ID {location_id}.")
+                return location_id
+            else:
+                # Add the new location
+                cursor = self.cnx.cursor()
+                query = "INSERT INTO location (name) VALUES (%s)"
+                cursor.execute(query, (location_name,))
+                self.cnx.commit()  # Commit the transaction
+                location_id = cursor.lastrowid  # Get the ID of the newly inserted location
+                print(f"Location '{location_name}' added successfully with ID {location_id}.")
+                return location_id
+
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+            return False

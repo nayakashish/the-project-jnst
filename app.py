@@ -1,4 +1,4 @@
-# this is the server
+# this is the backend server
 # use "pip install flask" to install flask, which is the python framework to run a server 
 # to run, type in python app.py in the terminal (dont forget to be in the project directory) 
 import os

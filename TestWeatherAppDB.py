@@ -46,9 +46,11 @@ def test_add_user():
         'name': 'John Doe',
         'email': 'john.doe@example.com',
         'theme': 2,
-        'temperatureUnit': 'F'
+        'temperatureUnit': 'F',
+        'password': "mystrongpass"
     }
     user_id = app_db.add_user(new_user)
+    
     user_info = app_db.get_user_info(user_id)
     assert user_info is not None
     assert user_info['name'] == 'John Doe'
@@ -64,13 +66,14 @@ def test_add_user_INVALIDName(capfd):
         'name': None,  # Invalid name
         'email': 'valid.email@example.com', 
         'theme': 1, 
-        'temperatureUnit': 'C'
+        'temperatureUnit': 'C',
+        'password': "mystrongpass"
     }
     user_id = app_db.add_user(invalid_user)
     
     out, err = capfd.readouterr()
-    assert user_id is None
-    assert "Invalid user data" in out
+    assert user_id is False
+    assert "Invalid" in out
     app_db.close()
 
 def test_add_user_INVALIDEmail(capfd):
@@ -80,13 +83,14 @@ def test_add_user_INVALIDEmail(capfd):
         'name': 'Valid Name',
         'email': None,  # Invalid email
         'theme': 1,
-        'temperatureUnit': 'C'
+        'temperatureUnit': 'C',
+        'password': "mystrongpass"
     }
     user_id = app_db.add_user(invalid_user)
     
     out, err = capfd.readouterr()
-    assert user_id is None
-    assert "Invalid user data" in out
+    assert user_id is False
+    assert "Invalid" in out
     app_db.close()
 
 def test_add_user_INVALIDTheme(capfd):
@@ -96,13 +100,14 @@ def test_add_user_INVALIDTheme(capfd):
         'name': 'Valid Name',
         'email': 'valid.email@example.com',
         'theme': 'notanInt',  # Invalid theme
-        'temperatureUnit': 'C'
+        'temperatureUnit': 'C',
+        'password': "mystrongpass"
     }
     user_id = app_db.add_user(invalid_user)
     
     out, err = capfd.readouterr()
-    assert user_id is None
-    assert "Invalid user data" in out
+    assert user_id is False
+    assert "Invalid" in out
     app_db.close()
 
 def test_add_user_INVALIDTemperatureUnit(capfd):
@@ -112,59 +117,68 @@ def test_add_user_INVALIDTemperatureUnit(capfd):
         'name': 'Valid Name',
         'email': 'valid.email@example.com',
         'theme': 1,
-        'temperatureUnit': 'invalid-unit'  # Invalid temperature unit
+        'temperatureUnit': 'invalid-unit',  # Invalid temperature unit
+        'password': "mystrongpass"
     }
     user_id = app_db.add_user(invalid_user)
     
     out, err = capfd.readouterr()
-    assert user_id is None
-    assert "Invalid user data" in out
+    assert user_id is False
+    assert "Invalid" in out
     app_db.close()
 
-def test_get_userinfo_byname():
+def test_get_userid():
     app_db = app_DB()
     app_db.connect()
     
-    user_info = app_db.get_user_info_byname('Ryan Reynolds')
+    user_id = app_db.get_userid('Ryan Reynolds')
     
-    assert user_info is not None
-    expected_result = {
-        'id': 1,
-        'name': 'Ryan Reynolds',
-        'email': 'ryan.reynolds@example.com',
-        'theme': 1,
-        'temperatureUnit': 'C'
-    }
-    
-    assert user_info == expected_result
+    assert user_id is not None
+    assert user_id == 1
     app_db.close()
 
-def test_get_userinfo_byname_INVALID(capfd):
+def test_get_userid_INVALID(capfd):
     app_db = app_DB()
     app_db.connect()
-    user_info = app_db.get_user_info_byname('Nonexistent User')
+    user_id = app_db.get_userid('Nonexistent User')
     
     out, err = capfd.readouterr()
-    assert user_info is None
+    assert user_id is False
     assert "No user found with name Nonexistent User" in out
     app_db.close()
 
 def test_update_user_info():
     app_db = app_DB()
     app_db.connect()
-    updated_info = {
-        'name': 'Jane Doe',
-        'email': 'jane.doe@example.com',
-        'theme': 3,
-        'temperatureUnit': 'C'
+    
+    # Add a temporary user
+    temp_user = {
+        'name': 'Temp User',
+        'email': 'temp.user@example.com',
+        'theme': 1,
+        'temperatureUnit': 'C',
+        'password': "temppass"
     }
-    app_db.update_user_info(1, updated_info)
-    user_info = app_db.get_user_info(1)
+    user_id = app_db.add_user(temp_user)
+    
+    # Update the temporary user's information
+    updated_info = {
+        'name': 'Updated Temp User',
+        'email': 'updated.temp.user@example.com',
+        'theme': 2,
+        'temperatureUnit': 'F'
+    }
+    app_db.update_user_info(user_id, **updated_info)
+    
+    # Retrieve and check the updated information
+    user_info = app_db.get_user_info(user_id)
     assert user_info is not None
-    assert user_info['name'] == 'Jane Doe'
-    assert user_info['email'] == 'jane.doe@example.com'
-    assert user_info['theme'] == 3
-    assert user_info['temperatureUnit'] == 'C'
+    assert user_info['name'] == 'Updated Temp User'
+    assert user_info['email'] == 'updated.temp.user@example.com'
+    assert user_info['theme'] == 2
+    assert user_info['temperatureUnit'] == 'F'
+    
+    app_db.delete_user(user_id)
     app_db.close()
 
 def test_update_user_info_INVALID(capfd):
@@ -176,7 +190,7 @@ def test_update_user_info_INVALID(capfd):
         'theme': 4,
         'temperatureUnit': 'F'
     }
-    app_db.update_user_info(999, updated_info)
+    app_db.update_user_info(999, **updated_info)
     
     out, err = capfd.readouterr()
     assert "No user found with ID 999" in out
@@ -185,16 +199,18 @@ def test_update_user_info_INVALID(capfd):
 def test_delete_user():
     app_db = app_DB()
     app_db.connect()
-    app_db.delete_user(1)
-    user_info = app_db.get_user_info(1)
+    delete_id = app_db.get_userid("John Doe")
+    ret = app_db.delete_user(delete_id)
+    assert ret == delete_id
+    user_info = app_db.get_user_info(delete_id)
     assert user_info is None
     app_db.close()
 
 def test_delete_user_INVALID(capfd):
     app_db = app_DB()
     app_db.connect()
-    app_db.delete_user(999)
-    
+    ret = app_db.delete_user(999)
+    assert ret is False
     out, err = capfd.readouterr()
     assert "No user found with ID 999" in out
     app_db.close()

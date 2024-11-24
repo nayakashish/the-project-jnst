@@ -214,3 +214,24 @@ def test_delete_user_INVALID(capfd):
     out, err = capfd.readouterr()
     assert "No user found with ID 999" in out
     app_db.close()
+
+def test_add_location():
+    app_db = app_DB()
+    app_db.connect()
+    location_id = app_db.add_location("Kelowna")
+    assert location_id is not None #if it failed, location id would be false;
+    app_db.close()
+
+def test_add_location_duplicate():
+    app_db = app_DB()
+    app_db.connect()
+    
+    location_id_1 = app_db.add_location("Redcliff")
+    assert location_id_1 is not None
+    
+    location_id_2 = app_db.add_location("Redcliff")
+    assert location_id_2 is not None
+    
+    assert location_id_1 == location_id_2 #the locations should be same as the second one will return existing location found in db instead of creating new one
+    
+    app_db.close()

@@ -156,3 +156,12 @@ class app_DB:
         except mysql.connector.Error as err:
             print(f"Error: {err}")
             return False
+        
+    def get_locationName(self, location_id):
+        return False
+
+    def get_locationID(self, location_name):
+        return False
+        
+    def add_location(self, location_name): 
+        return False

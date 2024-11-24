@@ -10,7 +10,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 -- Create the user table
 CREATE TABLE user (
-  id INT AUTO_INCREMENT,
+  id INT AUTO_INCREMENT, -- userid can also be interpreted as dashboardid as each user only has 1 dashboard.
   name VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL,
   theme INT, 

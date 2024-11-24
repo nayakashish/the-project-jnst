@@ -235,3 +235,150 @@ def test_add_location_duplicate():
     assert location_id_1 == location_id_2 #the locations should be same as the second one will return existing location found in db instead of creating new one
     
     app_db.close()
+
+def test_add_dashboardLocation():
+    app_db = app_DB()
+    app_db.connect()
+    
+    new_user = {
+        'name': 'Jane Doe',
+        'email': 'jane.doe@example.com',
+        'theme': 1,
+        'temperatureUnit': 'C',
+        'password': "anotherstrongpass"
+    }
+    user_id = app_db.add_user(new_user)
+    
+    location_id = app_db.add_location("Vancouver")
+    
+    result = app_db.add_dashboardLocation(user_id, location_id)
+    assert result is not False
+    
+    dashboard_locations = app_db.get_dashboardLocations(user_id)
+    location_ids = [location['id'] for location in dashboard_locations]
+    assert location_id in location_ids
+    
+    app_db.delete_user(user_id)
+    app_db.close()
+
+def test_add_dashboardLocation_duplicate():
+    app_db = app_DB()
+    app_db.connect()
+    
+    new_user = {
+        'name': 'Bob Brown',
+        'email': 'bob.brown@example.com',
+        'theme': 1,
+        'temperatureUnit': 'C',
+        'password': "strongpassword"
+    }
+    user_id = app_db.add_user(new_user)
+    
+    location_id = app_db.add_location("Toronto")
+    
+    result_1 = app_db.add_dashboardLocation(user_id, location_id)
+    result_2 = app_db.add_dashboardLocation(user_id, location_id)
+    
+    assert result_1 is not False
+    assert result_2 is not False
+    
+    dashboard_locations = app_db.get_dashboardLocations(user_id)
+    location_ids = [location['id'] for location in dashboard_locations]
+    assert location_ids.count(location_id) == 1  # ensure the location is only added once
+    
+    app_db.delete_user(user_id)
+    app_db.close()
+
+def test_add_dashboardLocation_INVALID():
+    app_db = app_DB()
+    app_db.connect()
+    
+    # attempt to add a dashboard location with invalid user_id and location_id
+    result = app_db.add_dashboardLocation(999, 3)
+    result2 = app_db.add_dashboardLocation(1, 999)
+    assert result is False
+    assert result2 is False
+    
+    app_db.close()
+
+def test_get_dashboardLocations():
+    app_db = app_DB()
+    app_db.connect()
+
+    new_user = {
+        'name': 'Alice Smith',
+        'email': 'alice.smith@example.com',
+        'theme': 1,
+        'temperatureUnit': 'C',
+        'password': "strongpassword"
+    }
+    user_id = app_db.add_user(new_user)
+    
+    location_id_1 = app_db.add_location("New York")
+    location_id_2 = app_db.add_location("Miami")
+    
+    app_db.add_dashboardLocation(user_id, location_id_1)
+    app_db.add_dashboardLocation(user_id, location_id_2)
+    
+    dashboard_locations = app_db.get_dashboardLocations(user_id)
+    location_ids = [location['id'] for location in dashboard_locations]
+    assert location_id_1 in location_ids
+    assert location_id_2 in location_ids
+    
+    app_db.delete_user(user_id)
+    app_db.close()
+
+def test_get_dashboardLocations_INVALID():
+    app_db = app_DB()
+    app_db.connect()
+    
+    dashboard_locations = app_db.get_dashboardLocations(999)
+    assert dashboard_locations is False
+    
+    app_db.close()
+
+def test_delete_dashboardLocations():
+    app_db = app_DB()
+    app_db.connect()
+    
+    new_user = {
+        'name': 'Charlie Brown',
+        'email': 'charlie.brown@example.com',
+        'theme': 1,
+        'temperatureUnit': 'C',
+        'password': "strongpassword"
+    }
+    user_id = app_db.add_user(new_user)
+    
+    location_id_1 = app_db.add_location("Los Angeles")
+    location_id_2 = app_db.add_location("San Francisco")
+    
+    app_db.add_dashboardLocation(user_id, location_id_1)
+    app_db.add_dashboardLocation(user_id, location_id_2)
+    
+    result_1 = app_db.delete_dashboardLocation(user_id, location_id_1)
+    result_2 = app_db.delete_dashboardLocation(user_id, location_id_2)
+    
+    assert result_1 is not False
+    assert result_2 is not False
+    
+    dashboard_locations = app_db.get_dashboardLocations(user_id)
+    assert dashboard_locations is False
+    
+    app_db.delete_user(user_id)
+    app_db.close()
+
+def test_delete_dashboardLocations_INVALID(capfd):
+    app_db = app_DB()
+    app_db.connect()
+    
+    result = app_db.delete_dashboardLocation(999, 3)
+    result2 = app_db.delete_dashboardLocation(1, 999)
+    
+    out, err = capfd.readouterr()
+    assert result is False
+    assert result2 is False
+    assert "No entry found for user ID 999 with location ID 3" in out
+    assert "No entry found for user ID 1 with location ID 999" in out
+    
+    app_db.close()

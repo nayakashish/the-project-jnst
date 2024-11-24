@@ -215,3 +215,12 @@ class app_DB:
         except mysql.connector.Error as err:
             print(f"Error: {err}")
             return False
+
+    def add_dashboardLocation(self, user_id, location_id):
+        return False
+        
+    def get_dashboardLocations(self, user_id):
+        return False
+        
+    def delete_dashboardLocation(self, user_id, location_id):
+        return False

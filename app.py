@@ -6,63 +6,100 @@
 from flask import Flask, request, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+from flask_cors import CORS
 
 app = Flask(__name__) # use flask framework
+CORS(app) #enables communication between frontend and backend
 
-# Configure MySQL
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://username:password@localhost/weather_app' # db url
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = 'your_secret_key'  # Replace with a strong secret key
+#THESE ARE TESTS
+@app.route('/', methods=['GET'])
+def home():
+    return "Flask server is running. Use POST requests to interact with /login or /register routes.", 200
 
-# Initialize extensions
-db = SQLAlchemy(app)
-bcrypt = Bcrypt(app)
 
-#User Model : This is essentially a table that holds the user credentials
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(200), nullable=False)
-
-# Create tables in the database
-with app.app_context():
-    db.create_all()
-
-# User Registeration
-@app.route("/register", methods=["POST"])
-def register():
-    data = request.json # This is the json file that holds the username and password from the post request
-    username = data.get("username")
-    password = data.get("password")
-
-    #Check if no username/password entered
-    if not username or not password: 
-        return jsonify({"error": "Username and password are required"}), 400
-
-    # Check if the username already exists
-    if User.query.filter_by(username=username).first():
-        return jsonify({"error": "Username already exists"}), 400
-
-    # Hash the password and save the user
-    hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-    new_user = User(username=username, password=hashed_password)
-    db.session.add(new_user) #INSERT INTO user (username, password) VALUES ('username', 'hashedpassword');
-    db.session.commit()
-    return jsonify({"message": "User registered successfully"}), 201
-
-# User login 
-@app.route("/login", methods=["POST"])
+@app.route('/login', methods=['POST'])
 def login():
+    # Mock response for login
     data = request.json
-    username = data.get("username")
-    password = data.get("password")
+    username = data.get('username')
+    password = data.get('password')
 
-    if not username or not password:
-        return jsonify({"error": "Username and password are required"}), 400
+    # Simulate successful login
+    if username == "testuser" and password == "password123":
+        return jsonify({"message": "Login successful!"}), 200
+    else:
+        return jsonify({"error": "Invalid credentials"}), 401
 
-    # Check if the username exists
-    user = User.query.filter_by(username=username).first() # SELECT * FROM user WHERE username = 'username' LIMIT 1;
-    if user and bcrypt.check_password_hash(user.password, password):
-        session["user_id"] = user.id  # Use Flask's session for stateful login
-        return jsonify({"message": "Login successful"}), 200
-    return jsonify({"error": "Invalid credentials"}), 401
+@app.route('/register', methods=['POST'])
+def register():
+    # Mock response for registration
+    data = request.json
+    username = data.get('username')
+    password = data.get('password')
+
+    # Simulate successful registration
+    if username and password:
+        return jsonify({"message": f"User {username} registered successfully!"}), 201
+    else:
+        return jsonify({"error": "Missing username or password"}), 400
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+# # Configure MySQL
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://username:password@localhost/weather_app' # db url
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.secret_key = 'your_secret_key'  # Replace with a strong secret key
+
+# # Initialize extensions
+# db = SQLAlchemy(app)
+# bcrypt = Bcrypt(app)
+
+# #User Model : This is essentially a table that holds the user credentials
+# class User(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     username = db.Column(db.String(80), unique=True, nullable=False)
+#     password = db.Column(db.String(200), nullable=False)
+
+# # Create tables in the database
+# with app.app_context():
+#     db.create_all()
+
+# # User Registeration
+# @app.route("/register", methods=["POST"])
+# def register():
+#     data = request.json # This is the json file that holds the username and password from the post request
+#     username = data.get("username")
+#     password = data.get("password")
+
+#     #Check if no username/password entered
+#     if not username or not password: 
+#         return jsonify({"error": "Username and password are required"}), 400
+
+#     # Check if the username already exists
+#     if User.query.filter_by(username=username).first():
+#         return jsonify({"error": "Username already exists"}), 400
+
+#     # Hash the password and save the user
+#     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+#     new_user = User(username=username, password=hashed_password)
+#     db.session.add(new_user) #INSERT INTO user (username, password) VALUES ('username', 'hashedpassword');
+#     db.session.commit()
+#     return jsonify({"message": "User registered successfully"}), 201
+
+# # User login 
+# @app.route("/login", methods=["POST"])
+# def login():
+#     data = request.json
+#     username = data.get("username")
+#     password = data.get("password")
+
+#     if not username or not password:
+#         return jsonify({"error": "Username and password are required"}), 400
+
+#     # Check if the username exists
+#     user = User.query.filter_by(username=username).first() # SELECT * FROM user WHERE username = 'username' LIMIT 1;
+#     if user and bcrypt.check_password_hash(user.password, password):
+#         session["user_id"] = user.id  # Use Flask's session for stateful login
+#         return jsonify({"message": "Login successful"}), 200
+#     return jsonify({"error": "Invalid credentials"}), 401

@@ -123,12 +123,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
     
             try {
-                const response = await fetch('http://localhost:5000/register', { // Tentative port number, might change
+                // This connects to app.py, tentative port number, might change
+                const response = await fetch('http://localhost:5000/register', { 
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ username, password }),
+                    body: JSON.stringify({ username, password }), // Formats the username and password
                 });
     
                 const result = await response.json();
@@ -142,6 +143,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('An error occurred while registering.');
             }
         }
+
+    // Login user
+    async function loginUser() {
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        if (!username || !password) {
+            alert('Please enter both username and password!');
+            return;
+        }
+
+        try {
+            // This connects to app.py Tentative port number, might change
+            const response = await fetch('http://localhost:5000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }), // Formats the username and password
+            });
+
+            const result = await response.json();
+            if (response.status === 200) {
+                alert(result.message);
+                // Redirect or load the weather data, etc.
+            } else {
+                alert(result.error);
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+            alert('An error occurred while logging in.');
+        }
+    }
+
     
    
 });

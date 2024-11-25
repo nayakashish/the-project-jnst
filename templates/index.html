@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Weather App</title>
-<link rel="stylesheet" href="../src/styles/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="../src/styles/styles.css">
 </head>
 <body>
-    <script src="../src/scripts/main.js"></script>
     <div class="container">
         <!-- Header Section -->
         <header>
             <div class="dark-mode-toggle">
-                <label>
+                <label for="darkModeSwitch">
                     <input type="checkbox" id="darkModeSwitch">
                     <span>Dark Mode</span>
                 </label>
             </div>
-            <input type="text" class="search-bar" placeholder="Search for your preferred city...">
+            <input 
+                type="text" 
+                class="search-bar" 
+                placeholder="Search for your preferred city..." 
+                aria-label="City Search Bar">
             <button class="current-location-btn">Current Location</button>
         </header>
 
@@ -25,7 +28,8 @@
         <section class="current-weather">
             <div class="time-info">
                 <h2 id="cityName">Athens</h2>
-                <h1 id="time">09:03</h1>
+                <h1 id="time">11<span class="blinking">:</span>30</h1>
+
                 <p id="date">Thursday, 31 Aug</p>
             </div>
         
@@ -40,17 +44,52 @@
         
                 <div class="extra-info">
                     <p id="humidity">Humidity: 41%</p>
-                    <p id="windSpeed">Wind Speed: 2 km/h</p>
+                    <p id="windSpeed">Wind Speed: 2 m/s</p>
                     <p id="pressure">Pressure: 997 hPa</p>
                     <p id="uvIndex">UV Index: 8</p>
                 </div>
             </div>
-        </section>
-        
 
-        <!-- 5-Day Forecast -->
+            <!-- 5-Hour Forecast (Simulated Hourly Forecast) -->
+<section class="five-hour-forecast">
+    <h3>Next 14 Hours</h3>
+    <div class="hourly-forecast">
+        <div class="hour">
+            <span>12:00 PM</span>
+            <span>22°C</span>
+            <span>Cloudy</span>
+        </div>
+        <div class="hour">
+            <span>1:00 PM</span>
+            <span>23°C</span>
+            <span>Partly Cloudy</span>
+        </div>
+        <div class="hour">
+            <span>2:00 PM</span>
+            <span>24°C</span>
+            <span>Sunny</span>
+        </div>
+        <div class="hour">
+            <span>3:00 PM</span>
+            <span>23°C</span>
+            <span>Sunny</span>
+        </div>
+        <div class="hour">
+            <span>4:00 PM</span>
+            <span>22°C</span>
+            <span>Cloudy</span>
+        </div>
+    </div>
+</section>
+
+
+            
+
+        </section>
+
+        <!-- 5-Day Forecast Section -->
         <section class="five-day-forecast">
-            <h3>5 Days Forecast:</h3>
+            <h3>5-Day Forecast:</h3>
             <ul>
                 <li>20°C - Fri, 1 Sep</li>
                 <li>22°C - Sat, 2 Sep</li>
@@ -60,22 +99,22 @@
             </ul>
         </section>
 
-        <!-- Saved Locations -->
+        <!-- Saved Locations Section -->
         <section class="saved-locations">
             <h3>Saved Locations:</h3>
             <ul>
                 <li>[Location Name] - 20°C</li>
                 <li>[Location Name] - 20°C</li>
                 <li>[Location Name] - 20°C</li>
-
             </ul>
-            <a href="dashboard.html" class="saved-locations__viewMore">view more...</a>
+            <a href="dashboard.html" class="saved-locations__viewMore">View more...</a>
         </section>
 
         <!-- Settings Icon -->
         <div class="settings-icon">
-            <img src="settings-icon.png" alt="Settings">
+            <img src="settings-icon.png" alt="Settings Icon">
         </div>
     </div>
+    <script src="../src/scripts/main.js"></script>
 </body>
 </html>

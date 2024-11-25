@@ -8,7 +8,7 @@
 
 /* Body and Container */
 body {
-    background-color: #1c1c1c;
+    background-color: white;
     color: white;
     display: flex;
     justify-content: center;
@@ -20,13 +20,15 @@ body {
 .container {
     width: 90%;
     max-width: 1000px;
-    background: #333;
+    background: #e1f5fe; /* Soft light blue */
     padding: 20px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+
 
 /* Header Section */
 header {
@@ -40,13 +42,14 @@ header {
     width: 25rem;
     padding: 10px;
     border-radius: 10px;
+    border: 1px solid #b0bec5;
     border: none;
     outline: none;
     font-size: 1rem;
 }
 
 .current-location-btn {
-    background-color: #4caf50;
+    background-color: #81d4fa;
     color: white;
     padding: 10px 20px;
     border-radius: 20px;
@@ -55,11 +58,12 @@ header {
     font-size: 1rem;
 }
 
+
 /* Current Weather Section */
 .current-weather {
     display: flex;
     justify-content: space-between;
-    background-color: #444;
+    background-color: #81d4fa;
     padding: 20px;
     border-radius: 10px;
     gap: 20px;
@@ -93,7 +97,7 @@ header {
 
 #date {
     font-size: 1.2rem;
-    color: #bbb;
+    color: white;
 }
 
 #temperature {
@@ -103,7 +107,7 @@ header {
 
 #feelsLike {
     font-size: 1.2rem;
-    color: #bbb;
+    color: white;
 }
 
 .sun-info p {
@@ -112,14 +116,14 @@ header {
 
 /* 5-Hour Forecast Section */
 .five-hour-forecast {
-    background-color: #444;
+    background-color: #81d4fa;
     padding: 20px;
     border-radius: 10px;
 }
 
 .five-hour-forecast h3 {
     font-size: 1.3rem;
-    color: #ccc;
+    color: #ffffff;
     text-align: center;
     margin-bottom: 15px;
 }
@@ -202,7 +206,7 @@ header {
 
 
 .five-day-forecast {
-    background-color: #444;
+    background-color: #03a9f4;
     padding: 20px;
     border-radius: 10px;
     width: 100%;
@@ -256,24 +260,10 @@ header {
     margin-bottom: 10px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .forecast-card {
-        width: 45%;
-    }
-}
-
-@media (max-width: 480px) {
-    .forecast-card {
-        width: 90%;
-        margin-bottom: 10px;
-    }
-}
-
 
 /* Saved Locations Section */
 .saved-locations {
-    background-color: #444;
+    background-color: #03a9f4;
     padding: 20px;
     border-radius: 10px;
     width: 48%;
@@ -319,4 +309,10 @@ header {
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
+}
+
+
+.weather-icon, .weather-icon2 {
+    filter: brightness(1.5) hue-rotate(180deg);
+    transition: filter 0.3s ease;
 }

@@ -27,3 +27,25 @@ class User(db.Model):
 # Create tables in the database
 with app.app_context():
     db.create_all()
+
+# User Registeration
+@app.route("/register", methods=["POST"])
+def register():
+    data = request.json # This is the json file that holds the username and password from the post request
+    username = data.get("username")
+    password = data.get("password")
+
+    #Check if no username/password entered
+    if not username or not password: 
+        return jsonify({"error": "Username and password are required"}), 400
+
+    # Check if the username already exists
+    if User.query.filter_by(username=username).first():
+        return jsonify({"error": "Username already exists"}), 400
+
+    # Hash the password and save the user
+    hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+    new_user = User(username=username, password=hashed_password)
+    db.session.add(new_user)
+    db.session.commit()
+    return jsonify({"message": "User registered successfully"}), 201

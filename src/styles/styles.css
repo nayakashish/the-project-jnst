@@ -171,6 +171,36 @@ header {
 }
 
 /* 5-Day Forecast Section */
+
+.forecast-container {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+.forecast-day {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: -1rem;
+}
+.forecast-day > span{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-top: 1rem;
+}
+
+.weather-icon2 {
+    width: 3rem;
+    height: 3rem;
+    vertical-align: middle;
+    margin-left: 1.2rem;
+}
+
+
+
+
 .five-day-forecast {
     background-color: #444;
     padding: 20px;

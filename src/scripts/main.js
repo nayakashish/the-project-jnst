@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sunrise = document.getElementById('sunrise');
     const sunset = document.getElementById('sunset');
     const hourlyForecastContainer = document.querySelector('.hourly-forecast');
-    const fiveDayForecastContainer = document.querySelector('.five-day-forecast ul');
+    const fiveDayForecastContainer = document.querySelector('.five-day-forecast .forecast-container');
 
     // OpenWeather API details
     const API_KEY = 'b5958d9b3908799da10532d190c26c36'; // Replace with your actual OpenWeather API key
@@ -95,21 +95,38 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update 5-day forecast UI
     function updateFiveDayForecast(forecast) {
         fiveDayForecastContainer.innerHTML = ''; // Clear existing content
+        const iconBaseURL = 'https://openweathermap.org/img/wn/';
+
+        // Group forecast data by day
         const dailyForecast = {};
 
         forecast.forEach((entry) => {
             const date = new Date(entry.dt * 1000);
-            const day = date.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
-            const temp = `${Math.round(entry.main.temp)}°C`;
+            const dayName = date.toLocaleDateString([], { weekday: 'short' }); // Abbreviated day of the week
+            const temp = entry.main.temp;
+            const icon = entry.weather[0].icon;
 
-            if (!dailyForecast[date.getDate()]) {
-                dailyForecast[date.getDate()] = { date: day, temp: temp };
+            const dayKey = date.toISOString().split('T')[0]; // Group by unique date
+            if (!dailyForecast[dayKey]) {
+                dailyForecast[dayKey] = { dayName, temps: [temp], icon };
+            } else {
+                dailyForecast[dayKey].temps.push(temp);
             }
         });
 
-        Object.values(dailyForecast).slice(0, 5).forEach((dayData) => {
-            const dayElement = document.createElement('li');
-            dayElement.textContent = `${dayData.temp} - ${dayData.date}`;
+        // Add the first 5 days to the forecast container
+        Object.values(dailyForecast).slice(0, 5).forEach(({ dayName, temps, icon }) => {
+            const minTemp = Math.round(Math.min(...temps));
+            const maxTemp = Math.round(Math.max(...temps));
+
+            // Create a forecast-day element
+            const dayElement = document.createElement('div');
+            dayElement.classList.add('forecast-day');
+            dayElement.innerHTML = `
+                <span>${dayName}</span>
+                <span>${minTemp}°C - ${maxTemp}°C</span>
+                <img src="${iconBaseURL}${icon}.png" alt="Weather Icon" class="weather-icon">
+            `;
             fiveDayForecastContainer.appendChild(dayElement);
         });
     }

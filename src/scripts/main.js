@@ -14,6 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const sunrise = document.getElementById('sunrise');
     const sunset = document.getElementById('sunset');
 
+    const registerBtn = document.querySelector('.register-btn');  // Your registration button
+    const loginBtn = document.querySelector('.login-btn');        // Your login button
+    const usernameInput = document.querySelector('#username');    // Username input
+    const passwordInput = document.querySelector('#password');    // Password input
+
     // OpenWeather API details
     const API_KEY = 'b5958d9b3908799da10532d190c26c36';  // Replace with your actual OpenWeather API key
     const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
@@ -105,5 +110,5 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentTime = new Date();
         time.textContent = currentTime.toLocaleTimeString();
         date.textContent = currentTime.toLocaleDateString();
-    }
+    }     
 });

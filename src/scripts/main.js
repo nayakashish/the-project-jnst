@@ -28,8 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             const data = await response.json();
-
-            // Update UI with weather data
             updateWeather(data);
         } catch (error) {
             console.error('Error fetching weather data:', error);
@@ -48,8 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             const forecastData = await response.json();
-
-            // Process the forecast data for the next 5 days (we will extract daily data)
+            updateHourlyForecast(forecastData.list.slice(0, 5)); // Display next 5 hours
             updateFiveDayForecast(forecastData.list);
         } catch (error) {
             console.error('Error fetching forecast data:', error);
@@ -65,40 +62,32 @@ document.addEventListener('DOMContentLoaded', () => {
         sunrise.textContent = `Sunrise: ${new Date(data.sys.sunrise * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
         sunset.textContent = `Sunset: ${new Date(data.sys.sunset * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
 
-        // Calculate UTC time
         const utcNow = new Date().getTime() + new Date().getTimezoneOffset() * 60000;
-
-        // Adjust to city's local time
         const cityLocalTime = new Date(utcNow + data.timezone * 1000);
-
-        // Extract hours and minutes
         const hours = String(cityLocalTime.getHours()).padStart(2, '0');
         const minutes = String(cityLocalTime.getMinutes()).padStart(2, '0');
-
-        // Update time and date for the city's local timezone
-        time.innerHTML = `${hours}<span class="blinking">:</span>${minutes}`; // Add blinking colon
+        time.innerHTML = `${hours}<span class="blinking">:</span>${minutes}`;
         date.textContent = cityLocalTime.toLocaleDateString();
     }
 
     // Update 5-hour forecast UI
     function updateHourlyForecast(forecast) {
         hourlyForecastContainer.innerHTML = ''; // Clear existing content
+        const iconBaseURL = 'https://openweathermap.org/img/wn/';
 
         forecast.forEach((entry) => {
             const time = new Date(entry.dt * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             const temp = `${Math.round(entry.main.temp)}°C`;
+            const icon = entry.weather[0].icon;
             const description = entry.weather[0].description;
 
-            // Create a forecast hour element
             const hourElement = document.createElement('div');
             hourElement.classList.add('hour');
             hourElement.innerHTML = `
                 <span>${time}</span>
                 <span>${temp}</span>
-                <span>${description}</span>
+                <img src="${iconBaseURL}${icon}.png" alt="${description}" class="weather-icon">
             `;
-
-            // Append to the container
             hourlyForecastContainer.appendChild(hourElement);
         });
     }
@@ -106,9 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update 5-day forecast UI
     function updateFiveDayForecast(forecast) {
         fiveDayForecastContainer.innerHTML = ''; // Clear existing content
-
-        // Process the forecast data to show the next 5 days
-        const dailyForecast = [];
+        const dailyForecast = {};
 
         forecast.forEach((entry) => {
             const date = new Date(entry.dt * 1000);
@@ -120,7 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Now update the 5-day forecast list
         Object.values(dailyForecast).slice(0, 5).forEach((dayData) => {
             const dayElement = document.createElement('li');
             dayElement.textContent = `${dayData.temp} - ${dayData.date}`;
@@ -134,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const city = searchBar.value.trim();
             if (city) {
                 getWeather(city);
-                getFiveDayForecast(city); // Fetch 5-day forecast
+                getFiveDayForecast(city);
             } else {
                 alert('Please enter a city!');
             }
@@ -158,17 +144,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     const data = await response.json();
                     updateWeather(data);
 
-                    // Fetch and display 5-day forecast for the current location
                     const forecastResponse = await fetch(`${FORECAST_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
                     if (forecastResponse.ok) {
                         const forecastData = await forecastResponse.json();
+                        updateHourlyForecast(forecastData.list.slice(0, 5));
                         updateFiveDayForecast(forecastData.list);
                     }
                 } catch (error) {
                     console.error('Error fetching location weather:', error);
                     alert('Failed to fetch weather data for your location.');
                 }
-            }, (error) => {
+            }, () => {
                 alert('Unable to access your location. Please enable location services.');
             });
         } else {

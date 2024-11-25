@@ -46,6 +46,23 @@ def register():
     # Hash the password and save the user
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
     new_user = User(username=username, password=hashed_password)
-    db.session.add(new_user)
+    db.session.add(new_user) #INSERT INTO user (username, password) VALUES ('username', 'hashedpassword');
     db.session.commit()
     return jsonify({"message": "User registered successfully"}), 201
+
+# User login 
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.json
+    username = data.get("username")
+    password = data.get("password")
+
+    if not username or not password:
+        return jsonify({"error": "Username and password are required"}), 400
+
+    # Check if the username exists
+    user = User.query.filter_by(username=username).first() # SELECT * FROM user WHERE username = 'username' LIMIT 1;
+    if user and bcrypt.check_password_hash(user.password, password):
+        session["user_id"] = user.id  # Use Flask's session for stateful login
+        return jsonify({"message": "Login successful"}), 200
+    return jsonify({"error": "Invalid credentials"}), 401

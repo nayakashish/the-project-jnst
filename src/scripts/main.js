@@ -111,4 +111,37 @@ document.addEventListener('DOMContentLoaded', () => {
         time.textContent = currentTime.toLocaleTimeString();
         date.textContent = currentTime.toLocaleDateString();
     }     
+    
+        // Register user
+        async function registerUser() {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+    
+            if (!username || !password) {
+                alert('Please enter both username and password!');
+                return;
+            }
+    
+            try {
+                const response = await fetch('http://localhost:5000/register', { // Tentative port number, might change
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password }),
+                });
+    
+                const result = await response.json();
+                if (response.status === 201) {
+                    alert(result.message);
+                } else {
+                    alert(result.error);
+                }
+            } catch (error) {
+                console.error('Error during registration:', error);
+                alert('An error occurred while registering.');
+            }
+        }
+    
+   
 });

@@ -153,12 +153,13 @@ header {
     font-size: 1rem;
     color: #bbb;
 }
+
 /* Style for Weather Icon */
 .weather-icon {
     width: 3rem;
     height: 3rem;
-    vertical-align: middle; /* Align with text */
-    margin-left: 1.3rem; /* Optional spacing between text and icon */
+    vertical-align: middle;
+    margin-left: 1.3rem;
 }
 
 
@@ -169,7 +170,6 @@ header {
     gap: 20px;
 }
 
-/* 5-Day Forecast Section */
 /* 5-Day Forecast Section */
 .five-day-forecast {
     background-color: #444;
@@ -190,7 +190,7 @@ header {
     display: flex;
     justify-content: space-around;
     gap: 20px;
-    flex-wrap: wrap; /* Allows cards to wrap on smaller screens */
+    flex-wrap: wrap;
 }
 
 .forecast-card {
@@ -198,7 +198,7 @@ header {
     padding: 15px;
     border-radius: 10px;
     text-align: center;
-    width: 18%; /* Adjust width for side-by-side display */
+    width: 18%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease-in-out;
 }
@@ -246,7 +246,7 @@ header {
     background-color: #444;
     padding: 20px;
     border-radius: 10px;
-    width: 48%;  /* Adjust width for side-by-side display */
+    width: 48%;
 }
 
 .saved-locations h3 {

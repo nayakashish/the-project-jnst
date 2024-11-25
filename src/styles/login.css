@@ -2,16 +2,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Roboto', Geneva, Tahoma, sans-serif;
 }
 
 body {
-  background-color: #1c1c1c;
+  background-color: #e1f5fe; /* Soft light blue */
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  color: #fff;
+  color: #1c1c1c; /* Dark text for better contrast */
   padding: 2rem;
 }
 
@@ -21,18 +21,17 @@ body {
   justify-content: center;
   align-items: center;
   width: 25rem;
-  /* max-width: 400px; */
-  background: #333;
+  background: #ffffff; /* White background */
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Softer shadow */
   text-align: center;
 }
 
 header h1 {
   margin-bottom: 2rem;
   font-size: 2rem;
-  color: #fff;
+  color: #81d4fa; /* Blue title color */
 }
 
 .login-form {
@@ -47,46 +46,46 @@ header h1 {
 label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #ccc;
+  color: #81d4fa; /* Blue labels */
 }
 
 input[type="text"], input[type="password"] {
   width: 100%;
   padding: 10px;
-  border: 1px solid #555;
+  border: 1px solid #b0bec5; /* Light gray border */
   border-radius: 5px;
-  background: #444;
-  color: #fff;
+  background: #e3f2fd; /* Light blue-gray background */
+  color: #1c1c1c; /* Dark text */
   outline: none;
 }
 
 input[type="text"]::placeholder, input[type="password"]::placeholder {
-  color: #bbb;
+  color: #90a4ae; /* Light gray placeholder */
 }
 
 .login-btn {
-  background-color: #4caf50;
-  color: #fff;
+  background-color: #81d4fa; /* Light blue button */
+  color: #ffffff; /* White text */
   border: none;
   padding: 12px 20px;
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
   margin-top: 1rem;
+  font-weight: bold;
 }
 
 .login-btn:hover {
-  background-color: #45a049;
+  background-color: #4fc3f7; /* Slightly darker blue on hover */
 }
 
 .register-link {
   margin-top: 1rem;
   font-size: 0.9rem;
-  color: #ccc;
+  color: #0277bd; /* Blue text */
 }
 
 .register-link a {
-  color: #4caf50;
+  color: #0288d1; /* Slightly darker blue link */
   text-decoration: underline;
 }
-

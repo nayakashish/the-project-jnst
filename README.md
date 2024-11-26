@@ -5,6 +5,7 @@
 | **Team Member**   | **Task(s)**                                | **Status**          |
 |--------------------|-----------------------------------------------------|---------------------|
 | **Syed Saad Ali** | - Manage communication between main.js and app.py           | In Progress           |
+|                   | - Create Login and Register User functionality      | In Progress           |
 | **Tawana Ndlovu** | - Write test plan               | In Progress           |
 |                    | - Create basic testing framework (including CI)          | In progress           |
 | **Jan Suratos** | - Create dashboard UI                            | Completed           |
@@ -34,6 +35,7 @@
     - [ ] Create login/sign up UI 
     - [ ] Implement dashboard functionality
     - [ ] Implement login functionality
+    - [ ] Create Login and Register User functionality  
 
   - **Remaining:**
     - [ ] Manage connection to RestAPI

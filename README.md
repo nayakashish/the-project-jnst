@@ -2,20 +2,17 @@
 # **Progress Report Dashboard**
 
 ## **1. Tasks Completed (by Owner)**
-
 | **Team Member**   | **Task(s)**                                | **Status**          |
 |--------------------|-----------------------------------------------------|---------------------|
 | **Syed Saad Ali** | - Manage communication between main.js and app.py           | In Progress           |
-
 | **Tawana Ndlovu** | - Write test plan               | In Progress           |
 |                    | - Create basic testing framework (including CI)          | In progress           |
 | **Jan Suratos** | - Create dashboard UI                            | Completed           |
 |                    | - Manage connection to Open Weather Map API                          | Completed           |
+|                    | - Create login UI                             | In Progress          |
 | **Ashish Nayak** | - Database ER/UML Diagram            | Completed       |
 |                 | - Create Docker Database Connection | Completed |
 |                 | - Merge Docker Database connection | Review | 
-
----
 
 ## **2. Progress Summary**
 

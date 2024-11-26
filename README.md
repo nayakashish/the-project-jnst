@@ -85,8 +85,10 @@ One of the main challenges we faced was integrating the various components of ou
 
 ## **6. Testing Report**
 
- Create basic testing framework (including CI)     is completed
- Tests for the database manager has been created and tested.
+- Create basic testing framework (including CI) is completed
+- Tests for the database manager has been created and tested.
+- Test Plan spreadsheet has been used, for tracking changes, and will become increasingly more important as we add the login and sharing functionality.
+
  
 ---
 

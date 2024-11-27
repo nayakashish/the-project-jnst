@@ -1,1 +1,4 @@
 .env
+templates/test.html
+archived_app.py
+src/scripts/test.js

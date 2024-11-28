@@ -280,3 +280,30 @@ class app_DB:
         except mysql.connector.Error as err:
             print(f"Error: {err}")
             return False
+        
+
+# This function is just for our team to test the database functions. 
+if __name__ == "__main__":
+    db = app_DB()
+    connection = db.connect()
+    
+    if connection:
+        # Test adding a user
+        user_info = {
+            'name': 'John Doe',
+            'email': 'john.doe@example.com',
+            'theme': 1,
+            'temperatureUnit': 'C',
+            'password': 'securepassword'
+        }
+        user_id = db.add_user(user_info)
+        
+        if user_id:
+            print(f"User created with ID: {user_id}")
+            
+            # Test deleting the user
+            if not db.delete_user(user_id):
+                print(f"Failed to delete user with ID {user_id}.")
+        
+        db.close()
+    print("Done testing database functions.")

@@ -1,9 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const API_KEY = 'b5958d9b3908799da10532d190c26c36'; // Replace with your OpenWeather API key
+  const API_KEY = 'b5958d9b3908799da10532d190c26c36'; // Replace with your OpenWeather API key TBD
   const WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather';
 
-  const addButtons = document.querySelectorAll('.add-btn');
+  // Get reference to html elements
+  const addButtons = document.querySelectorAll('.add-btn'); 
   const dashboardCards = document.querySelectorAll('.dashboard-card');
+
+  // TODO: edit this method such that a json file containing weather data is passed to app.py,
+  // which will then be passed to the database
 
   // Function to fetch and populate weather data for the city
   async function getWeather(city, card) {
@@ -49,6 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
           resetCardToAddButton(card);
       });
   }
+
+   // TODO: edit this method such that a commmand is passed to app.py to delete the weather card from the database,
+  // (I think you can use a get or a post request here)
 
   // Function to reset the card to the "Add" button state
   function resetCardToAddButton(card) {

@@ -4,6 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Error: Failed to connect to the database.\nIs Database Server Running?');
     }
 
+    // Check for success message in URL parameters and display an alert
+    const urlParams = new URLSearchParams(window.location.search);
+    const alertMSG = urlParams.get('alert_msg');
+    if (alertMSG) {
+        alert(alertMSG);
+    }
+
     // Select DOM elements
     const searchBar = document.querySelector('.search-bar');
     const currentLocationBtn = document.querySelector('.current-location-btn');

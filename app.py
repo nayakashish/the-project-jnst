@@ -81,8 +81,7 @@ def login():
         weather_app_db.close()
 
         if userLoggedin:
-            return redirect(url_for('index'))
-            # return render_template('index.html', return_message="User authenticated")
+            return redirect(url_for('index', alert_msg="You've been logged in successfully!"))
         return render_template('login.html', return_message=error_message)
     return render_template('login.html')
 

@@ -1,0 +1,120 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', Geneva, Tahoma, sans-serif;
+}
+
+/* Body Styles */
+body {
+  background-color: white;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 0;
+  height: 100vh;
+}
+
+/* Dashboard Section */
+.dashboard {
+  width: 90%;
+  max-width: 1000px;
+  height: 30rem;
+  padding-top: 8rem;
+  text-align: center;
+}
+
+.dashboard h3 {
+  font-size: 1.8rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+  height: 20rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+/* Dashboard Card */
+.dashboard-card {
+  background-color: #81d4fa; /* Soft blue */
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Allow for positioning inside the card */
+}
+
+/* Add Button Styles */
+.add-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  background-image: url('https://img.icons8.com/?size=100&id=37839&format=png&color=FFFFFF'); /* New Add icon */
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 50%; /* Circular button */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: none; /* Remove any box shadow to avoid the blue background */
+}
+
+/* Add Button Hover Effect */
+.add-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Add subtle shadow on hover */
+}
+
+.dashboard-card h4 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.dashboard-card span {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #f1f8e9; /* Soft greenish-white for consistency */
+}
+
+/* Weather Icon */
+.weather-icon {
+  margin-top: 10px;
+  width: 50px;
+  height: 50px;
+  filter: brightness(1.5) hue-rotate(180deg); /* Matches other icons */
+}
+
+/* Remove Button Styles */
+.remove-btn {
+  background-color: #ccc; /* Red color */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.remove-btn:hover {
+  background-color: #ccc;
+  ; /* Darker red on hover */
+}

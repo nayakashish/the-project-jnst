@@ -23,7 +23,19 @@
                 aria-label="City Search Bar">
             <div class="current-location-btn">Current Location</div>
 
-        <div class="login-btn">Login</div>
+
+            <!-- User Authentication Section -->
+             <!-- If logged in it says hello, otherwise it is a login button. -->
+            {% if userLoggedin %}
+                <div class="welcome-btn">
+                    Hello, {{userName}}!
+                </div>
+            {% else %}
+                <div class="login-btn">
+                    Login
+                </div>
+            {% endif %}
+
         </header>
 
         <!-- Current Weather Section -->

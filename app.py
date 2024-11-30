@@ -2,7 +2,7 @@
 # use "pip install flask" to install flask, which is the python framework to run a server 
 # to run, type in python app.py in the terminal (dont forget to be in the project directory) 
 import os
-from flask import Flask, render_template, request, jsonify, redirect, url_for
+from flask import Flask, render_template, request, jsonify, redirect, url_for, session
 import requests
 from dotenv import load_dotenv
 from weather_app_db import app_DB
@@ -11,11 +11,11 @@ from weather_app_db import app_DB
 load_dotenv()
 
 app = Flask(__name__)
+app.secret_key = 'my_secret_key'
 
 # OpenWeather API key (To be added)
 API_KEY = os.getenv("OPENWEATHER_API_KEY")
 weather_app_db = app_DB()
-userLoggedin = False
 
 @app.route("/")
 def home():
@@ -49,10 +49,13 @@ def get_weather():
 @app.route('/index')
 def index():
     db_connection_failed = False
-    return render_template('index.html', db_connection_failed=db_connection_failed)
+    userLoggedin = session.get('userLoggedin', False)
+    userName = session.get('userName', None)
+    return render_template('index.html', db_connection_failed=db_connection_failed, userLoggedin=userLoggedin, userName=userName)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    userLoggedin = session.get('userLoggedin', False)  # Ensure userLoggedin is defined
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -60,27 +63,29 @@ def login():
         print(f"Username: {username}, Password: {password}")
         weather_app_db.connect()
         user_id = weather_app_db.get_userid(username)
-
+       
         if user_id:
             print(f"User ID: {user_id}")
             user_info = weather_app_db.get_user_info(user_id)
-            
+            session['userName'] = user_info['name'] #update session user name
             if user_info:
                 print(f"User Info: {user_info}")
                 if password == user_info['password']:
                     print("User authenticated")
-                    userLoggedin = True
+                    session['userLoggedin'] = True
                 else:
                     error_message = "Invalid password."
-                    userLoggedin = False
-
+                    session['userLoggedin'] = False
+            else:
+                error_message = "User information not found."
+                session['userLoggedin'] = False
         else: 
             error_message = "Invalid username."
-            userLoggedin = False
+            session['userLoggedin'] = False
         
         weather_app_db.close()
 
-        if userLoggedin:
+        if session['userLoggedin']:
             return redirect(url_for('index', alert_msg="You've been logged in successfully!"))
         return render_template('login.html', return_message=error_message)
     return render_template('login.html')

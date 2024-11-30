@@ -180,11 +180,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
-
-// LOGIN:
-// main.js
-
-// main.js
-
+// Event listener for view dashboards button
+const viewDashboardsBtn = document.querySelector('.view-dashboards-btn');
+if(viewDashboardsBtn) {
+    viewDashboardsBtn.addEventListener('click', () => {
+        window.location.href = '/dashboards';
+    });
+}
 

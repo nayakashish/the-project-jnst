@@ -158,15 +158,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event listener for login button
     const loginBtn = document.querySelector('.login-btn');
-    loginBtn.addEventListener('click', () => {
-        window.location.href = '/login';
-    });
+    if(loginBtn) {
+        loginBtn.addEventListener('click', () => {
+            window.location.href = '/login';
+        });
+    }
 
     // Event listener for view dashboards button
     const viewDashboardsBtn = document.querySelector('.view-dashboards-btn');
-    viewDashboardsBtn.addEventListener('click', () => {
-        window.location.href = '/dashboards';
-    });
+    if(viewDashboardsBtn) {
+        viewDashboardsBtn.addEventListener('click', () => {
+            window.location.href = '/dashboards';
+        });
+    }
 
     // Event listener for current location button
     currentLocationBtn.addEventListener('click', () => {
@@ -202,6 +206,9 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Geolocation is not supported by your browser.');
         }
     });
+
+
+    console.log("main.js loaded");
 });
 
 

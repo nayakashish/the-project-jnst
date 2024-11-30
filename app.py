@@ -19,6 +19,7 @@ weather_app_db = app_DB()
 
 @app.route("/")
 def home():
+    session.clear()
     db_connection_failed = session.get('db_connection_failed', True)
     print("SERVER IS RUNNING")
     if not weather_app_db.connect():
@@ -30,22 +31,8 @@ def home():
         weather_app_db.close()
         print("Closed connection to database")
    
-    return render_template("index.html", db_connection_failed= session['db_connection_failed'])
-
-@app.route("/weather", methods=["GET"])
-def get_weather():
-    city = request.args.get("city")
-    if not city:
-        return jsonify({"error": "City is required"}), 400
-# Fetch weather data from OpenWeather API
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
-    response = requests.get(url)
-
-    if response.status_code != 200:
-        return jsonify({"error": "Failed to fetch weather data"}), 500
-
-    weather_data = response.json()
-    return jsonify(weather_data)
+    return redirect(url_for('index'))
+    # return render_template("index.html", db_connection_failed= session['db_connection_failed'])
 
 @app.route('/index')
 def index():
@@ -96,6 +83,21 @@ def dashboards():
     #TODO - check if user is logged in
     return render_template('dashboard.html')
 
+
+@app.route("/weather", methods=["GET"])
+def get_weather():
+    city = request.args.get("city")
+    if not city:
+        return jsonify({"error": "City is required"}), 400
+# Fetch weather data from OpenWeather API
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        return jsonify({"error": "Failed to fetch weather data"}), 500
+
+    weather_data = response.json()
+    return jsonify(weather_data)
 
 if __name__ == "__main__":
     app.run(debug=True)

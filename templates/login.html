@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="../static/styles/login.css">
 </head>
 <body>
-    <script src="../static/scripts/main.js"></script>
+
+    <script src="../static/scripts/login.js"></script>
     <div class="container login-container">
         <header>
             <h1>Login</h1>
@@ -24,6 +25,15 @@
               </div>
               <button type="submit" class="login-btn">Login</button>
         </form>
+        
+        <style>
+            .login-form p {
+                margin-top: 10px;
+            }
+        </style>
+        {% if return_message %}
+        <p style="color: red;">{{ return_message }}</p>
+         {% endif %}
         </section>
     </div>
 </body>

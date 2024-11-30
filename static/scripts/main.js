@@ -149,6 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Event listener for login button
     const loginBtn = document.querySelector('.login-btn');
     loginBtn.addEventListener('click', () => {
         window.location.href = '/login';

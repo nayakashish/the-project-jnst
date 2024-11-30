@@ -24,7 +24,7 @@ class app_DB:
         """Fetches user information from the database based on user_id"""
         try:
             cursor = self.cnx.cursor(dictionary=True)  # To get results as a dictionary
-            query = "SELECT id, name, email, theme, temperatureUnit FROM user WHERE id = %s"
+            query = "SELECT id, name, email, theme, temperatureUnit, password FROM user WHERE id = %s"
             cursor.execute(query, (user_id,))  # Use parameterized query to avoid SQL injection
             user_info = cursor.fetchone()  # Fetch a single result since we're querying by ID
             

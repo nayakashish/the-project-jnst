@@ -19,7 +19,18 @@ weather_app_db = app_DB()
 @app.route("/")
 def home():
     print("SERVER IS RUNNING")
-    return render_template("index.html")
+
+
+    if not weather_app_db.connect():
+        print("Error: Failed to connect to the database.")
+        db_connection_failed = True
+    else:
+        print("Connected to the database!")
+        db_connection_failed = False
+        weather_app_db.close()
+        print("Closed connection to database")
+   
+    return render_template("index.html", db_connection_failed=db_connection_failed)
 
 @app.route("/weather", methods=["GET"])
 def get_weather():
@@ -47,7 +58,11 @@ def login():
         password = request.form['password']
         # Process the username and password (e.g., authenticate the user)
         print(f"Username: {username}, Password: {password}")
-        app_DB.get_userid(username, password)
+        user_id = weather_app_db.get_userid(username, password)
+        if user_id:
+            print(f"User ID: {user_id}")
+        else: 
+            print("Invalid username or password")
         return redirect(url_for('index'))
     return render_template('login.html')
 

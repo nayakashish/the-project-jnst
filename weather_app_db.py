@@ -11,8 +11,7 @@ class app_DB:
             print("Connected!")
             return self.cnx
         except mysql.connector.Error as err:  
-            print(err)     
-            exit(1)  
+            return False
         
     def close(self):
         try:

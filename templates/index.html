@@ -22,7 +22,7 @@
                 placeholder="Search for your preferred city..." 
                 aria-label="City Search Bar">
             <div class="current-location-btn">Current Location</div>
-            
+
         <div class="login-btn">Login</div>
         </header>
 
@@ -133,6 +133,9 @@
         </div>
     </div>
 
+    <script>
+        const dbConnectionFailed = {{ db_connection_failed|tojson|safe }}; //This line shows error in html, however it is working with flask.
+    </script>
     <script src="../static/scripts/main.js"></script>
 </body>
 </html>

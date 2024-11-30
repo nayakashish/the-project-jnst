@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Check if the database connection failed and display an alert
+    if (typeof dbConnectionFailed !== 'undefined' && dbConnectionFailed) {
+        alert('Error: Failed to connect to the database.\nIs Database Server Running?');
+    }
+
     // Select DOM elements
     const searchBar = document.querySelector('.search-bar');
     const currentLocationBtn = document.querySelector('.current-location-btn');

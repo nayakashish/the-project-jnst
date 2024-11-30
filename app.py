@@ -61,16 +61,16 @@ def login():
         password = request.form['password']
         # Process the username and password (e.g., authenticate the user)
         print(f"Username: {username}, Password: {password}")
-        weather_app_db.connect()
-        user_id = weather_app_db.get_userid(username)
+        weather_app_db.connect() #connect to DB
+        user_id = weather_app_db.get_userid(username) #get user id from DB based on user given username
        
-        if user_id:
+        if user_id: #If user is found in DB
             print(f"User ID: {user_id}")
             user_info = weather_app_db.get_user_info(user_id)
             session['userName'] = user_info['name'] #update session user name
-            if user_info:
+            if user_info: #If user info is found in DB
                 print(f"User Info: {user_info}")
-                if password == user_info['password']:
+                if password == user_info['password']: #if user given password matches the password in DB
                     print("User authenticated")
                     session['userLoggedin'] = True
                 else:
@@ -83,12 +83,12 @@ def login():
             error_message = "Invalid username."
             session['userLoggedin'] = False
         
-        weather_app_db.close()
+        weather_app_db.close() #close connection to DB
 
         if session['userLoggedin']:
-            return redirect(url_for('index', alert_msg="You've been logged in successfully!"))
-        return render_template('login.html', return_message=error_message)
-    return render_template('login.html')
+            return redirect(url_for('index', alert_msg="You've been logged in successfully!")) #redirect to index page with an alert
+        return render_template('login.html', return_message=error_message) #go back to login page with an error message
+    return render_template('login.html') # this is return statement if login.request.method is not POST
 
 if __name__ == "__main__":
     app.run(debug=True)

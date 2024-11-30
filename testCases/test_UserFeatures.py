@@ -23,4 +23,12 @@ def test_view_five_day_forecast(client):
     assert response.status_code == 200
     assert b"5-Day Forecast" in response.data #Verifies that the response contains "5-Day Forecast" text
 
-    
+def test_search_location(client):
+    """
+    Test that the app allows searching for location by name.
+    """
+    response = client.get("/weather?city=Kelowna") #Sends a GET request with a city parameter
+    assert response.status_code == 200
+    assert b"Kelowna" in response.data #Verifies that the response includes the searched city name
+
+

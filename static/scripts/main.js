@@ -162,6 +162,12 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = '/login';
     });
 
+    // Event listener for view dashboards button
+    const viewDashboardsBtn = document.querySelector('.view-dashboards-btn');
+    viewDashboardsBtn.addEventListener('click', () => {
+        window.location.href = '/dashboards';
+    });
+
     // Event listener for current location button
     currentLocationBtn.addEventListener('click', () => {
         if (navigator.geolocation) {

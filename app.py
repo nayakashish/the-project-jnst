@@ -19,17 +19,18 @@ weather_app_db = app_DB()
 
 @app.route("/")
 def home():
+    db_connection_failed = session.get('db_connection_failed', True)
     print("SERVER IS RUNNING")
     if not weather_app_db.connect():
         print("Error: Failed to connect to the database.")
-        db_connection_failed = True
+        session['db_connection_failed'] = True
     else:
         print("Connected to the database!")
-        db_connection_failed = False
+        session['db_connection_failed'] = False
         weather_app_db.close()
         print("Closed connection to database")
    
-    return render_template("index.html", db_connection_failed=db_connection_failed)
+    return render_template("index.html", db_connection_failed= session['db_connection_failed'])
 
 @app.route("/weather", methods=["GET"])
 def get_weather():
@@ -48,7 +49,7 @@ def get_weather():
 
 @app.route('/index')
 def index():
-    db_connection_failed = False
+    db_connection_failed = session.get('db_connection_failed', True)
     userLoggedin = session.get('userLoggedin', False)
     userName = session.get('userName', None)
     return render_template('index.html', db_connection_failed=db_connection_failed, userLoggedin=userLoggedin, userName=userName)
@@ -89,6 +90,12 @@ def login():
             return redirect(url_for('index', alert_msg="You've been logged in successfully!")) #redirect to index page with an alert
         return render_template('login.html', return_message=error_message) #go back to login page with an error message
     return render_template('login.html') # this is return statement if login.request.method is not POST
+
+@app.route('/dashboards')
+def dashboards():
+    #TODO - check if user is logged in
+    return render_template('dashboard.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True)

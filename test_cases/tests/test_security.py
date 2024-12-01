@@ -19,9 +19,9 @@ def test_invalid_login(client):
     assert response.json["message"] == "Invalid credentials"  # Accessing JSON response directly
 
 
-# Test access to protected resource without login
+# Test to ensure user cannot view dashboard without login
 def test_access_protected_resource_without_login(client):
-    url = "/user/profile"  # Use relative paths for internal routes
+    url = "/dashboard"  # Use relative paths for internal routes
     response = client.get(url)
 
     # Assert that unauthorized access is prevented

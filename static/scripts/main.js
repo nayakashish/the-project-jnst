@@ -11,16 +11,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const sunset = document.getElementById('sunset');
     const hourlyForecastContainer = document.querySelector('.hourly-forecast');
     const fiveDayForecastContainer = document.querySelector('.five-day-forecast .forecast-container');
+    const toggleUnitBtn = document.getElementById('toggleUnit');
+    
 
     // OpenWeather API details
     const API_KEY = 'b5958d9b3908799da10532d190c26c36'; // Replace with your actual OpenWeather API key
     const WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather';
     const FORECAST_URL = 'https://api.openweathermap.org/data/2.5/forecast';
+    
+    
+    // Default unit system (metric = Celsius)
+    let unit = 'metric';
 
+    // Toggle units and update button text
+    toggleUnitBtn.addEventListener('click', () => {
+        unit = unit === 'metric' ? 'imperial' : 'metric'; // Switch unit
+        toggleUnitBtn.textContent = unit === 'metric' ? '°C / °F' : '°F / °C'; // Update button text
+
+        // Optionally re-fetch data for the currently displayed city
+        const city = document.getElementById('cityName').textContent.split(',')[0]; // Extract city name
+        if (city) {
+            getWeather(city);
+            getFiveDayForecast(city);
+        }
+    });
     // Fetch weather data based on city name
     async function getWeather(city) {
         try {
-            const response = await fetch(`${WEATHER_URL}?q=${city}&appid=${API_KEY}&units=metric`);
+            const response = await fetch(`${WEATHER_URL}?q=${city}&appid=${API_KEY}&units=${unit}`);
             if (!response.ok) {
                 const errorData = await response.json();
                 console.error('Weather API Error:', errorData);
@@ -38,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fetch 5-day forecast
     async function getFiveDayForecast(city) {
         try {
-            const response = await fetch(`${FORECAST_URL}?q=${city}&appid=${API_KEY}&units=metric`);
+            const response = await fetch(`${FORECAST_URL}?q=${city}&appid=${API_KEY}&units=${unit}`);
             if (!response.ok) {
                 const errorData = await response.json();
                 console.error('Forecast API Error:', errorData);
@@ -56,28 +74,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update current weather UI
     function updateWeather(data) {
+        const unitSymbol = unit === 'metric' ? '°C' : '°F';
+        const cityName = document.getElementById('cityName');
+        const temperature = document.getElementById('temperature');
+        const feelsLike = document.getElementById('feelsLike');
+        const sunrise = document.getElementById('sunrise');
+        const sunset = document.getElementById('sunset');
+
         cityName.textContent = `${data.name}, ${data.sys.country}`;
-        temperature.textContent = `${data.main.temp}°C`;
-        feelsLike.textContent = `Feels like: ${data.main.feels_like}°C`;
+        temperature.textContent = `${data.main.temp}${unitSymbol}`;
+        feelsLike.textContent = `Feels like: ${data.main.feels_like}${unitSymbol}`;
         sunrise.textContent = `Sunrise: ${new Date(data.sys.sunrise * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
         sunset.textContent = `Sunset: ${new Date(data.sys.sunset * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
-
-        const utcNow = new Date().getTime() + new Date().getTimezoneOffset() * 60000;
-        const cityLocalTime = new Date(utcNow + data.timezone * 1000);
-        const hours = String(cityLocalTime.getHours()).padStart(2, '0');
-        const minutes = String(cityLocalTime.getMinutes()).padStart(2, '0');
-        time.innerHTML = `${hours}<span class="blinking">:</span>${minutes}`;
-        date.textContent = cityLocalTime.toLocaleDateString();
     }
 
     // Update 5-hour forecast UI
     function updateHourlyForecast(forecast) {
+        const unitSymbol = unit === 'metric' ? '°C' : '°F';
+        const hourlyForecastContainer = document.querySelector('.hourly-forecast');
         hourlyForecastContainer.innerHTML = ''; // Clear existing content
         const iconBaseURL = 'https://openweathermap.org/img/wn/';
 
         forecast.forEach((entry) => {
             const time = new Date(entry.dt * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            const temp = `${Math.round(entry.main.temp)}°C`;
+            const temp = `${Math.round(entry.main.temp)}${unitSymbol}`;
             const icon = entry.weather[0].icon;
             const description = entry.weather[0].description;
 
@@ -94,6 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update 5-day forecast UI
     function updateFiveDayForecast(forecast) {
+        const unitSymbol = unit === 'metric' ? '°C' : '°F';
+        const fiveDayForecastContainer = document.querySelector('.five-day-forecast .forecast-container');
         fiveDayForecastContainer.innerHTML = ''; // Clear existing content
         const iconBaseURL = 'https://openweathermap.org/img/wn/';
 
@@ -124,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
             dayElement.classList.add('forecast-day');
             dayElement.innerHTML = `
                 <span>${dayName}</span>
-                <span>${minTemp}°C - ${maxTemp}°C</span>
+                <span>${minTemp}${unitSymbol} - ${maxTemp}${unitSymbol}</span>
                 <img src="${iconBaseURL}${icon}.png" alt="Weather Icon" class="weather-icon">
             `;
             fiveDayForecastContainer.appendChild(dayElement);

@@ -74,11 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     setInterval(() => {
-        if (currentCityData) {
-            updateTime(currentCityData.timezone); // Pass the city's timezone
-        }
-    }, 1000);
-    
+    if (currentCityData) {
+        updateTime(currentCityData.timezone); // Pass the city's timezone
+    }
+}, 1000);
+
 
     async function getFiveDayForecast(city) {
         try {
@@ -182,13 +182,54 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Event listener for the current location button
-    currentLocationBtn.addEventListener('click', () => {
+    // Event listener for the current location button
+// Event listener for the current location button
+currentLocationBtn.addEventListener('click', () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            try {
+                const response = await fetch(`${WEATHER_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=${unit}`);
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error('Location Weather API Error:', errorData);
+                    alert(`Error fetching weather: ${errorData.message}`);
+                    return;
+                }
+                const data = await response.json();
+                updateWeather(data);
+                updateTime(data.timezone); // Update the time with the timezone of the current location
+
+                const forecastResponse = await fetch(`${FORECAST_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=${unit}`);
+                if (forecastResponse.ok) {
+                    const forecastData = await forecastResponse.json();
+                    updateHourlyForecast(forecastData.list.slice(0, 5));
+                    updateFiveDayForecast(forecastData.list);
+                }
+            } catch (error) {
+                console.error('Error fetching location weather:', error);
+                alert('Failed to fetch weather data for your location.');
+            }
+        }, () => {
+            alert('Unable to access your location. Please enable location services.');
+        });
+    } else {
+        alert('Geolocation is not supported by your browser.');
+    }
+});
+
+
+
+    // Check the user's location if geolocation is available
+    document.addEventListener('DOMContentLoaded', () => {
+        // Automatically prompt for the user's location when the page loads
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(async (position) => {
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
                 try {
-                    const response = await fetch(`${WEATHER_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
+                    const response = await fetch(`${WEATHER_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=${unit}`);
                     if (!response.ok) {
                         const errorData = await response.json();
                         console.error('Location Weather API Error:', errorData);
@@ -197,8 +238,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     const data = await response.json();
                     updateWeather(data);
-
-                    const forecastResponse = await fetch(`${FORECAST_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
+                    updateTime(data.timezone); // Update time with the timezone of the current location
+    
+                    const forecastResponse = await fetch(`${FORECAST_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=${unit}`);
                     if (forecastResponse.ok) {
                         const forecastData = await forecastResponse.json();
                         updateHourlyForecast(forecastData.list.slice(0, 5));
@@ -215,28 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Geolocation is not supported by your browser.');
         }
     });
-
-    // Check the user's location if geolocation is available
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(async (position) => {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            try {
-                const response = await fetch(`${WEATHER_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=${unit}`);
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    console.error('Location Weather API Error:', errorData);
-                    alert(`Error fetching weather: ${errorData.message}`);
-                    return;
-                }
-                const data = await response.json();
-                updateWeather(data);
-            } catch (error) {
-                console.error('Error fetching weather:', error);
-                alert('Failed to fetch weather data.');
-            }
-        });
-    }
+    
 });
 
 

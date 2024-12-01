@@ -64,3 +64,15 @@ def test_invalid_password(client):
         assert sess['userLoggedin'] == False
 
 #No need for tests for empty fields as the form has required fields
+
+def test_logout(client):
+    # First, log in the user
+    response = client.post("/login", data={"username": "Ryan Reynolds", "password": "ryanPass"})
+
+    # Then, log out the user
+    response = client.get("/logout")
+    assert response.status_code == 302  # Redirect to index
+    assert b"You've been successfully logged out!" in response.data
+    with client.session_transaction() as sess:
+        assert 'userLoggedin' not in sess
+        assert 'userName' not in sess

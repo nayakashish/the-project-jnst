@@ -49,3 +49,10 @@ def test_successful_login(client):
         assert sess['userLoggedin'] == True
         assert sess['userName'] == "Ryan Reynolds"  # Replace with actual expected name
 
+def test_invalid_username(client):
+    response = client.post("/login", data={"username": "invalid_user", "password": "ryanPass"})
+    assert response.status_code == 200  # Stay on login page
+    assert b"Invalid username." in response.data
+    with client.session_transaction() as sess:
+        assert sess['userLoggedin'] == False
+

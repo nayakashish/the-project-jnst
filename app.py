@@ -83,7 +83,6 @@ def dashboards():
     #TODO - check if user is logged in
     return render_template('dashboard.html')
 
-
 @app.route("/weather", methods=["GET"])
 def get_weather():
     city = request.args.get("city")

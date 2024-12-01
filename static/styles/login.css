@@ -1,0 +1,91 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', Geneva, Tahoma, sans-serif;
+}
+
+body {
+  background-color: #e1f5fe; /* Soft light blue */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #1c1c1c; /* Dark text for better contrast */
+  padding: 2rem;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 25rem;
+  background: #ffffff; /* White background */
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Softer shadow */
+  text-align: center;
+}
+
+header h1 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #81d4fa; /* Blue title color */
+}
+
+.login-form {
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #81d4fa; /* Blue labels */
+}
+
+input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #b0bec5; /* Light gray border */
+  border-radius: 5px;
+  background: #e3f2fd; /* Light blue-gray background */
+  color: #1c1c1c; /* Dark text */
+  outline: none;
+}
+
+input[type="text"]::placeholder, input[type="password"]::placeholder {
+  color: #90a4ae; /* Light gray placeholder */
+}
+
+.login-btn {
+  background-color: #81d4fa; /* Light blue button */
+  color: #ffffff; /* White text */
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.login-btn:hover {
+  background-color: #4fc3f7; /* Slightly darker blue on hover */
+}
+
+.register-link {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #0277bd; /* Blue text */
+}
+
+.register-link a {
+  color: #0288d1; /* Slightly darker blue link */
+  text-decoration: underline;
+}

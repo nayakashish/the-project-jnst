@@ -1,4 +1,13 @@
 .env
+<<<<<<< HEAD
+templates/test.html
+archived_app.py
+src/scripts/test.js
 __pycache__
 .pytest_cache
 .DS_Store
+=======
+__pycache__
+.pytest_cache
+.DS_Store
+>>>>>>> origin/development

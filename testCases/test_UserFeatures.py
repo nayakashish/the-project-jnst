@@ -1,4 +1,6 @@
 import pytest
+from flask import session
+from app import app
 
 @pytest.fixture
 def client():
@@ -40,4 +42,10 @@ def test_user_login(client):
     assert response.status_code == 200
     assert b"Welcome test_user" in response.data #Verify that the response includes a welcome message for each of these test cases may you writer a similar commit message
 
+def test_successful_login(client):
+    response = client.post("/login", data={"username": "Ryan Reynolds", "password": "ryanPass"})
+    assert response.status_code == 302  # Redirect to index
+    with client.session_transaction() as sess:
+        assert sess['userLoggedin'] == True
+        assert sess['userName'] == "Ryan Reynolds"  # Replace with actual expected name
 

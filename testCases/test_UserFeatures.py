@@ -56,3 +56,11 @@ def test_invalid_username(client):
     with client.session_transaction() as sess:
         assert sess['userLoggedin'] == False
 
+def test_invalid_password(client):
+    response = client.post("/login", data={"username": "Ryan Reynolds", "password": "invalid_password"})
+    assert response.status_code == 200  # Stay on login page
+    assert b"Invalid password." in response.data
+    with client.session_transaction() as sess:
+        assert sess['userLoggedin'] == False
+
+#No need for tests for empty fields as the form has required fields

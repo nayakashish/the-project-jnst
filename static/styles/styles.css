@@ -20,7 +20,7 @@ body {
 .container {
     width: 90%;
     max-width: 1000px;
-    background: #e1f5fe; /* Soft light blue */
+    background: #e1f5fe;
     padding: 20px;
     border-radius: 20px;
     display: flex;
@@ -33,9 +33,23 @@ body {
 /* Header Section */
 header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 15px;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: inherit;
+}
+
+.dark-mode-toggle {
+    display: flex;
+    align-items: center;
+}
+.dark-mode-toggle span {
+    margin-left: 5px; /* Space between checkbox and label */
+}
+.header-middle {
+    flex: 1;
+    display: flex;
+    justify-content: center;
 }
 
 .search-bar {
@@ -46,6 +60,23 @@ header {
     border: none;
     outline: none;
     font-size: 1rem;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.unit-toggle button {
+    padding: 10px 15px;
+    border: 1px solid #81d4fa;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    color: #81d4fa;
+    font-weight: bold;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .current-location-btn {

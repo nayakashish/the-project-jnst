@@ -22,23 +22,24 @@ document.addEventListener('DOMContentLoaded', () => {
     let unit = 'metric';
 
     // Function to update time
-    function updateTime() {
+    function updateTime(timezone) {
         const now = new Date();
-        const hours = String(now.getHours()).padStart(2, '0'); // Format hours as 2 digits
-        const minutes = String(now.getMinutes()).padStart(2, '0'); // Format minutes as 2 digits
-    
+        
+        // Convert the current time to the city's timezone
+        const utcOffset = timezone * 1000;  // Convert to milliseconds
+        const cityTime = new Date(now.getTime() + utcOffset);
+        
+        const hours = String(cityTime.getUTCHours()).padStart(2, '0'); // Format hours as 2 digits
+        const minutes = String(cityTime.getUTCMinutes()).padStart(2, '0'); // Format minutes as 2 digits
+        
         // Update the time element with the colon blinking
         time.innerHTML = `${hours}<span class="blinking">:</span>${minutes}`;
     }
     
     
     
+    
 
-    // Update the time immediately when the page loads
-    updateTime();
-
-    // Set interval to update the time every second
-    setInterval(updateTime, 1000);
 
     // Other weather-related functions
     toggleUnitBtn.addEventListener('click', () => {
@@ -63,11 +64,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const data = await response.json();
             updateWeather(data);
+    
+            // Get the timezone from the weather data and update the time
+            updateTime(data.timezone);
         } catch (error) {
             console.error('Error fetching weather data:', error);
             alert('Failed to fetch weather data.');
         }
     }
+    
+    setInterval(() => {
+        if (currentCityData) {
+            updateTime(currentCityData.timezone); // Pass the city's timezone
+        }
+    }, 1000);
+    
 
     async function getFiveDayForecast(city) {
         try {

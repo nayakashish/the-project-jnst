@@ -39,13 +39,6 @@ header {
     background-color: inherit;
 }
 
-.dark-mode-toggle {
-    display: flex;
-    align-items: center;
-}
-.dark-mode-toggle span {
-    margin-left: 5px; /* Space between checkbox and label */
-}
 .header-middle {
     flex: 1;
     display: flex;
@@ -351,4 +344,66 @@ header {
 .weather-icon, .weather-icon2 {
     filter: brightness(1.5) hue-rotate(180deg);
     transition: filter 0.3s ease;
+}
+
+/* General styles for the switch */
+.dark-mode-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Roboto', Geneva, Tahoma, sans-serif;
+}
+
+/* Hide the default checkbox */
+.switch input {
+    display: none;
+}
+
+/* The outer container for the toggle slider */
+.switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #81d4fa; /* Adjust based on your theme */
+}
+
+/* The slider itself */
+.slider {
+    width: 50px;
+    height: 25px;
+    background-color: #ccc; /* Default background */
+    border-radius: 50px;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+/* The circle inside the slider */
+.slider::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    top: 2.5px;
+    left: 3px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* When the checkbox is checked, move the circle and change background */
+input:checked + .slider {
+    background-color: #81d4fa; /* Active color */
+}
+
+input:checked + .slider::before {
+    transform: translateX(25px); /* Move the circle */
+}
+
+/* Hover effects for better feedback */
+.slider:hover {
+    background-color: #bbb; /* Slightly darker */
 }

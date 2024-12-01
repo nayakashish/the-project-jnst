@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather';
     const FORECAST_URL = 'https://api.openweathermap.org/data/2.5/forecast';
 
+
+
+    
     // Default unit system (metric = Celsius)
     let unit = 'metric';
 
@@ -220,6 +223,13 @@ currentLocationBtn.addEventListener('click', () => {
 });
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    const darkModeSwitch = document.getElementById('darkModeSwitch');
+
+    darkModeSwitch.addEventListener('change', function () {
+        alert('Dark mode toggle clicked'); // This ensures the event is firing
+    });
+});
 
     // Check the user's location if geolocation is available
     document.addEventListener('DOMContentLoaded', () => {
@@ -268,4 +278,5 @@ if(viewDashboardsBtn) {
         window.location.href = '/dashboards';
     });
 }
+
 

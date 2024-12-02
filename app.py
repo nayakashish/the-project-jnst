@@ -14,8 +14,18 @@ app = Flask(__name__)
 app.secret_key = 'my_secret_key'
 
 # OpenWeather API key (To be added)
-API_KEY = os.getenv("OPENWEATHER_API_KEY")
+API_KEY = os.getenv("API_KEY")
 weather_app_db = app_DB()
+
+# Reusable function to get weather data
+def fetch_weather(city):
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        return None  # or maybe change to raise an exception if needed?
+
+    return response.json()
 
 @app.route("/")
 def home():
@@ -88,14 +98,13 @@ def get_weather():
     city = request.args.get("city")
     if not city:
         return jsonify({"error": "City is required"}), 400
-# Fetch weather data from OpenWeather API
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
-    response = requests.get(url)
 
-    if response.status_code != 200:
+    # Call the reusable fetch_weather function
+    weather_data = fetch_weather(city)
+
+    if not weather_data:
         return jsonify({"error": "Failed to fetch weather data"}), 500
 
-    weather_data = response.json()
     return jsonify(weather_data)
 
 if __name__ == "__main__":

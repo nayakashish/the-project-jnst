@@ -1,4 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Check if the database connection failed and display an alert
+    if (typeof dbConnectionFailed !== 'undefined' && dbConnectionFailed) {
+        alert('Error: Failed to connect to the database.\nIs Database Server Running?');
+    }
+
+    // Check for success message in URL parameters and display an alert
+    const urlParams = new URLSearchParams(window.location.search);
+    const alertMSG = urlParams.get('alert_msg');
+    if (alertMSG) {
+        alert(alertMSG);
+    }
+
     // Select DOM elements
     const searchBar = document.querySelector('.search-bar');
     const currentLocationBtn = document.querySelector('.current-location-btn');
@@ -144,6 +156,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Event listener for login button
+    const loginBtn = document.querySelector('.login-btn');
+    if(loginBtn) {
+        loginBtn.addEventListener('click', () => {
+            window.location.href = '/login';
+        });
+    }
+
+    // Event listener for view dashboards button
+    const viewDashboardsBtn = document.querySelector('.view-dashboards-btn');
+    if(viewDashboardsBtn) {
+        viewDashboardsBtn.addEventListener('click', () => {
+            window.location.href = '/dashboards';
+        });
+    }
+
     // Event listener for current location button
     currentLocationBtn.addEventListener('click', () => {
         if (navigator.geolocation) {
@@ -178,13 +206,16 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Geolocation is not supported by your browser.');
         }
     });
+
+
+    console.log("main.js loaded");
 });
 
-// Event listener for view dashboards button
-const viewDashboardsBtn = document.querySelector('.view-dashboards-btn');
-if(viewDashboardsBtn) {
-    viewDashboardsBtn.addEventListener('click', () => {
-        window.location.href = '/dashboards';
-    });
-}
+
+
+// LOGIN:
+// main.js
+
+// main.js
+
 

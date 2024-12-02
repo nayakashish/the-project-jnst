@@ -33,14 +33,7 @@ def test_search_location(client):
     assert response.status_code == 200
     assert b"Kelowna" in response.data #Verifies that the response includes the searched city name
 
-def test_user_login(client):
-    """
-    Test that users must log in to access specific features.
-    """
-    #Sends a POST (used when submitting data) request to "/login" with mock credentials
-    response = client.post("/login", json = {"username": "test_user", "password": "test_pass"}) 
-    assert response.status_code == 200
-    assert b"Welcome test_user" in response.data #Verify that the response includes a welcome message for each of these test cases may you writer a similar commit message
+# removed duplicate test test_userLogin
 
 def test_successful_login(client):
     response = client.post("/login", data={"username": "Ryan Reynolds", "password": "ryanPass"})

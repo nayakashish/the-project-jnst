@@ -35,32 +35,32 @@ def test_api_error_handling(client):
 #tests if system maintains session data for duration of user interaction    
 def test_session_data_persistence(client):
     # Step 1: Log in and set session data
-    login_payload = {"username": "testuser", "password": "password123"}
+    login_payload = {"username": "Ryan Reynolds", "password": "ryanPass"} # testing with these credentials
     response = client.post("/login", data=login_payload)
 
     # Assert successful login and session setup
     assert response.status_code == 200
     assert "Welcome testuser" in response.data.decode()
 
-    # Step 2: Access a protected route to verify session persistence
-    response = client.get("/protected")
+    # Step 2: Access dashboard route (only available to logged in users) to verify session persistence
+    response = client.get("/dashboard")
     assert response.status_code == 200
     assert "Hello testuser" in response.data.decode()  # Example of session data usage
 
 def test_session_timeout(client):
     # Step 1: Log in and set session data
-    login_payload = {"username": "testuser", "password": "password123"}
+    login_payload = {"username": "Ryan Reynolds", "password": "ryanPass"}
     response = client.post("/login", data=login_payload)
 
     # Assert successful login and session setup
     assert response.status_code == 200
     assert "Welcome testuser" in response.data.decode()
 
-    # Step 2: Simulate session expiration (Flask does not handle timeouts by default, mock it here)
+    # Step 2: Log out the user by simulating session expiration (Flask does not handle timeouts by default)
     with client.session_transaction() as session:
         session.clear()  # Manually clear session to simulate timeout
 
-    # Step 3: Attempt to access a protected route after session expiration
-    response = client.get("/protected")
+    # Step 3: Attempt to access a dashboard route after logging out
+    response = client.get("/dashboard")
     assert response.status_code == 401  # Unauthorized
     assert "Session expired, please log in again" in response.data.decode()

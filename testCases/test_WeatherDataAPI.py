@@ -24,3 +24,12 @@ def test_retrieve_five_day_forecast(client):
     assert response.status_code == 200 
     #Ensures that the forecast field in the response contains 5 days of weather data
     assert len(response.json["forecast"]) == 5 
+
+def test_handle_api_error(client):
+    """
+    Test that the app handles API errors properly.
+    """ 
+    response = client.get("/api/forecast?city=InvalidCity") #Sends GET request for a non-existent city
+    #Checks that the HTTP request code is 404 (Not Found), indicating that the server could not find the requested data. 
+    assert response.status_code == 404 
+    assert b"City not found" in response.data #Verifies that the response contains " City not found" error message.  create a commit message for each function like you did for test_UserFeatures

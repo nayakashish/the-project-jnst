@@ -78,6 +78,12 @@ def login():
         return render_template('login.html', return_message=error_message) #go back to login page with an error message
     return render_template('login.html') # this is return statement if login.request.method is not POST
 
+@app.route('/logout')
+def logout():
+    session.pop('userLoggedin', None)
+    session.pop('userName', None)
+    return redirect(url_for('index', alert_msg="You've been successfully logged out!"))
+
 @app.route('/dashboards')
 def dashboards():
     #TODO - check if user is logged in

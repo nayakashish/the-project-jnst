@@ -172,6 +172,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Event listener for view dashboards button non-logged-in-users
+    const viewDashboardsBtnNotLoggedIn = document.querySelector('.view-dashboards-btn-not-logged-in');
+    if(viewDashboardsBtnNotLoggedIn) {
+        viewDashboardsBtnNotLoggedIn.addEventListener('click', () => {
+            const userConfirmed = confirm('You need to login first. Do you want to login now?');
+            if (userConfirmed) {
+                window.location.href = '/login';
+            }
+        });
+    }
+
     // Event listener for current location button
     currentLocationBtn.addEventListener('click', () => {
         if (navigator.geolocation) {

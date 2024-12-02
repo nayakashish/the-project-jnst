@@ -49,7 +49,27 @@ def index():
     db_connection_failed = session.get('db_connection_failed', True)
     userLoggedin = session.get('userLoggedin', False)
     userName = session.get('userName', None)
-    return render_template('index.html', db_connection_failed=db_connection_failed, userLoggedin=userLoggedin, userName=userName)
+
+    if userLoggedin: #if user is logged in mini dashboard shows
+        weather_app_db.connect()
+        locations = weather_app_db.get_dashboardLocations(weather_app_db.get_userid(userName)) #get locations from db
+        if locations:
+            locations = locations[:3] #get first 3 locations from user's dashboard
+            for location in locations: #for each get temps and add to location array to be sent to frontend
+                city_weather = fetch_weather(location['name'])
+                if city_weather:
+                    main_temp = city_weather.get('main', {}).get('temp')
+                    location['temperature'] = round(main_temp)
+                else:
+                    print("Failed to fetch weather data")
+                    return jsonify({"error": "Failed to fetch weather data"}), 500
+        else:
+            locations = None
+        weather_app_db.close()
+    else:
+        locations = None
+        
+    return render_template('index.html', db_connection_failed=db_connection_failed, userLoggedin=userLoggedin, userName=userName, locations=locations)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

@@ -403,6 +403,16 @@ header {
     font-size: 1rem;
 }
 
+.view-dashboards-btn-not-logged-in {
+    background-color: #81d4fa;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
 
 /* Current Weather Section */
 .current-weather {
@@ -661,3 +671,17 @@ header {
     filter: brightness(1.5) hue-rotate(180deg);
     transition: filter 0.3s ease;
 }
+
+.weather-list-item {
+    display: flex;
+    justify-content: space-between; /* Aligns the items to opposite ends */
+    align-items: center; /* Vertically centers the items */
+  }
+  
+  .location-name {
+    text-align: left;  /* Ensures left alignment of location name */
+  }
+  
+  .temperature {
+    text-align: right; /* Ensures right alignment of temperature */
+  }

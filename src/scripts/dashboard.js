@@ -63,23 +63,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-   // TODO: edit this method such that a commmand is passed to app.py to delete the weather card from the database,
-  // (I think you can use a get or a post request here)
-
   // Function to reset the card to the "Add" button state
   function resetCardToAddButton(card) {
-      card.innerHTML = `
-          <button class="add-btn"></button>
-      `;
-
-      // Reattach event listener to the "Add" button after resetting
-      const addButton = card.querySelector('.add-btn');
-      addButton.addEventListener('click', () => {
-          const city = prompt('Enter city name:');
-          if (city) {
-              getWeather(city, card);
-          }
-      });
+    card.innerHTML = `<button class="add-btn"></button>`;  // Add "Add" button
+    const addButton = card.querySelector('.add-btn');
+    addButton.addEventListener('click', async () => {
+      const city = prompt('Enter city name:');  // Prompt user for a city
+      if (city) {
+        await addLocation(city);  // Add location to backend
+        getWeather(city, card);  // Fetch and display weather for the new city
+      }
+    });
   }
 
   // Event listener for the "Add" button in each card

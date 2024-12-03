@@ -5,7 +5,6 @@
 # imports
 from flask import Flask, request, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 
 app = Flask(__name__) # use flask framework
@@ -14,11 +13,16 @@ CORS(app) #enables communication between frontend and backend
 # Configure MySQL
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://username:password@localhost/weather_app' # db url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = 'your_secret_key'  # Replace with a strong secret key
+db = SQLAlchemy(app) # Initialize extensions (SQLAlchemy)
 
-# Initialize extensions
-db = SQLAlchemy(app)
-bcrypt = Bcrypt(app)
+# Location Model - Represents a saved location in the database
+class Location(db.Model):
+    id = db.Column(db.Integer, primary_key=True)  # Primary key for the location
+    city = db.Column(db.String(100), nullable=False)  # City name, must be provided
+
+# Create tables in the database
+with app.app_context():
+    db.create_all()
 
 #User Model : This is essentially a table that holds the user credentials
 class User(db.Model):
@@ -26,9 +30,40 @@ class User(db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
 
-# Create tables in the database
-with app.app_context():
-    db.create_all()
+# Route to fetch all saved locations from the database
+@app.route('/dashboard/locations', methods=['GET'])
+def get_locations():
+    locations = Location.query.all()  # Query all locations from the database
+    # Return locations as a JSON response
+    return jsonify([{"id": loc.id, "city": loc.city} for loc in locations])
+
+# Route to add a new location to the database
+@app.route('/dashboard/locations', methods=['POST'])
+def add_location():
+    data = request.json  # Get the JSON data from the request
+    city = data.get('city')  # Extract the city name from the data
+    if city:
+        new_location = Location(city=city)  # Create a new Location object
+        db.session.add(new_location)  # Add new location to the database session
+        db.session.commit()  # Commit the session to save changes to the database
+        return jsonify({"message": "Location added"}), 201  # Return success message
+    return jsonify({"error": "City name is required"}), 400  # Return error if city is not provided
+
+# Route to remove a location from the database
+@app.route('/dashboard/locations', methods=['DELETE'])
+def remove_location():
+    data = request.json  # Get the JSON data from the request
+    city = data.get('city')  # Extract the city name from the data
+    location = Location.query.filter_by(city=city).first()  # Find location by city name
+    if location:
+        db.session.delete(location)  # Delete the location from the database
+        db.session.commit()  # Commit the session to save changes
+        return jsonify({"message": "Location removed"}), 200  # Return success message
+    return jsonify({"error": "City not found"}), 404  # Return error if location doesn't exist
+
+if __name__ == '__main__':
+    app.run(debug=True)  # Run the Flask app in debug mode
+
 
 # User Registeration
 @app.route("/register", methods=["POST"])

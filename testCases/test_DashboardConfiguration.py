@@ -24,3 +24,12 @@ def test_remove_location_from_dashboard(client):
     response = client.post("/dashboard/adremoved", json = {"location": "Vancouver"}) 
     assert response.status_code == 200 
     assert b"Vancouver was removed from your dashboard" in response.data #Confirms that the location was removed.
+
+def test_save_dashboard_preferences(client):
+    """
+    Tests that dahshboard preferences are saved after changes
+    """
+    response = client.post("/dashboard/preferences", json = {"theme": "dark", "units": "imperial"}) 
+    assert response.status_code == 200 
+    #Confirms that the dashboard preferences are sucessfully updated.
+    assert b"Dashboard preferences updated succesfully" in response.data 

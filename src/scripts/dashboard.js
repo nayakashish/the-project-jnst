@@ -74,15 +74,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         getWeather(city, card);  // Fetch and display weather for the new city
       }
     });
-  }
 
-  // Event listener for the "Add" button in each card
-  addButtons.forEach((button, index) => {
-      button.addEventListener('click', () => {
-          const city = prompt('Enter city name:');
-          if (city) {
-              getWeather(city, dashboardCards[index]);
-          }
+  // Add a location to the backend
+  async function addLocation(city) {
+    try {
+      // Send a POST request to add the city
+      const response = await fetch('http://localhost:5000/dashboard/locations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ city }),
       });
-  });
-});
+      if (!response.ok) throw new Error('Failed to save location');  // Error if adding fails
+    } catch (error) {
+      console.error('Error saving location:', error);  // Log error
+    }
+}
+  }});

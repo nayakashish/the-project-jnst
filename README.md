@@ -1,263 +1,123 @@
-# Weather App
+# Milestone 6
+# **Progress Report Dashboard**
 
-This project is a web-based weather application that provides users with real-time weather data, location-specific forecasts, and a customizable dashboard. Users can view, share, and customize their weather data and dashboards, all powered by the OpenWeather API.
-
-#### Project Members
- - Jan Suratos
- - Tawana Ndlovu
- - Syed Saad Ali
- - Ashish Nayak
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Requirements](#requirements)
-- [Proto Personas](#proto-personas)
-- [Use Cases](#use-cases)
-- [Setup](#setup)
-- [License](#license)
-
----
-
-## Overview
-
-**Project Description & Scope -** \
- This application will be a user-focused weather platform offering real-time weather updates and a 5-day forecast for selected locations. The platform will allow users to create accounts, allowing them to access, personalize, and share their dashboards with other users. The system will support search functionality, enabling users to retrieve weather details by city name. For each selected location, it will display current temperature, weather conditions, and an appropriate weather icon, with user-selectable display formats for personalization. Users will also benefit from quick access to saved favorite locations on their dashboards and can share this information with others once they have created an account. In addition, the application will maintain a simple and intuitive interface, ensuring accessibility across multiple web screen sizes and browser environments like Chrome and Safari. It will adhere to data privacy standards, disclosing only necessary user information. Users can expect seamless login and logout functionality to protect their accounts. The platform will also notify users of any errors in retrieving weather data, managing accounts, or sharing features, making the experience smooth and user-friendly.
+## **1. Tasks Completed (by Owner)**
+| **Team Member**   | **Task(s)**                                      | **Status**      |
+|-------------------|--------------------------------------------------|-----------------|
+| **Syed Saad Ali** | - Manage communication between main.js and app.py| Completed       |
+|                   | - Create Register User functionality             | In-Progress     |
+|                   | - Test security features                         | In-Progress     |
+|                   | - Test reliability of app                        | In-Progress     |
+|                   | - Test performance of app                        | In-Progress     |
+| **Tawana Ndlovu** | - Write test plan                                | Completed       |
+|                   | - Create basic testing framework (including CI)  | In-Progress     |
+|                   | - Add Dashboard Page feature                     | In-Progress     |
+| **Jan Suratos**   | - Create dashboard UI                            | Completed       |
+|                   | - Manage connection to Open Weather Map API      | Completed       |
+|                   | - Create login UI                                | Completed       |
+|                   | - Add C/F toggle button and logic                | Completed       |
+|                   | - Add dark mode feature                          | In-Progress     |
+| **Ashish Nayak**  | - Database ER/UML Diagram                        | Completed       |
+|                   | - Create Docker Database Connection              | Completed       |
+|                   | - Implement login/logout feature                 | Completed       |
+|                   | - Create main page mini dashboard                | In-Progress     |
 
 
+## **2. Progress Summary**
 
----
+### **Where We Are:**
+- **Completed:**
+  - [x] Test plan written
+  - [x] Initial main page UI created
+  - [x] Initial dashboard UI created
+  - [x] Connection to Open Weather Map API
+  - [x] Weather dashboard UI created
+  - [x] Database created
+  - [x] Backend database manager created and tested 
+  - [x] Database ER/UML Diagram
+  - [x] Create login/sign up UI 
+  - [x] Implement dashboard functionality
+  - [x] Implement login functionality
+  - [x] Implement logout functionality  
+  - [x] Server for end to end communication
+  - [x] Configure database and connect to server
+- **In Progress:**
+  - [ ] Basic testing framework (including CI) [In-Review]
+  - [ ] Ongoing Project Documentation
+  - [ ] Create Register User functionality  
+  - [ ] Create Dashboard Page functionality
+  - [ ] Implement C/F switching [In-Review]
 
-## Requirements
+- **Remaining:**
+  - [ ] Implement dashboard sharing
+  - [ ] Implement C/F saving to database and update on user login
+  - [ ] Implement dark mode
+  - [ ] Connect dark mode preference to databse and update on user login
 
-**Functional:**
-Users must be able to create, edit, and delete accounts.
-Users will be able to log in to access their personal dashboard.
-Users can personalize their dashboard (e.g., select favorite locations or adjust themes).
-Logged-in users will be able to save favorite locations for quick access on the dashboard.
-Logged-in users will be able to share their dashboard with other users.
-The system will allow users to search for weather information by city name.
-The system will display current weather for the selected location, including temperature, weather conditions (e.g., cloudy, rainy), and an icon representing the current weather condition.
-The system will display a 5-day weather forecast, showing daily temperatures, weather conditions.
-Users will be able to choose how to display temperature (Celsius/Fahrenheit) and weather formats (e.g., detailed/summary view).
-Shared dashboards will be view-only for other users.
-The system will notify the user of any errors in retrieving weather, account management, or sharing, if they occur.
-
-**Non-Functional:**
-The user interface should be simple and intuitive, allowing users to quickly access weather information.
-The system will support multiple active users simultaneously. 
-The system must not disclose any personal information about users apart from their name and shared dashboards to users of the system.
-The app must work on common browsers like Chrome and Safari.
-Basic login and logout functionality should be implemented to protect accounts.
-The application must adapt to various screen sizes (web), so that it displays content properly depending on how large the browser screen size is.
-
-
----
-
-## Proto Personas
-
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
-
-  <div style="flex: 1 1 45%; margin: 5px;">
-    <img src="images/Persona1.png" alt="Image 1" title="Persona 1" width="100%">
-  </div>
-  
-  <div style="flex: 1 1 45%; margin: 5px;">
-    <img src="images/Persona2.png" alt="Image 2" title="Persona 2" width="100%">
-  </div>
-  
-  <div style="flex: 1 1 45%; margin: 5px;">
-    <img src="images/Persona3.png" alt="Image 3" title="Persona 3" width="100%">
-  </div>
-  
-  <div style="flex: 1 1 45%; margin: 5px;">
-    <img src="images/Persona4.png" alt="Image 4" title="Persona 4" width="100%">
-  </div>
-
-</div>
-
-
-## Use Cases
-
-<img src="images/useCaseDiagram.png" alt="UseCase Diagram" title="UseCaseDiagram" style="width: 50%;">
-
-
-
-### Actors
-**Actor**: Users (Primary) \
-**Description**: Users are our primary actors in this application. They will be using the system most utilizing various use cases. Users will be able to view the weather, set locations, favorite locations to their dashboard, and share their dashboard with others. 
-
-**Actor**: OpenWeatherAPI (Secondary)  \
-**Description**: The OpenWeatherAPI receives requests from the application to provide weather data for viewing by users.
-
----
-
-### Use Case 1. View Weather
-**Primary Actor**: User  
-**Description**: Users view the weather for a default location upon opening the app.  
-**Pre-condition**: Successful API connection.  
-**Post-condition**: Accurate weather data is displayed, including forecast and summary.
-
-**Main Scenario**:
-1. User opens the application.
-2. Application requests data from the API.
-3. API provides weather data.
-4. Application displays the data.
-
-**Extension**:
-- 1a. Process completes within seconds.
-- 2a. API connection fails.
-    - 2a1. Application notifies the user of an error.
-
----
-
-### Use Case 2. Set Location
-**Primary Actor**: User  
-**Description**: Users select a location to view weather data.  
-**Pre-condition**: User has a location in mind.  
-**Post-condition**: Application refreshes with accurate data for the selected location.
-
-**Main Scenario**:
-1. User inputs a location in the search bar.
-2. System requests data for the location from OpenWeatherAPI.
-3. API responds with weather data for the location.
-4. System updates displayed information.
-
-**Extension**:
-- 1a. User misspells location.
-    - 1a1. System notifies of invalid input.
-- 1b. User selects location from dashboard if logged in.
-- 2a. API request fails.
-    - 2a1. System notifies of an error.
-
----
-
-### Use Case 3. Login
-**Primary Actor**: User  
-**Description**: User logs into the application.  
-**Pre-condition**: User has an account.  
-**Post-condition**: User is logged in and sees saved dashboard.
-
-**Main Scenario**:
-1. System prompts login details.
-2. User inputs username and password.
-3. System validates credentials.
-4. System logs user in and displays saved dashboard.
-
-**Extension**:
-- 2a. User does not have an account.
-    - 2a1. System prompts to create an account.
-- 2b. Invalid username or password.
-    - 2b1. System notifies of error.
-
----
-
-### Use Case 4. View Dashboard
-**Primary Actor**: User  
-**Description**: User views active dashboard.  
-**Pre-condition**: User is logged in.  
-**Post-condition**: Correct dashboard displayed.
-
-**Main Scenario**:
-1. System starts with a blank dashboard.
-2. System verifies the user.
-3. Dashboard is updated to display saved locations.
-
-**Extension**:
-- 2a. User not logged in.
-    - 2a1. System prompts for login.
-    - 2a2. Dashboard remains blank until login.
-- 3a. No saved dashboard found.
-    - 3a1. System displays default dashboard.
-
----
-
-### Use Case 5. View Shared Dashboard
-**Primary Actor**: User  
-**Description**: User views a shared dashboard.  
-**Pre-condition**: User is authenticated.  
-**Post-condition**: Shared dashboard displayed in view-only mode.
-
-**Main Scenario**:
-1. User requests to view another user’s shared dashboard.
-2. System authenticates the user.
-3. System displays shared dashboard.
-
-**Extension**:
-- 2a. User not logged in.
-    - 2a1. System prompts for login.
-
----
-
-### Use Case 6. Add Locations to Dashboard
-**Primary Actor**: User  
-**Description**: User adds a selected location to their dashboard.  
-**Pre-condition**: User is logged in with a selected location.  
-**Post-condition**: Location added to dashboard and page updated.
-
-**Main Scenario**:
-1. User favorites the current location.
-2. System authenticates the user.
-3. System adds location to the dashboard.
-
-**Extension**:
-- 2a. User not logged in.
-    - 2a1. System prompts for login.
-- 3a. Location already favorited.
-    - 3a1. System notifies location is already saved.
-
----
-
-### Use Case 7. Share Dashboard
-**Primary Actor**: User  
-**Description**: User shares their dashboard.  
-**Pre-condition**: User is logged in.  
-**Post-condition**: Application generates a shareable link to the dashboard.
-
-**Main Scenario**:
-1. User requests to share dashboard.
-2. System authenticates the user.
-3. System generates and shares a link to the dashboard.
-
-**Extension**:
-- 2a. User not logged in.
-    - 2a1. System prompts for login.
-
----
-
-### Use Case 8. Customize Dashboard
-**Primary Actor**: User  
-**Description**: User customizes their dashboard layout.  
-**Pre-condition**: User is logged in.  
-**Post-condition**: Dashboard saved with custom layout.
-
-**Main Scenario**:
-1. User edits dashboard.
-2. System authenticates user.
-3. User rearranges locations as desired.
-4. System saves changes.
-
-**Extension**:
-- 2a. User not logged in.
-    - 2a1. System prompts for login.
-
----
-
-### Use Case 9. Fetch Weather Data
-**Primary Actor**: OpenWeather API  
-**Description**: Requests weather data from API.  
-**Pre-condition**: System has an authenticated API key.  
-**Post-condition**: System receives weather data from API.
-
-**Main Scenario**:
-1. System requests data from API.
-2. API responds with weather data.
-3. System displays data to user.
-
-**Extension**:
-- 1a. API request fails.
-    - 1a1. System notifies user of an error.
 
 ---
 
 
+## **3. Comments on Process**
+
+- **What’s Working:**
+  - Kanban board keeps tasks visible and manageable.
+  - Iterative work on the project everyday.
+  - Communication has been going well between team members since return from reading break. Involving daily check-ins and updates occuring in our project chat. 
+  - The proposed scrum-like workflow has been working well and progress has been consistent as well as communication between members.
+  - Rotate on roles so everyone understands each part of the project.
+
+- **Challenges:**
+  - Communication gaps between integrating certain parts.
+  - Keeping up with the PRs including reviewing and merging was initially a challenge, but the team quickly found a rhythm in this area. 
+  - Initially the team was not creating issues for the PRs and features-list, however this was caught and the team began creating issues, adding them to PRs and closing them when completed in the kanbam board. 
+
+
+- **Proposed Changes:**
+  - Informal meetings to discuss where we are at, what questions need to be answered and what's next as we move forward.
+  - Conduct retrospectives after each milestone to identify areas of improvement and celebrate successes.
+  - Each member keeps track of open PRs and reviews when they are able. 
+
+---
+
+## **4. Branches/Tasks Completed and Tested/Merged**
+| **Branch Name**             | **Task**                                           | **Merged**    | **Notes**                                             |
+|-----------------------------|----------------------------------------------------|---------------|-------------------------------------------------------|
+| `development`               | Development Progress                               | No, merged only as stable releases | branch for development, merging new features          |
+| `milestone-4--dashboard`    | Summarize milestone 4 work                         | No, planned to be merged at project completion | branch for displaying milestone 4 update              |
+| `milestone-5--dashboard`    | Summarize milestone 5 work                         | No, planned to be merged at project completion | branch for displaying milestone 5 update              |
+| `milestone-6--dashboard`    | Summarize milestone 6 work                         | No, planned to be merged at project completion | branch for displaying milestone 6 update              |
+| `test_Authentication`       | Testing                                            | No            | tests authentication                                  |
+| `register_UI`               | Develop and test register user interface           | No            | developing and testing register user features         |
+| `requirementsEngineering`   | Requirements Analysis                              | Yes           | branch for specifying requirements                    |
+| `database_connection`       | Create docker database and python manager/tests    | Yes           | branch for developing database and the python manager to interact with db |
+| `server-development`        | End to end communication                           | Yes           | branch for developing server                          |
+| `test_UserFeatures`         | Testing                                            | Yes           | tests user features                                   |
+| `test_WeatherDataAPI`       | Testing                                            | Yes           | tests weather data api                                |
+| `login_functionality`       | Implement login functionality                      | Yes           | developing and testing login features                 |
+| `logout_functionality`      | Implement logout functionality                     | Yes           | developing and testing logout features                |
+| `add_pr_template`           | Add PR template                                    | Yes           | added pull request template to repo                   |
+| `user_interface`            | Develop and test user interface                    | Yes           | major updates to ui developed                         |`index_locations_functionality` | Implement mini dashboard on index page         | Yes           | developing and testing mini dash features             |
+| `test_DashboardConfiguration`| Testing                                           | In-Progress (Active PR) | tests dashboard features                              |
+| `test_security`             | Testing security features                          | In-Progress (Active PR) | tests security features                               |
+| `test_reliability`          | Testing reliability of app                         | In-Progress (Active PR) | tests reliability of app                              |
+| `test_performance`          | Testing performance of app                         | In-Progress (Active PR) | tests performance of app                              |
+| `celcius_fahrenheit_toggle` | Implement C/F toggle functionality                 | In-Progress (Active PR) | developing and testing C/F toggle features            |
+
+---
+
+## **5. Reflection**
+One of the main challenges we faced was integrating the various components of our application, particularly ensuring that the Flask application could correctly serve static files. We also encountered difficulties with setting up the Docker environment, which required several tries to get right. The frontend has undergone several iterations, however it has been receiving steady development and is reaching our desired state. We believe that we have made good progress during the last milestone and are on track to completing the project. 
+
+
+---
+
+## **6. Testing Report**
+
+- Create basic testing framework (including CI) is completed
+- Failing tests during development of each new feature have been created before implementing functionality. Then after impleneting the feature, along with passing it's own tests, previous tests are expected to pass as well. This has been a requirement for our team as we develop and if the test doesn't psas, the team member resolves the issue before the feature is merged into dev.
+- Test Plan spreadsheet has been updated as features have been added. (Seen on team member's UBC sharepoint, populated test plan will be added to repo on completion of project)
+ 
+---
+
+**Reminder:** Book a time with the TA during lab sessions to present this report.

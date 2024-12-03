@@ -49,6 +49,21 @@ def add_location():
         return jsonify({"message": "Location added"}), 201  # Return success message
     return jsonify({"error": "City name is required"}), 400  # Return error if city is not provided
 
+# Route to remove a location from the database
+@app.route('/dashboard/locations', methods=['DELETE'])
+def remove_location():
+    data = request.json  # Get the JSON data from the request
+    city = data.get('city')  # Extract the city name from the data
+    location = Location.query.filter_by(city=city).first()  # Find location by city name
+    if location:
+        db.session.delete(location)  # Delete the location from the database
+        db.session.commit()  # Commit the session to save changes
+        return jsonify({"message": "Location removed"}), 200  # Return success message
+    return jsonify({"error": "City not found"}), 404  # Return error if location doesn't exist
+
+if __name__ == '__main__':
+    app.run(debug=True)  # Run the Flask app in debug mode
+
 
 # User Registeration
 @app.route("/register", methods=["POST"])

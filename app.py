@@ -20,15 +20,23 @@ class Location(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # Primary key for the location
     city = db.Column(db.String(100), nullable=False)  # City name, must be provided
 
+# Create tables in the database
+with app.app_context():
+    db.create_all()
+
 #User Model : This is essentially a table that holds the user credentials
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
 
-# Create tables in the database
-with app.app_context():
-    db.create_all()
+# Route to fetch all saved locations from the database
+@app.route('/dashboard/locations', methods=['GET'])
+def get_locations():
+    locations = Location.query.all()  # Query all locations from the database
+    # Return locations as a JSON response
+    return jsonify([{"id": loc.id, "city": loc.city} for loc in locations])
+
 
 # User Registeration
 @app.route("/register", methods=["POST"])

@@ -5,7 +5,6 @@
 # imports
 from flask import Flask, request, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 
 app = Flask(__name__) # use flask framework
@@ -14,11 +13,12 @@ CORS(app) #enables communication between frontend and backend
 # Configure MySQL
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://username:password@localhost/weather_app' # db url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = 'your_secret_key'  # Replace with a strong secret key
+db = SQLAlchemy(app) # Initialize extensions (SQLAlchemy)
 
-# Initialize extensions
-db = SQLAlchemy(app)
-bcrypt = Bcrypt(app)
+# Location Model - Represents a saved location in the database
+class Location(db.Model):
+    id = db.Column(db.Integer, primary_key=True)  # Primary key for the location
+    city = db.Column(db.String(100), nullable=False)  # City name, must be provided
 
 #User Model : This is essentially a table that holds the user credentials
 class User(db.Model):

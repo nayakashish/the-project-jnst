@@ -1,2 +1,6 @@
-.env
+templates/test.html
+archived_app.py
+src/scripts/test.js
 __pycache__
+.pytest_cache
+.DS_Store

@@ -1,15 +1,30 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const API_KEY = 'b5958d9b3908799da10532d190c26c36'; // Replace with your OpenWeather API key TBD
   const WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather';
 
   // Get reference to html elements
-  const addButtons = document.querySelectorAll('.add-btn'); 
   const dashboardCards = document.querySelectorAll('.dashboard-card');
 
-  // TODO: edit this method such that a json file containing weather data is passed to app.py,
-  // which will then be passed to the database
-
   // Function to fetch and populate weather data for the city
+   // Fetch saved locations and populate the dashboard
+   async function loadSavedLocations() {
+    try {
+      // Fetch saved locations from the server
+      const response = await fetch('http://localhost:5000/dashboard/locations');
+      if (!response.ok) throw new Error('Failed to fetch saved locations');  // Error if response fails
+      const locations = await response.json();  // Parse the response as JSON
+
+      // Loop through locations and fetch weather for each
+      locations.forEach((location, index) => {
+        if (dashboardCards[index]) {
+          getWeather(location.city, dashboardCards[index]);  // Call getWeather to update card with weather
+        }
+      });
+    } catch (error) {
+      console.error('Error loading saved locations:', error);  // Log any error
+    }
+  }
+
   async function getWeather(city, card) {
       try {
           const response = await fetch(`${WEATHER_URL}?q=${city}&appid=${API_KEY}&units=metric`);

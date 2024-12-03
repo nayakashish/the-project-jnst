@@ -14,8 +14,18 @@ app = Flask(__name__)
 app.secret_key = 'my_secret_key'
 
 # OpenWeather API key (To be added)
-API_KEY = os.getenv("OPENWEATHER_API_KEY")
+API_KEY = os.getenv("API_KEY")
 weather_app_db = app_DB()
+
+# Reusable function to get weather data
+def fetch_weather(city):
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        return None  # or maybe change to raise an exception if needed?
+
+    return response.json()
 
 @app.route("/")
 def home():
@@ -39,7 +49,27 @@ def index():
     db_connection_failed = session.get('db_connection_failed', True)
     userLoggedin = session.get('userLoggedin', False)
     userName = session.get('userName', None)
-    return render_template('index.html', db_connection_failed=db_connection_failed, userLoggedin=userLoggedin, userName=userName)
+
+    if userLoggedin: #if user is logged in mini dashboard shows
+        weather_app_db.connect()
+        locations = weather_app_db.get_dashboardLocations(weather_app_db.get_userid(userName)) #get locations from db
+        if locations:
+            locations = locations[:3] #get first 3 locations from user's dashboard
+            for location in locations: #for each get temps and add to location array to be sent to frontend
+                city_weather = fetch_weather(location['name'])
+                if city_weather:
+                    main_temp = city_weather.get('main', {}).get('temp')
+                    location['temperature'] = round(main_temp)
+                else:
+                    print("Failed to fetch weather data")
+                    return jsonify({"error": "Failed to fetch weather data"}), 500
+        else:
+            locations = None
+        weather_app_db.close()
+    else:
+        locations = None
+        
+    return render_template('index.html', db_connection_failed=db_connection_failed, userLoggedin=userLoggedin, userName=userName, locations=locations)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -88,14 +118,13 @@ def get_weather():
     city = request.args.get("city")
     if not city:
         return jsonify({"error": "City is required"}), 400
-# Fetch weather data from OpenWeather API
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
-    response = requests.get(url)
 
-    if response.status_code != 200:
+    # Call the reusable fetch_weather function
+    weather_data = fetch_weather(city)
+
+    if not weather_data:
         return jsonify({"error": "Failed to fetch weather data"}), 500
 
-    weather_data = response.json()
     return jsonify(weather_data)
 
 if __name__ == "__main__":

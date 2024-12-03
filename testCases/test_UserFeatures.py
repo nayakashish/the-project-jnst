@@ -1,6 +1,6 @@
 import pytest
 from flask import session
-from app import app
+from app import app, weather_app_db
 
 @pytest.fixture
 def client():
@@ -8,6 +8,26 @@ def client():
     app.config["TESTING"] = True
     with app.test_client() as client:
         yield client
+
+@pytest.fixture
+def logged_in_client(client):
+    with client.session_transaction() as sess:
+        sess['userLoggedin'] = True
+        sess['userName'] = 'testuser'
+        sess['db_connection_failed'] = False
+
+    # Mock the database connection and methods
+    weather_app_db.connect = lambda: None
+    weather_app_db.close = lambda: None
+    weather_app_db.get_dashboardLocations = lambda user_id: [
+        {'name': 'New York'},
+        {'name': 'Los Angeles'},
+        {'name': 'Chicago'}
+    ]
+    weather_app_db.get_userid = lambda username: 1
+
+    return client
+
 
 def test_view_weather_on_open(client):
     """
@@ -69,3 +89,35 @@ def test_logout(client):
     with client.session_transaction() as sess:
         assert 'userLoggedin' not in sess
         assert 'userName' not in sess
+
+def test_logged_in_user_sees_saved_locations_weather(logged_in_client):
+    """
+    Test that a logged-in user sees the saved locations' weather.
+    """
+    response = logged_in_client.get('/index')
+    assert response.status_code == 200
+    assert b'New York' in response.data
+    assert b'Los Angeles' in response.data
+    assert b'Chicago' in response.data
+
+def test_non_logged_in_user_sees_default_locations(client):
+    """
+    Test that a non-logged-in user sees the default locations' weather.
+    """
+    response = client.get('/index')
+    assert response.status_code == 200
+    assert b'Example Location' in response.data
+    assert b'Please login to save locations' in response.data
+
+def test_logged_in_user_with_no_locations(logged_in_client):
+    """
+    Test that a logged-in user with no saved locations sees an appropriate message.
+    """
+    # Mock the database method to return an empty list for locations
+    weather_app_db.get_dashboardLocations = lambda user_id: []
+
+    response = logged_in_client.get('/index')
+    assert response.status_code == 200
+    assert b'No saved locations' in response.data
+    assert b'Follow the link below to add locations!' in response.data
+

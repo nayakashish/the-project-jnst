@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather';
 
   // Get reference to html elements
+  const addButtons = document.querySelectorAll('.add-btn');
   const dashboardCards = document.querySelectorAll('.dashboard-card');
 
   // Function to fetch and populate weather data for the city

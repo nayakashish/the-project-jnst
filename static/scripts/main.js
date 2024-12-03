@@ -156,6 +156,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Event listener for the welcome button
+    const welcomeBtn = document.querySelector('.welcome-btn');
+    if (welcomeBtn) {
+        const originalText = welcomeBtn.textContent; // Capture the original text content
+        
+        welcomeBtn.addEventListener('mouseover', () => {
+            welcomeBtn.textContent = 'Logout?';
+        });
+        welcomeBtn.addEventListener('mouseout', () => {
+            welcomeBtn.textContent = originalText;
+        });
+
+        welcomeBtn.addEventListener('click', () => {
+            // Your desired function here
+            window.location.href = '/logout';
+
+        });
+    }   
+
     // Event listener for login button
     const loginBtn = document.querySelector('.login-btn');
     if(loginBtn) {

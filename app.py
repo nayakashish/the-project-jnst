@@ -37,6 +37,18 @@ def get_locations():
     # Return locations as a JSON response
     return jsonify([{"id": loc.id, "city": loc.city} for loc in locations])
 
+# Route to add a new location to the database
+@app.route('/dashboard/locations', methods=['POST'])
+def add_location():
+    data = request.json  # Get the JSON data from the request
+    city = data.get('city')  # Extract the city name from the data
+    if city:
+        new_location = Location(city=city)  # Create a new Location object
+        db.session.add(new_location)  # Add new location to the database session
+        db.session.commit()  # Commit the session to save changes to the database
+        return jsonify({"message": "Location added"}), 201  # Return success message
+    return jsonify({"error": "City name is required"}), 400  # Return error if city is not provided
+
 
 # User Registeration
 @app.route("/register", methods=["POST"])

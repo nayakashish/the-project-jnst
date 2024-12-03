@@ -37,30 +37,30 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // Function to update the card with weather data
-  function updateCardWithWeather(data, card) {
-      const cityName = data.name;
-      const temperature = `${data.main.temp}°C`;
-      const weatherIcon = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
+  function updateCardWithWeather(data, card, city) {
+    const cityName = data.name;  // Extract city name from response
+    const temperature = `${data.main.temp}°C`;  // Get the temperature
+    const weatherIcon = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;  // Get weather icon URL
 
-      // Format time without seconds
-      const formattedTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    // Get the current time and date
+    const formattedTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-      // Populate the card with the weather data
-      card.innerHTML = `
-          <h4>${cityName}</h4>
-          <span>${formattedTime}</span>
-          <span>${new Date().toLocaleDateString()}</span>
-          <span>${temperature}</span>
-          <img src="${weatherIcon}" alt="Weather Icon" class="weather-icon">
-          <button class="remove-btn">Remove</button>
-      `;
+    // Update the card's inner HTML with weather info
+    card.innerHTML = `
+      <h4>${cityName}</h4>
+      <span>${formattedTime}</span>
+      <span>${new Date().toLocaleDateString()}</span>
+      <span>${temperature}</span>
+      <img src="${weatherIcon}" alt="Weather Icon" class="weather-icon">
+      <button class="remove-btn">Remove</button>
+    `;
 
-      // Add event listener for the "Remove" button
-      const removeButton = card.querySelector('.remove-btn');
-      removeButton.addEventListener('click', () => {
-          // Reset the card to its original state with just the "Add" button
-          resetCardToAddButton(card);
-      });
+    // Add event listener to the "Remove" button
+    const removeButton = card.querySelector('.remove-btn');
+    removeButton.addEventListener('click', async () => {
+      resetCardToAddButton(card);  // Reset card to "Add" button state
+      await removeLocation(city);  // Remove location from backend
+    });
   }
 
    // TODO: edit this method such that a commmand is passed to app.py to delete the weather card from the database,

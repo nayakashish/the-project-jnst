@@ -26,20 +26,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   async function getWeather(city, card) {
-      try {
-          const response = await fetch(`${WEATHER_URL}?q=${city}&appid=${API_KEY}&units=metric`);
-          if (!response.ok) {
-              const errorData = await response.json();
-              console.error('Weather API Error:', errorData);
-              alert(`Error fetching weather for ${city}: ${errorData.message}`);
-              return;
-          }
-          const data = await response.json();
-          updateCardWithWeather(data, card);
-      } catch (error) {
-          console.error('Error fetching weather data:', error);
-          alert('Failed to fetch weather data.');
-      }
+    try {
+      const response = await fetch(`${WEATHER_URL}?q=${city}&appid=${API_KEY}&units=metric`);  // API call to get weather
+      if (!response.ok) throw new Error(`Failed to fetch weather for ${city}`);  // Error handling
+      const data = await response.json();  // Parse weather data as JSON
+      updateCardWithWeather(data, card, city);  // Update the card with weather data
+    } catch (error) {
+      console.error('Error fetching weather data:', error);  // Log error
+    }
   }
 
   // Function to update the card with weather data

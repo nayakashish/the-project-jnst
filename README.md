@@ -6,9 +6,9 @@
 |-------------------|--------------------------------------------------|-----------------|
 | **Syed Saad Ali** | - Manage communication between main.js and app.py| Completed       |
 |                   | - Create Register User functionality             | In-Progress     |
-|                   | - Test security features                         | In-Progress     |
-|                   | - Test reliability of app                        | In-Progress     |
-|                   | - Test performance of app                        | In-Progress     |
+|                   | - Test security features                         | Done            |
+|                   | - Test reliability of app                        | Done            |
+|                   | - Test performance of app                        | Done            |
 | **Tawana Ndlovu** | - Write test plan                                | Completed       |
 |                   | - Create basic testing framework (including CI)  | In-Progress     |
 |                   | - Add Dashboard Page feature                     | In-Progress     |
@@ -47,6 +47,7 @@
   - [ ] Create Register User functionality  
   - [ ] Create Dashboard Page functionality
   - [ ] Implement C/F switching [In-Review]
+  - [ ] Finish writing Non Functional tests
 
 - **Remaining:**
   - [ ] Implement dashboard sharing
@@ -66,6 +67,8 @@
   - Communication has been going well between team members since return from reading break. Involving daily check-ins and updates occuring in our project chat. 
   - The proposed scrum-like workflow has been working well and progress has been consistent as well as communication between members.
   - Rotate on roles so everyone understands each part of the project.
+  - Following detailed PR template to describe PRs
+  - Marking unfinished tasks as issues to priortize them.
 
 - **Challenges:**
   - Communication gaps between integrating certain parts.

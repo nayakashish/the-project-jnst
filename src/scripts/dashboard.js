@@ -87,6 +87,26 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (!response.ok) throw new Error('Failed to save location');  // Error if adding fails
     } catch (error) {
       console.error('Error saving location:', error);  // Log error
+        }
     }
 }
-  }});
+
+  // Remove a location from the backend
+  async function removeLocation(city) {
+    try {
+      // Send a DELETE request to remove the city
+      const response = await fetch('http://localhost:5000/dashboard/locations', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ city }),
+      });
+      if (!response.ok) throw new Error('Failed to remove location');  // Error if removing fails
+    } catch (error) {
+      console.error('Error removing location:', error);  // Log error
+    }
+  }
+
+  await loadSavedLocations();  // Load saved locations when the page loads
+});
+
+  

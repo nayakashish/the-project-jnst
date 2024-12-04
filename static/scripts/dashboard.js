@@ -81,18 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return Array.from(dashboardCards).find(card => !card.querySelector('h4'));
 }
 
- // New function: Save the dashboard's location data to localStorage
- function saveLocations() {
-    const locations = [];
-    dashboardCards.forEach(card => {
-        const city = card.querySelector('h4')?.textContent;
-        if (city) {
-            locations.push(city); // Add city name if present in card
-        }
-    });
-    localStorage.setItem('savedLocations', JSON.stringify(locations)); // Save to localStorage
-}
-
  // Load saved locations from the database (via Flask API)
  async function loadSavedLocations() {
     try {

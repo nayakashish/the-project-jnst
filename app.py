@@ -135,3 +135,11 @@ def get_weather():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+@app.route('/add_location', methods=['POST'])
+def add_location():
+    city = request.json.get('city')
+    if city and city not in locations:
+        locations.append(city)
+        return jsonify(message="Location added successfully"), 200
+    return jsonify(error="Location already exists or invalid"), 400

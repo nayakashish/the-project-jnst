@@ -134,11 +134,25 @@ async function addLocation(city) {
     }
 }
 
-// New function: Remove a city from the saved locations
-function removeLocation(city) {
-    let savedLocations = JSON.parse(localStorage.getItem('savedLocations')) || [];
-    savedLocations = savedLocations.filter(location => location !== city);
-    localStorage.setItem('savedLocations', JSON.stringify(savedLocations)); // Save updated list
+// Remove a city from the saved locations (via Flask API)
+async function removeLocation(city) {
+    try {
+        const response = await fetch('/remove_location', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ city }),
+        });
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Error removing location:', errorData);
+            alert(`Failed to remove ${city}: ${errorData.message}`);
+        }
+    } catch (error) {
+        console.error('Error removing location:', error);
+        alert('Failed to remove the location.');
+    }
 }
 
 // Initial loading of saved locations

@@ -158,7 +158,4 @@ async function removeLocation(city) {
 // Initial loading of saved locations
 loadSavedLocations();
 
-// Event listener to save locations on logout or page refresh
-window.addEventListener('beforeunload', saveLocations);
-
 });

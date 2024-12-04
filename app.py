@@ -151,3 +151,7 @@ def remove_location():
         locations.remove(city)
         return jsonify(message="Location removed successfully"), 200
     return jsonify(error="Location not found"), 400
+
+@app.route('/dashboards', methods=['GET'])
+def loadSavedLocations():
+    return jsonify(locations), 200

@@ -143,3 +143,11 @@ def add_location():
         locations.append(city)
         return jsonify(message="Location added successfully"), 200
     return jsonify(error="Location already exists or invalid"), 400
+
+@app.route('/remove_location', methods=['DELETE'])
+def remove_location():
+    city = request.json.get('city')
+    if city in locations:
+        locations.remove(city)
+        return jsonify(message="Location removed successfully"), 200
+    return jsonify(error="Location not found"), 400

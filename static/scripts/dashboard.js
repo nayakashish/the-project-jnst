@@ -93,15 +93,24 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('savedLocations', JSON.stringify(locations)); // Save to localStorage
 }
 
-// New function: Load saved locations from localStorage and populate cards
-function loadSavedLocations() {
-    const savedLocations = JSON.parse(localStorage.getItem('savedLocations')) || [];
-    savedLocations.forEach(city => {
-        const card = getAvailableCard();
-        if (card) {
-            getWeather(city, card);
+ // Load saved locations from the database (via Flask API)
+ async function loadSavedLocations() {
+    try {
+        const response = await fetch('/dashboards');
+        if (response.ok) {
+            const locations = await response.json(); // Expect an array of cities
+            locations.forEach(city => {
+                const card = getAvailableCard();
+                if (card) {
+                    getWeather(city, card);
+                }
+            });
+        } else {
+            console.error('Failed to load saved locations');
         }
-    });
+    } catch (error) {
+        console.error('Error loading locations:', error);
+    }
 }
 
 // New function: Add a city to the saved locations

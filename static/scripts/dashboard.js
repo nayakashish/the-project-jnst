@@ -113,12 +113,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 }
 
-// New function: Add a city to the saved locations
-function addLocation(city) {
-    const savedLocations = JSON.parse(localStorage.getItem('savedLocations')) || [];
-    if (!savedLocations.includes(city)) {
-        savedLocations.push(city);
-        localStorage.setItem('savedLocations', JSON.stringify(savedLocations)); // Save updated list
+// Add a city to the saved locations (via Flask API)
+async function addLocation(city) {
+    try {
+        const response = await fetch('/add_location', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ city }),
+        });
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Error adding location:', errorData);
+            alert(`Failed to add ${city}: ${errorData.message}`);
+        }
+    } catch (error) {
+        console.error('Error adding location:', error);
+        alert('Failed to add the location.');
     }
 }
 

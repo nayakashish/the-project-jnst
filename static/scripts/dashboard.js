@@ -93,4 +93,15 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('savedLocations', JSON.stringify(locations)); // Save to localStorage
 }
 
+// New function: Load saved locations from localStorage and populate cards
+function loadSavedLocations() {
+    const savedLocations = JSON.parse(localStorage.getItem('savedLocations')) || [];
+    savedLocations.forEach(city => {
+        const card = getAvailableCard();
+        if (card) {
+            getWeather(city, card);
+        }
+    });
+}
+
 });

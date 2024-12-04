@@ -120,4 +120,10 @@ function removeLocation(city) {
     localStorage.setItem('savedLocations', JSON.stringify(savedLocations)); // Save updated list
 }
 
+// Initial loading of saved locations
+loadSavedLocations();
+
+// Event listener to save locations on logout or page refresh
+window.addEventListener('beforeunload', saveLocations);
+
 });

@@ -104,4 +104,13 @@ function loadSavedLocations() {
     });
 }
 
+// New function: Add a city to the saved locations
+function addLocation(city) {
+    const savedLocations = JSON.parse(localStorage.getItem('savedLocations')) || [];
+    if (!savedLocations.includes(city)) {
+        savedLocations.push(city);
+        localStorage.setItem('savedLocations', JSON.stringify(savedLocations)); // Save updated list
+    }
+}
+
 });

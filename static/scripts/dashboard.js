@@ -113,4 +113,11 @@ function addLocation(city) {
     }
 }
 
+// New function: Remove a city from the saved locations
+function removeLocation(city) {
+    let savedLocations = JSON.parse(localStorage.getItem('savedLocations')) || [];
+    savedLocations = savedLocations.filter(location => location !== city);
+    localStorage.setItem('savedLocations', JSON.stringify(savedLocations)); // Save updated list
+}
+
 });

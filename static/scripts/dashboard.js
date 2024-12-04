@@ -75,4 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
           }
       });
   });
+
+   // Function to get the first available (empty) card to populate with weather data
+   function getAvailableCard() {
+    return Array.from(dashboardCards).find(card => !card.querySelector('h4'));
+}
+
 });

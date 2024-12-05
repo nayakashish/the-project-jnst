@@ -19,7 +19,10 @@ def test_index_route(client):
     assert b"Welcome" in response.data  # Replace 'Welcome' with known content
 
 def test_login_success(client, mocker):
-    mocker.patch('weather_app_db.get_userid', return_value=1)
+    # Use mocker to replace the 'get_userid' and 'get_user_info' methods from 'weather_app_db' with predefined outputs.
+    # This simulates database responses without requiring an actual database connection.
+
+    mocker.patch('weather_app_db.get_userid', return_value=1) #mocker is a test instance of the app.py
     mocker.patch('weather_app_db.get_user_info', return_value={'name': 'testuser', 'password': 'testpassword'})
     
     response = client.post('/login', data={'username': 'testuser', 'password': 'testpassword'})

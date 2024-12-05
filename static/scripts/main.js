@@ -31,7 +31,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const FORECAST_URL = 'https://api.openweathermap.org/data/2.5/forecast';
 
 
-
+    // Function to convert temperatures in the list
+    function convertTemperatures() {
+        const unitSymbol = unit === 'metric' ? '°C' : '°F';
+        const weatherItems = document.querySelectorAll('.weather-list-item');
+    
+        weatherItems.forEach((item) => {
+            const temperatureElement = item.querySelector('.temperature');
+            const temperatureText = temperatureElement.textContent;
+            const currentTemp = parseFloat(temperatureText.replace(/[^\d.-]/g, '')); // Extract number
+            
+            if (!isNaN(currentTemp)) {
+                const newTemp = unit === 'metric'
+                    ? ((currentTemp - 32) * 5) / 9 // Convert Fahrenheit to Celsius
+                    : (currentTemp * 9) / 5 + 32; // Convert Celsius to Fahrenheit
+                temperatureElement.textContent = `${Math.round(newTemp)}${unitSymbol}`;
+            }
+        });
+    }
+    
     
     // Default unit system (metric = Celsius)
     let unit = 'metric';
@@ -60,13 +78,17 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleUnitBtn.addEventListener('click', () => {
         unit = unit === 'metric' ? 'imperial' : 'metric'; // Switch unit
         toggleUnitBtn.textContent = unit === 'metric' ? '°C / °F' : '°F / °C'; // Update button text
-
-        const city = document.getElementById('cityName').textContent.split(',')[0]; // Extract city name
+    
+        const city = document.getElementById('cityName')?.textContent?.split(',')[0]; // Extract city name
         if (city) {
             getWeather(city);
             getFiveDayForecast(city);
         }
+    
+        // Update the temperatures in the list dynamically
+        convertTemperatures();
     });
+    
 
     async function getWeather(city) {
         try {
@@ -327,12 +349,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
     console.log("main.js loaded");
 });
-
-
-
-// LOGIN:
-// main.js
-
-// main.js
-
-

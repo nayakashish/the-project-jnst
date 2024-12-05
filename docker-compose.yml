@@ -1,0 +1,20 @@
+
+services:             
+    cosc310-jnst-db:
+        image: mysql:8.0
+        container_name: cosc310-jnst-db
+        restart: always
+        environment:
+            MYSQL_DATABASE: 'testuser'
+            MYSQL_USER: 'testuser'
+            MYSQL_PASSWORD: 'jnst'            
+            MYSQL_ROOT_PASSWORD: 'jnstRoot'
+        ports:
+            - '3307:3306'
+        expose:
+            - '3307:3306'
+        volumes:
+            - ./docker/weatherAppDB.sql:/docker-entrypoint-initdb.d/weatherAppDB.sql
+            - jnst-db:/var/lib/mysql
+volumes: 
+    jnst-db:

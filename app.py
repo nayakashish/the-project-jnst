@@ -159,11 +159,26 @@ def add_location():
 
 @app.route('/remove_location', methods=['DELETE'])
 def remove_location():
-    city = request.json.get('city')
-    if city in locations:
-        locations.remove(city)
+    db.connect()
+    try:
+        city_name = request.json.get('city')
+        if not city_name:
+            return jsonify(error="City name is required"), 400
+
+        user_id = db.get_user_id(session['userName'])
+        if not user_id:
+            return jsonify(error="User not found"), 404
+
+        loc_id = db.get_location_id(city_name)  # Fetch the location ID for the given city
+        if not loc_id:
+            return jsonify(error="Location not found"), 404
+
+        db.delete_dashboard_location(user_id, loc_id)  # Remove the location from user's dashboard
         return jsonify(message="Location removed successfully"), 200
-    return jsonify(error="Location not found"), 400
+    except Exception as e:
+        return jsonify(error=str(e)), 500
+    finally:
+        db.close()
 
 @app.route('/dashboards', methods=['GET'])
 def loadSavedLocations():

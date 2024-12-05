@@ -4,12 +4,17 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Error: Failed to connect to the database.\nIs Database Server Running?');
     }
 
+    function getQueryParameter(name) { //for code reuse
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
     // Check for success message in URL parameters and display an alert
-    const urlParams = new URLSearchParams(window.location.search);
-    const alertMSG = urlParams.get('alert_msg');
+    const alertMSG = getQueryParameter('alert_msg');
     if (alertMSG) {
         alert(alertMSG);
     }
+
 
     // Select DOM elements
     const searchBar = document.querySelector('.search-bar');
@@ -150,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (city) {
                 getWeather(city);
                 getFiveDayForecast(city);
+                window.history.replaceState(null, '', '/index'); //clear url after updating
             } else {
                 alert('Please enter a city!');
             }
@@ -189,6 +195,13 @@ document.addEventListener('DOMContentLoaded', () => {
         viewDashboardsBtn.addEventListener('click', () => {
             window.location.href = '/dashboards';
         });
+    }
+
+    //If city location is given in url ... if /weather routed
+    const location = getQueryParameter('location');
+    if (location) {
+        getWeather(location);
+        getFiveDayForecast(location);
     }
 
     // Event listener for view dashboards button non-logged-in-users

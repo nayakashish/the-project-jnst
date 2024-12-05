@@ -104,7 +104,21 @@ def login():
         weather_app_db.close() #close connection to DB
 
         if session['userLoggedin']:
-            return redirect(url_for('index', alert_msg="You've been logged in successfully!")) #redirect to index page with an alert
+            #update current location to most recent saved location
+            weather_app_db.connect()
+            saved_locations = weather_app_db.get_dashboardLocations(user_id)
+            if saved_locations:
+                city = saved_locations[0]['name']
+            else:
+                city = None
+            weather_app_db.close()
+
+            #redirect to index page with an alert and location if found
+            if city:
+                return redirect(url_for('index', alert_msg="You've been logged in successfully!", location=city))
+            else:
+                return redirect(url_for('index', alert_msg="You've been logged in successfully!")) 
+       
         return render_template('login.html', return_message=error_message) #go back to login page with an error message
     return render_template('login.html') # this is return statement if login.request.method is not POST
 

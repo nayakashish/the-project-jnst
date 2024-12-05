@@ -138,11 +138,24 @@ if __name__ == "__main__":
 
 @app.route('/add_location', methods=['POST'])
 def add_location():
-    city = request.json.get('city')
-    if city and city not in locations:
-        locations.append(city)
+    db.connect()  # Connect to the database
+    try:
+        city_name = request.json.get('city')
+        if not city_name:
+            return jsonify(error="City name is required"), 400
+
+        user_id = db.get_user_id(session['userName'])  # Assuming session contains 'userName'
+        if not user_id:
+            return jsonify(error="User not found"), 404
+
+        loc_id = db.add_location(city_name)  # Add city to locations table if not exists
+        db.add_dashboard_location(user_id, loc_id)  # Link the location to the user's dashboard
+
         return jsonify(message="Location added successfully"), 200
-    return jsonify(error="Location already exists or invalid"), 400
+    except Exception as e:
+        return jsonify(error=str(e)), 500
+    finally:
+        db.close()  # Ensure the connection is closed
 
 @app.route('/remove_location', methods=['DELETE'])
 def remove_location():

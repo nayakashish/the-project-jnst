@@ -10,8 +10,22 @@ For your final deliverable, you will need to produce a short video overview of y
 
 ### General Development:
 
- - What did your team build?
- - Is it feature complete and running?  Clearly address each feature and it's state,
+ Our team build a web-based weather app which provides users with real-time weather data. The application allows users to search various locations, along with save and share dashboards which consist of 5 locations and minimal weather data. 
+ 
+Although our weather app includes numerous features and functionalities, some of the initially planned features listed in the original documentation were not included in the final product due to time constraints.
+ #### List of Completed Features:
+ - [x] Search for weather data by location and receive real-time data as well as a forecast.
+ - [x] Login to access restricted features (Dashboard/Saved Locations)
+ - [x] Login/Logout functionality with data validation.
+ - [x] Update weather to top location on login
+ - [x] Update mini-dashboard (Saved Locations box) on login.
+ - [x] Create account for application
+ - [x] Add/edit saved locations and recieve updated weather data for each
+ - [x] Toggle between celsius/fahrenheit
+ - [x] Ability to share dashboards once created
+#### List of Unfinished Features: 
+ - [ ] Implement dark mode toggling
+
  - How many of your initial requirements that your team set out to deliver did you actually deliver (a checklist/table would help to summarize)?  Were you able to deliver everything or are there things missing?  Did your initial requirements sufficiently capture the details needed for the project?
  - What is the architecture of the system?
  - What are the key components?

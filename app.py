@@ -114,10 +114,36 @@ def logout():
     session.pop('userName', None)
     return redirect(url_for('index', alert_msg="You've been successfully logged out!"))
 
-@app.route('/dashboards')
-def dashboards():
-    #TODO - check if user is logged in
-    return render_template('dashboard.html')
+@app.route('/dashboard')
+def dashboard():
+    userLoggedin = session.get('userLoggedin', False)
+    userName = session.get('userName', None)
+    locations = None
+
+    if userLoggedin:
+        try:
+            weather_app_db.connect()
+            user_id = weather_app_db.get_userid(userName)  # Retrieve user ID
+            locations = weather_app_db.get_dashboardLocations(user_id)
+
+            if locations:
+                locations = locations[:5]  # Fetch up to 5 saved locations
+                for location in locations:
+                    city_weather = fetch_weather(location['name'])
+                    location['temperature'] = (
+                        round(city_weather.get('main', {}).get('temp')) 
+                        if city_weather 
+                        else "N/A"
+                    )
+                print("Fetched locations for dashboard:", locations)
+            else:
+                print("No locations found for user.")
+        except Exception as e:
+            print("Error fetching locations for dashboard:", e)
+        finally:
+            weather_app_db.close()
+
+    return render_template('dashboard.html', userLoggedin=userLoggedin, locations=locations)
 
 @app.route("/weather", methods=["GET"])
 def get_weather():

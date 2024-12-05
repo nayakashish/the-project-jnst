@@ -54,7 +54,7 @@ def index():
         weather_app_db.connect()
         locations = weather_app_db.get_dashboardLocations(weather_app_db.get_userid(userName)) #get locations from db
         if locations:
-            locations = locations[:3] #get first 3 locations from user's dashboard
+            locations = locations[1:4] # get locations 2, 3, and 4 from user's dashboard
             for location in locations: #for each get temps and add to location array to be sent to frontend
                 city_weather = fetch_weather(location['name'])
                 if city_weather:

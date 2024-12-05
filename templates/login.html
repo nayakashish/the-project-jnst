@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="../static/styles/login.css">
 </head>
 <body>
-    <script src="../static/scripts/main.js"></script>
+
+    <script src="../static/scripts/login.js"></script>
     <div class="container login-container">
         <header>
             <h1>Login</h1>
         </header>
         <section class="login-form">
-        <form class="login-form" action="index.html" method="GET">
+        <form class="login-form" action="/login" method="POST">
               <div class="form-group">
                   <label for="username">Username:</label>
                   <input type="text" id="username" name="username" placeholder="Enter your username" required>
@@ -24,6 +25,15 @@
               </div>
               <button type="submit" class="login-btn">Login</button>
         </form>
+        
+        <style>
+            .login-form p {
+                margin-top: 10px;
+            }
+        </style>
+        {% if return_message %}
+        <p style="color: red;">{{ return_message }}</p>
+         {% endif %}
         </section>
     </div>
 </body>

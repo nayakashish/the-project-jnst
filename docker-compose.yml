@@ -14,10 +14,7 @@ services:
         expose:
             - '3307:3306'
         volumes:
-            - ./weatherAppDB.sql:/docker-entrypoint-initdb.d/weatherAppDB.sql
+            - ./docker/weatherAppDB.sql:/docker-entrypoint-initdb.d/weatherAppDB.sql
             - jnst-db:/var/lib/mysql
 volumes: 
     jnst-db:
-    
-
-

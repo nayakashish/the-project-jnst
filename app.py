@@ -114,6 +114,29 @@ def logout():
     session.pop('userName', None)
     return redirect(url_for('index', alert_msg="You've been successfully logged out!"))
 
+@app.route('/dashboards')
+def dashboards():
+    #TODO - check if user is logged in
+    return render_template('dashboard.html')
+
+@app.route("/weather", methods=["GET"])
+def get_weather():
+    city = request.args.get("city")
+    if not city:
+        return jsonify({"error": "City is required"}), 400
+
+    # Call the reusable fetch_weather function
+    weather_data = fetch_weather(city)
+
+    if not weather_data:
+        return jsonify({"error": "Failed to fetch weather data"}), 500
+
+    return jsonify(weather_data)
+
+if __name__ == "__main__":
+    app.run(debug=True)
+    
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -152,28 +175,3 @@ def register():
 
     # Render the registration form for GET requests
     return render_template('register.html')
-
-
-        
-
-@app.route('/dashboards')
-def dashboards():
-    #TODO - check if user is logged in
-    return render_template('dashboard.html')
-
-@app.route("/weather", methods=["GET"])
-def get_weather():
-    city = request.args.get("city")
-    if not city:
-        return jsonify({"error": "City is required"}), 400
-
-    # Call the reusable fetch_weather function
-    weather_data = fetch_weather(city)
-
-    if not weather_data:
-        return jsonify({"error": "Failed to fetch weather data"}), 500
-
-    return jsonify(weather_data)
-
-if __name__ == "__main__":
-    app.run(debug=True)

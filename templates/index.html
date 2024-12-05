@@ -22,6 +22,20 @@
                 placeholder="Search for your preferred city..." 
                 aria-label="City Search Bar">
             <div class="current-location-btn">Current Location</div>
+
+
+            <!-- User Authentication Section -->
+             <!-- If logged in it says Hello,[username] otherwise it is a normal login button. -->
+            {% if userLoggedin %}
+                <div class="welcome-btn">
+                    Hello, {{userName}}!
+                </div>
+            {% else %}
+                <div class="login-btn">
+                    Login
+                </div>
+            {% endif %}
+
         </header>
 
         <!-- Current Weather Section -->
@@ -111,19 +125,45 @@
             
 
 
-               <!-- Saved Locations Section -->
-               <section class="saved-locations">
+            <!-- Saved Locations Section -->
+            <section class="saved-locations">
                 <h3>Saved Locations:</h3>
                 <ul>
-                    <li>[Location Name] - 20°C</li>
-                    <li>[Location Name] - 20°C</li>
-                    <li>[Location Name] - 20°C</li>
+                    {% if userLoggedin and locations %}
+                    <!-- If user is logged in and has saved locations in db -->
+                    {% for location in locations %}
+                    <li class="weather-list-item">
+                        <span class="location-name">{{ location.name }}:</span>
+                        <span class="temperature">{{ location.temperature }}°C</span>
+                      </li>
+                    {% endfor %}
+                    {% elif not userLoggedin %}
+                    <!-- User is not logged in -->
+                    <li class="weather-list-item">
+                        <span class="location-name">[Example Location]:</span>
+                        <span class="temperature">##°C</span>
+                      </li>
+                    <li class="weather-list-item">Please login to save locations.</li>
+                    <li></li>
+                    {% elif not locations %}
+                    <!-- No saved locations -->
+                    <li class="weather-list-item">No saved locations.</li>
+                    <li>Follow the link below to add locations!</li>
+                    <li></li>
+                    {% endif %}
                     <li></li>
                 </ul>
                 <!-- <a href="dashboard.html" class="saved-locations__viewMore">View more...</a> -->
+                {% if userLoggedin %}
+                <!-- if user is logged in give the normal button -->
                 <div class="view-dashboards-btn">
+                {% else %}
+                <!-- if user is not logged in give the fake button -->
+                <div class="view-dashboards-btn-not-logged-in">
+                {% endif %}
                     View more...
                 </div>
+
     
             </section>
         </div>
@@ -134,6 +174,9 @@
         </div>
     </div>
 
+    <script>
+        const dbConnectionFailed = {{ db_connection_failed|tojson|safe }}; //This line shows error in html, however it is working with flask.
+    </script>
     <script src="../static/scripts/main.js"></script>
 </body>
 </html>

@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
  // Load saved locations from the database (via Flask API)
  async function loadSavedLocations() {
     try {
-        const response = await fetch('/dashboards');
+        const response = await fetch('/load_saved_locations');
         if (response.ok) {
             const locations = await response.json(); // Expect an array of cities
             locations.forEach(city => {

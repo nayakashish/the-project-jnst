@@ -180,6 +180,17 @@ def remove_location():
     finally:
         db.close()
 
-@app.route('/dashboards', methods=['GET'])
-def loadSavedLocations():
-    return jsonify(locations), 200
+@app.route('/load_saved_locations', methods=['GET'])
+def load_saved_locations():
+    db.connect()
+    try:
+        user_id = db.get_user_id(session['userName'])
+        if not user_id:
+            return jsonify(error="User not found"), 404
+
+        locations = db.get_dashboard_locations(user_id)  # Get all locations for the user's dashboard
+        return jsonify(locations), 200  # Return as JSON
+    except Exception as e:
+        return jsonify(error=str(e)), 500
+    finally:
+        db.close()

@@ -114,8 +114,8 @@ def logout():
     session.pop('userName', None)
     return redirect(url_for('index', alert_msg="You've been successfully logged out!"))
 
-@app.route('/dashboard')
-def dashboard():
+@app.route('/dashboards')
+def dashboards():
     userLoggedin = session.get('userLoggedin', False)
     userName = session.get('userName', None)
     locations = None
@@ -130,16 +130,30 @@ def dashboard():
                 locations = locations[:5]  # Fetch up to 5 saved locations
                 for location in locations:
                     city_weather = fetch_weather(location['name'])
-                    location['temperature'] = (
-                        round(city_weather.get('main', {}).get('temp')) 
-                        if city_weather 
-                        else "N/A"
-                    )
+
+                    if city_weather:
+                        main_temp = round(city_weather.get('main', {}).get('temp'))
+                        weather_icon = city_weather.get('weather', [{}])[0].get('icon', '01d')
+                    else:
+                        main_temp = "N/A"
+                        weather_icon = '01d'  # Default icon if weather data is unavailable
+
+                    # Get current time and date
+                    from datetime import datetime
+                    current_time = datetime.now().strftime("%I:%M %p")
+                    current_date = datetime.now().strftime("%m/%d/%Y")
+
+                    # Add weather data and time/date to the location dictionary
+                    location['temperature'] = main_temp
+                    location['weather_icon'] = weather_icon
+                    location['time'] = current_time
+                    location['date'] = current_date
+
                 print("Fetched locations for dashboard:", locations)
             else:
-                print("No locations found for user.")
+                locations = []
         except Exception as e:
-            print("Error fetching locations for dashboard:", e)
+            print("Error fetching locations:", e)
         finally:
             weather_app_db.close()
 

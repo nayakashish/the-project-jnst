@@ -660,7 +660,7 @@ header {
 
 .five-day-forecast h3 {
     font-size: 1.8rem;
-    color: #ccc;
+    color: white;
     margin-bottom: 15px;
     text-align: center;
 }
@@ -717,7 +717,7 @@ header {
 
 .saved-locations h3 {
     font-size: 1.8rem;
-    color: #ccc;
+    color: white;
     margin-bottom: 10px;
 }
 

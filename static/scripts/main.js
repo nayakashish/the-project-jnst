@@ -1,4 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Check if the database connection failed and display an alert
+    if (typeof dbConnectionFailed !== 'undefined' && dbConnectionFailed) {
+        alert('Error: Failed to connect to the database.\nIs Database Server Running?');
+    }
+
+    // Check for success message in URL parameters and display an alert
+    const urlParams = new URLSearchParams(window.location.search);
+    const alertMSG = urlParams.get('alert_msg');
+    if (alertMSG) {
+        alert(alertMSG);
+    }
+
     // Select DOM elements
     const searchBar = document.querySelector('.search-bar');
     const currentLocationBtn = document.querySelector('.current-location-btn');
@@ -184,8 +196,52 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Event listener for the current location button
-    // Event listener for the current location button
+    // Event listener for the welcome button
+    const welcomeBtn = document.querySelector('.welcome-btn');
+    if (welcomeBtn) {
+        const originalText = welcomeBtn.textContent; // Capture the original text content
+        
+        welcomeBtn.addEventListener('mouseover', () => {
+            welcomeBtn.textContent = 'Logout?';
+        });
+        welcomeBtn.addEventListener('mouseout', () => {
+            welcomeBtn.textContent = originalText;
+        });
+
+        welcomeBtn.addEventListener('click', () => {
+            // Your desired function here
+            window.location.href = '/logout';
+
+        });
+    }   
+
+    // Event listener for login button
+    const loginBtn = document.querySelector('.login-btn');
+    if(loginBtn) {
+        loginBtn.addEventListener('click', () => {
+            window.location.href = '/login';
+        });
+    }
+
+    // Event listener for view dashboards button
+    const viewDashboardsBtn = document.querySelector('.view-dashboards-btn');
+    if(viewDashboardsBtn) {
+        viewDashboardsBtn.addEventListener('click', () => {
+            window.location.href = '/dashboards';
+        });
+    }
+
+    // Event listener for view dashboards button non-logged-in-users
+    const viewDashboardsBtnNotLoggedIn = document.querySelector('.view-dashboards-btn-not-logged-in');
+    if(viewDashboardsBtnNotLoggedIn) {
+        viewDashboardsBtnNotLoggedIn.addEventListener('click', () => {
+            const userConfirmed = confirm('You need to login first. Do you want to login now?');
+            if (userConfirmed) {
+                window.location.href = '/login';
+            }
+        });
+    }
+
 // Event listener for the current location button
 currentLocationBtn.addEventListener('click', () => {
     if (navigator.geolocation) {
@@ -267,16 +323,16 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Geolocation is not supported by your browser.');
         }
     });
-    
+
+
+    console.log("main.js loaded");
 });
 
 
-// Event listener for view dashboards button
-const viewDashboardsBtn = document.querySelector('.view-dashboards-btn');
-if(viewDashboardsBtn) {
-    viewDashboardsBtn.addEventListener('click', () => {
-        window.location.href = '/dashboards';
-    });
-}
+
+// LOGIN:
+// main.js
+
+// main.js
 
 

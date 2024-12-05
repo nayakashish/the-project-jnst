@@ -11,32 +11,45 @@
         <!-- Header Section -->
         <header>
             <div class="dark-mode-toggle">
-                <label for="darkModeSwitch">
+                <label for="darkModeSwitch" class="switch">
+                    Dark Mode
                     <input type="checkbox" id="darkModeSwitch">
-                    <span>Dark Mode</span>
+                    <span class="slider"></span>
                 </label>
             </div>
-            <input 
-                type="text" 
-                class="search-bar" 
-                placeholder="Search for your preferred city..." 
-                aria-label="City Search Bar">
-            <div class="current-location-btn">Current Location</div>
+            
+            
+                        
+            <div class="header-middle">
+                <input 
+                    type="text" 
+                    class="search-bar" 
+                    placeholder="Search for your preferred city..." 
+                    aria-label="City Search Bar">
+            </div>
+            <div class="header-right">
+                <div class="current-location-btn">Current Location</div>
+                <!-- User Authentication Section -->
+                 <!-- If logged in it says Hello,[username] otherwise it is a normal login button. -->
+                {% if userLoggedin %}
+                    <div class="welcome-btn">
+                        Hello, {{userName}}!
+                    </div>
+                {% else %}
+                    <div class="login-btn">
+                        Login
+                    </div>
+                {% endif %}
+                <div class="unit-toggle">
+                    <button id="toggleUnit">°C / °F</button>
+                </div>
+            </div>
 
 
-            <!-- User Authentication Section -->
-             <!-- If logged in it says Hello,[username] otherwise it is a normal login button. -->
-            {% if userLoggedin %}
-                <div class="welcome-btn">
-                    Hello, {{userName}}!
-                </div>
-            {% else %}
-                <div class="login-btn">
-                    Login
-                </div>
-            {% endif %}
 
         </header>
+        
+        
 
         <!-- Current Weather Section -->
         <section class="current-weather">

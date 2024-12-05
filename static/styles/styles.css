@@ -20,7 +20,7 @@ body {
 .container {
     width: 90%;
     max-width: 1000px;
-    background: #e1f5fe; /* Soft light blue */
+    background: #e1f5fe;
     padding: 20px;
     border-radius: 20px;
     display: flex;
@@ -33,9 +33,16 @@ body {
 /* Header Section */
 header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 15px;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: inherit;
+}
+
+.header-middle {
+    flex: 1;
+    display: flex;
+    justify-content: center;
 }
 
 .search-bar {
@@ -48,6 +55,23 @@ header {
     font-size: 1rem;
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.unit-toggle button {
+    padding: 10px 15px;
+    border: 1px solid #81d4fa;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    color: #81d4fa;
+    font-weight: bold;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
 .current-location-btn {
     background-color: #81d4fa;
     color: white;
@@ -56,6 +80,7 @@ header {
     cursor: pointer;
     font-weight: bold;
     font-size: 1rem;
+    width: 11.8rem;
 }
 
 
@@ -92,8 +117,18 @@ header {
 #time {
     font-size: 3rem;
     font-weight: bold;
+}
+
+.blinking {
     animation: blink 1s infinite;
 }
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
 
 #date {
     font-size: 1.2rem;
@@ -305,16 +340,74 @@ header {
     height: 40px;
 }
 
-/* Keyframes for Blinking Effect */
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
 
 
 .weather-icon, .weather-icon2 {
     filter: brightness(1.5) hue-rotate(180deg);
     transition: filter 0.3s ease;
+}
+
+/* General styles for the switch */
+.dark-mode-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Roboto', Geneva, Tahoma, sans-serif;
+}
+
+/* Hide the default checkbox */
+.switch input {
+    display: none;
+}
+
+/* The outer container for the toggle slider */
+.switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #81d4fa; /* Adjust based on your theme */
+}
+
+/* The slider itself */
+.slider {
+    width: 50px;
+    height: 25px;
+    background-color: #ccc; /* Default background */
+    border-radius: 50px;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+/* The circle inside the slider */
+.slider::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    top: 2.5px;
+    left: 3px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* When the checkbox is checked, move the circle and change background */
+input:checked + .slider {
+    background-color: #81d4fa; /* Active color */
+}
+
+input:checked + .slider::before {
+    transform: translateX(25px); /* Move the circle */
+}
+
+/* Hover effects for better feedback */
+.slider:hover {
+    background-color: #bbb; /* Slightly darker */
+}
 }/* General Reset */
 * {
     margin: 0;
@@ -336,7 +429,7 @@ body {
 
 .container {
     width: 90%;
-    max-width: 1000px;
+    max-width: 1200px;
     background: #e1f5fe; /* Soft light blue */
     padding: 20px;
     border-radius: 20px;
@@ -372,7 +465,8 @@ header {
     border-radius: 20px;
     cursor: pointer;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 90%;
+    height: 2.4rem;
 }
 .login-btn {
     background-color: #81d4fa;
@@ -390,7 +484,9 @@ header {
     border-radius: 20px;
     cursor: pointer;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 1vw;
+    width: 13rem;
+    text-align: center;
 }
 
 .view-dashboards-btn {
@@ -447,7 +543,6 @@ header {
 #time {
     font-size: 3rem;
     font-weight: bold;
-    animation: blink 1s infinite;
 }
 
 #date {
@@ -569,7 +664,7 @@ header {
 
 .five-day-forecast h3 {
     font-size: 1.8rem;
-    color: #ccc;
+    color: white;
     margin-bottom: 15px;
     text-align: center;
 }
@@ -626,7 +721,7 @@ header {
 
 .saved-locations h3 {
     font-size: 1.8rem;
-    color: #ccc;
+    color: white;
     margin-bottom: 10px;
 }
 

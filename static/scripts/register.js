@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Your code here
-    console.log('DOM fully loaded and parsed');
+    console.log('Register page loaded');
 });
 
 document.querySelector('.login-form').addEventListener('submit', async (event) => {
@@ -27,7 +27,7 @@ document.querySelector('.login-form').addEventListener('submit', async (event) =
         if (response.ok) {
             const result = await response.json();
             alert(`Registration successful: ${result.message}`);
-            window.location.href = 'login.html'; // Redirect to the login page
+            window.location.href = 'the-project-jnst/templates/index.html'; // Redirect to the login page
         } else {
             const error = await response.json();
             alert(`Registration failed: ${error.message}`);

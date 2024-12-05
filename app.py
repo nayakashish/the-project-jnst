@@ -114,6 +114,48 @@ def logout():
     session.pop('userName', None)
     return redirect(url_for('index', alert_msg="You've been successfully logged out!"))
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        # Retrieve data from the request form
+        username = request.form['username']
+        password = request.form['password']
+
+        # Check if the username already exists
+        weather_app_db.connect()  # Connect to the database
+
+        existing_user_id = weather_app_db.get_userid(username)
+
+        if existing_user_id:  # If the username is already taken
+            weather_app_db.close()  # Close the database connection
+            error_message = "Username already exists. Please choose a different one."
+            session['userLoggedin'] = False
+            return render_template('register.html', return_message=error_message)
+        
+        new_user_id = weather_app_db.add_user({
+            'name': username,
+            'email': 'default@example.com', # keeping email in the database is tentative as we dont need it 
+            'theme': 1,
+            'temperatureUnit': 'C',
+            'password': password
+        })
+
+        if new_user_id:  # If the user was successfully registered
+            weather_app_db.close()  # Close the database connection
+            success_message = "Registration successful! Please log in." # Registering user doesn't log them in right away
+            return render_template('register.html', alert_msg=success_message)  # Redirect to the login page with a success message
+        
+        # If there was an error during registration
+        weather_app_db.close()  # Close the database connection
+        error_message = "Registration failed. Please try again later."
+        return render_template('register.html', return_message=error_message)
+
+    # Render the registration form for GET requests
+    return render_template('register.html')
+
+
+        
+
 @app.route('/dashboards')
 def dashboards():
     #TODO - check if user is logged in

@@ -307,6 +307,9 @@ def register():
 @app.route('/shared_dashboard/dash_<dash_id>')
 def shared_dashboard(dash_id):
     userLoggedin = session.get('userLoggedin', False)
+    if (not userLoggedin):
+        return redirect(url_for('index', alert_msg="You must be logged in. Redirecting to index!"))
+
     locations = None
     try:
         weather_app_db.connect()

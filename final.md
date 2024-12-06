@@ -53,8 +53,23 @@ This markdown file contains the final review of the jnst project.
 | Dashboard sharing                       | Partially delivered |
 | Dashboard customization                              | Delivered           |
 
-- **Summary**: We delivered most of the requirements except for the dashboard saving functionality, which is still under development. Our initial requirements captured the necessary details to guide the project effectively.
+- **Summary**: We delivered most of the requirements except for the dashboard sharing functionality, we did not get to start developing. Our initial requirements captured the necessary details to guide the project effectively.
 
+### System Architecture and Key Components
+#### Architecture Overview
+The system follows a **Client-Server Architecture** with the following components:  
+1. **Front-End**:  
+   - **Technology**: Webpages (HTML files) JavaScript (main.js, register.js, dashboard.js, etc)  
+   - Displays weather data and supports user interaction.  
+2. **Back-End Server**:  
+   - **Technology**: Python Flask (app.py)  
+   - Handles API requests, user authentication, and database interactions.  
+3. **Database**:  
+   - **Technology**: MySQL  
+   - Stores user data, dashboard configurations, and weather preferences.  
+4. **External Weather API Integration**:  
+   - **API**: OpenWeather API  
+   - Provides real-time weather and forecast data.  
 
 
 ---

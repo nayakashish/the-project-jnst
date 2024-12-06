@@ -86,6 +86,15 @@ We implemented modular and reusable components, such as:
 - Reusable UI components for weather widgets and forecasts.  
 - [ PLEASE HELP HERE]
 
+This approach facilitated clean code, reduced redundancy, and allowed for easier debugging.
+
+### 1.5 - Remaining Backlog Tasks
+- **Dashboard Sharing Functionality**: Finalize and integrate the feature. [TENTATIVE]
+- **Dark Mode**: Personalize background to a dark theme.
+- **Temperature Unit Conversion**: Implement functionality of converting between Celsius to fahrenheit
+
+## Weather Forecast Application Summary
+The application meets its primary goals, providing a robust and intuitive platform for users to access weather information and forecasts. While a minor feature remains incomplete, the core functionality is operational and demonstrates the potential for real-world use.
 
 ---
 

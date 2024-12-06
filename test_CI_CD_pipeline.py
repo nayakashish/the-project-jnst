@@ -1,5 +1,6 @@
 import pytest
 from flask import session
+import os
 from app import app, weather_app_db
 
 @pytest.fixture
@@ -31,4 +32,7 @@ def test_database_connection(client):
     assert b"Database connection successful" in response.data
 
 def test_environment_variables(client):
-    assert os.getenv("SECRET_KEY") == "my_secret_key"  # Check if the SECRET_KEY is set in the environmen
+    """
+    Test that necessary environment variables are set after deployment.
+    """
+    assert app.config['SECRET_KEY'] == 'my_secret_key'  # Check if SECRET_KEY is set in Flask config

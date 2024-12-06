@@ -127,8 +127,9 @@ body {
   padding: 10px 20px;
   border-radius: 5px;
   font-size: 1rem;
-  display: inline-block;
-  margin-bottom: 20px; /* Add spacing from the title */
+  position: absolute; /* Position the button absolutely */
+  top: 10px;  /* Distance from the top */
+  left: 10px; /* Distance from the left */
   transition: background-color 0.3s ease;
 }
 

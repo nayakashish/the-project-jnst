@@ -1,4 +1,4 @@
-# Weather App
+# Weather App Final Review 
 
 This project is a web-based weather application that provides users with real-time weather data, location-specific forecasts, and a customizable dashboard. Users can view, share, and customize their weather data and dashboards, all powered by the OpenWeather API.
 

@@ -6,7 +6,7 @@ def client():
     app.config["TESTING"] = True
     with app.test_client() as client:
         yield client
-
+#
 def test_retrieve_current_weather(client):
     """
     Test that the app retreives current weather data using the external API.

@@ -100,13 +100,14 @@ The application meets its primary goals, providing a robust and intuitive platfo
 
 ## 2 - CI/CD Report
 
-### Testing Strategies
-### Implemented Strategies
+### 2.1 Testing Strategies
+#### Implemented Strategies
 - **Test Plan**:  
   We developed a test plan addressing both functional and non-functional requirements.  
 - **Testing Tools and Frameworks**:  
   - **Pytest**: Used extensively to test:  
-    - **Functional Tests**: Security, user authentication, API functionality, and UI behavior.  
+    - **Functional Tests**: User requirements, weather data retrival, dashboard customization, CI/CD pipeline database testing.  
+    - **Non Functional Tests**: Security, useability reliablity, performace, maintainability. 
     - **Component Testing**: Database, server, and UI were tested independently to isolate issues.
 - **Automation**:  
   - All tests were manually initiated using Pytest. No automated CI tools (e.g., Jenkins or GitHub Actions) were employed to run tests automatically.  

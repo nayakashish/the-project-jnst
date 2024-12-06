@@ -8,27 +8,34 @@
 </head>
 <body>
   <section class="dashboard">
+    <a href="/index" class="back-btn">Back to Home</a>  <!-- Back Button -->
     <h3>Dashboard</h3>
     <div class="dashboard-container">
-      <!-- Placeholder cards -->
+      {% for location in locations %}
+      <div class="dashboard-card">
+        <h4>{{ location.name }}</h4>
+        <span>{{ location.time }}</span>
+        <span>{{ location.date }}</span>
+        <span>{{ location.temperature }}°C</span>
+        <img src="https://openweathermap.org/img/wn/{{ location.weather_icon }}.png" alt="Weather Icon" class="weather-icon">
+        <button class="remove-btn" data-city="{{ location.name }}">Remove</button>
+      </div>
+      {% endfor %}
+      <!-- Placeholder cards for adding new locations -->
+      {% for _ in range(5 - locations|length) %}
       <div class="dashboard-card">
         <button class="add-btn"></button>
       </div>
-      <div class="dashboard-card">
-        <button class="add-btn"></button>
-      </div>
-      <div class="dashboard-card">
-        <button class="add-btn"></button>
-      </div>
-      <div class="dashboard-card">
-        <button class="add-btn"></button>
-      </div>
-      <div class="dashboard-card">
-        <button class="add-btn"></button>
-      </div>
+      {% endfor %}
     </div>
   </section>
 
   <script src="../static/scripts/dashboard.js"></script>
+
+  <script>
+    // Call loadSavedLocations function after page loads
+    document.addEventListener('DOMContentLoaded', loadSavedLocations);
+  </script>
+
 </body>
 </html>

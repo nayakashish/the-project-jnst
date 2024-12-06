@@ -33,3 +33,13 @@ def test_deployment(client):
     response = client.get("/deployment/status")  # Access the endpoint for deployment status
     assert response.status_code == 200  # Ensure the status is returned successfully
     assert b"Deployment successful" in response.data  # Confirm deployment success
+
+# Test for the database connection after deployment
+def test_database_connection(client):
+    """
+    Test that the application successfully connects to the database after deployment.
+    """
+    response = client.get("/db/connect")  # Mock the database connection check
+    assert response.status_code == 200  # Ensure the DB connection check is successful
+    assert b"Database connection successful" in response.data  # Confirm the database is reachable
+

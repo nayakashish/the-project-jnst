@@ -34,6 +34,11 @@ header h1 {
   color: #81d4fa; /* Blue title color */
 }
 
+p {
+  margin-top: 1rem;
+  color: #81d4fa; /* Blue title color */
+}
+
 .login-form {
   width: 100%;
 }

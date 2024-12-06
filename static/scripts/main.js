@@ -72,6 +72,14 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Update the time element with the colon blinking
         time.innerHTML = `${hours}<span class="blinking">:</span>${minutes}`;
+        const today = new Date();
+
+        const options = { weekday: 'long', day: '2-digit', month: 'short' };
+        const formattedDate = new Intl.DateTimeFormat('en-US', options).format(today);
+
+        date.innerText = formattedDate;
+        
+
     }
     
     

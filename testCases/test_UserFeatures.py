@@ -125,7 +125,7 @@ def test_shared_dashboard(logged_in_client):
     """
     Test that the shared dashboard displays the correct locations for the given dash_id.
     """
-    response = logged_in_client.get('/shared_dashboard?dash_1') #enter the url for a shared dash for the logged_in_client
+    response = logged_in_client.get('/shared_dashboard/dash_1') #enter the url for a shared dash for the logged_in_client
     assert response.status_code == 200
     assert b'New York' in response.data
     assert b'Los Angeles' in response.data

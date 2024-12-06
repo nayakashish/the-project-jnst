@@ -144,18 +144,27 @@ def dashboards():
                 locations = locations[:5]  # Fetch up to 5 saved locations
                 for location in locations:
                     city_weather = fetch_weather(location['name'])
-
+                    tz_offset = 0
                     if city_weather:
                         main_temp = round(city_weather.get('main', {}).get('temp'))
                         weather_icon = city_weather.get('weather', [{}])[0].get('icon', '01d')
+                        tz_offset = city_weather.get('timezone', 0)
                     else:
                         main_temp = "N/A"
                         weather_icon = '01d'  # Default icon if weather data is unavailable
 
-                    # Get current time and date
-                    from datetime import datetime
-                    current_time = datetime.now().strftime("%I:%M %p")
-                    current_date = datetime.now().strftime("%m/%d/%Y")
+                    # Get current time and date in PST
+                    from datetime import datetime, timedelta, timezone
+
+                    pst_offset = timedelta(hours=-8)  # PST is UTC-8
+                    current_date = (datetime.now(timezone.utc) + pst_offset).strftime("%m/%d/%Y")
+
+                    offset = timedelta(seconds=tz_offset)
+
+                    # Apply the offset to the UTC time and convert to PST
+                    local_time = datetime.now(timezone.utc) + offset
+                    local_time_pst = local_time.astimezone(timezone(timedelta(hours=0)))
+                    current_time = local_time_pst.strftime("%I:%M %p")
 
                     # Add weather data and time/date to the location dictionary
                     location['temperature'] = main_temp
@@ -243,24 +252,22 @@ def load_saved_locations():
         if not user_id:
             return jsonify(error="User not found"), 404
 
-        locations = weather_app_db.get_dashboard_locations(user_id)  # Get all locations for the user's dashboard
+        locations = weather_app_db.get_dashboardLocations(user_id)  # Get all locations for the user's dashboard
         return jsonify(locations), 200  # Return as JSON
     except Exception as e:
         return jsonify(error=str(e)), 500
     finally:
         weather_app_db.close()
 
-if __name__ == "__main__":
-    app.run(debug=True)
-    
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    print("AKSJHFDLKAJDHFLKSJHF")
     if request.method == 'POST':
         # Retrieve data from the request form
         username = request.form['username']
         password = request.form['password']
 
+        print(f"Username: {username}, Password: {password}")
         # Check if the username already exists
         weather_app_db.connect()  # Connect to the database
 
@@ -270,7 +277,7 @@ def register():
             weather_app_db.close()  # Close the database connection
             error_message = "Username already exists. Please choose a different one."
             session['userLoggedin'] = False
-            return render_template('register.html', return_message=error_message)
+            return redirect(url_for('register', alert_msg=error_message))
         
         new_user_id = weather_app_db.add_user({
             'name': username,
@@ -283,12 +290,15 @@ def register():
         if new_user_id:  # If the user was successfully registered
             weather_app_db.close()  # Close the database connection
             success_message = "Registration successful! Please log in." # Registering user doesn't log them in right away
-            return render_template('register.html', alert_msg=success_message)  # Redirect to the login page with a success message
+            return redirect(url_for('login', alert_msg=success_message))  # Redirect to the login page with a success message
         
         # If there was an error during registration
         weather_app_db.close()  # Close the database connection
         error_message = "Registration failed. Please try again later."
-        return render_template('register.html', return_message=error_message)
+        return redirect(url_for('register', alert_msg=error_message))
 
     # Render the registration form for GET requests
     return render_template('register.html')
+
+if __name__ == "__main__":
+    app.run(debug=True)

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return urlParams.get(name);
     }
 
-    
+
     const alertMSG = getQueryParameter('alert_msg');
     if (alertMSG) {
         alert(alertMSG);
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
 });
 
-
+//I moved the data validation to the background app.py
 // document.querySelector('.login-form').addEventListener('submit', async (event) => {
 //     event.preventDefault(); // Prevent the default form submission behavior
 

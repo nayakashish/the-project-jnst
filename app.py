@@ -164,7 +164,7 @@ def dashboards():
                     # Apply the offset to the UTC time and convert to PST
                     local_time = datetime.now(timezone.utc) + offset
                     local_time_pst = local_time.astimezone(timezone(timedelta(hours=0)))
-                    current_time = local_time_pst.strftime("%I:%M %p")
+                    current_time = local_time_pst.strftime("%-I:%M %p")
 
                     # Add weather data and time/date to the location dictionary
                     location['temperature'] = main_temp

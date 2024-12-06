@@ -133,7 +133,12 @@ def logout():
 def dashboards():
     userLoggedin = session.get('userLoggedin', False)
     userName = session.get('userName', None)
-
+    userId = session.get('userId', 0)
+    if userLoggedin:
+        weather_app_db.connect()
+        userId = weather_app_db.get_userid(userName)
+        session['userId'] = userId
+        weather_app_db.close()
     locations = None
 
     if userLoggedin:
@@ -182,7 +187,7 @@ def dashboards():
         finally:
             weather_app_db.close()
 
-    return render_template('dashboard.html', userLoggedin=userLoggedin, locations=locations)
+    return render_template('dashboard.html', userLoggedin=userLoggedin, locations=locations, userId=userId)
 
 @app.route("/weather", methods=["GET"])
 def get_weather():

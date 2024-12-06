@@ -1,6 +1,6 @@
 # Weather App Final Review 
 
-This project is a web-based weather application that provides users with real-time weather data, location-specific forecasts, and a customizable dashboard. Users can view, share, and customize their weather data and dashboards, all powered by the OpenWeather API.
+This markdown file contains the final review of the jnst project.
 
 #### Project Members
  - Jan Suratos
@@ -10,7 +10,7 @@ This project is a web-based weather application that provides users with real-ti
 
 ## Table of Contents
 
-- [Overview](#overview)
+- [General Requirements](#General-Requirements)
 - [Requirements](#requirements)
 - [Proto Personas](#proto-personas)
 - [Use Cases](#use-cases)
@@ -21,9 +21,9 @@ This project is a web-based weather application that provides users with real-ti
 
 ## Overview
 
-**Project Description & Scope -** \
- This application will be a user-focused weather platform offering real-time weather updates and a 5-day forecast for selected locations. The platform will allow users to create accounts, allowing them to access, personalize, and share their dashboards with other users. The system will support search functionality, enabling users to retrieve weather details by city name. For each selected location, it will display current temperature, weather conditions, and an appropriate weather icon, with user-selectable display formats for personalization. Users will also benefit from quick access to saved favorite locations on their dashboards and can share this information with others once they have created an account. In addition, the application will maintain a simple and intuitive interface, ensuring accessibility across multiple web screen sizes and browser environments like Chrome and Safari. It will adhere to data privacy standards, disclosing only necessary user information. Users can expect seamless login and logout functionality to protect their accounts. The platform will also notify users of any errors in retrieving weather data, managing accounts, or sharing features, making the experience smooth and user-friendly.
-
+**General Requirements -** \
+1. Our team built a weather app. It is mostly complete and it is running. Features: 
+- [ ] 5 day weather forcast
 
 
 ---

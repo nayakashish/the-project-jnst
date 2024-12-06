@@ -43,3 +43,8 @@ def test_database_connection(client):
     assert response.status_code == 200  # Ensure the DB connection check is successful
     assert b"Database connection successful" in response.data  # Confirm the database is reachable
 
+def test_environment_variables(client):
+    """
+    Test that necessary environment variables are set after deployment.
+    """
+    assert app.secret_key == 'my_secret_key'  # Check if SECRET_KEY matches the expected value

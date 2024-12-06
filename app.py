@@ -252,12 +252,53 @@ def load_saved_locations():
         if not user_id:
             return jsonify(error="User not found"), 404
 
-        locations = weather_app_db.get_dashboard_locations(user_id)  # Get all locations for the user's dashboard
+        locations = weather_app_db.get_dashboardLocations(user_id)  # Get all locations for the user's dashboard
         return jsonify(locations), 200  # Return as JSON
     except Exception as e:
         return jsonify(error=str(e)), 500
     finally:
         weather_app_db.close()
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    print("AKSJHFDLKAJDHFLKSJHF")
+    if request.method == 'POST':
+        # Retrieve data from the request form
+        username = request.form['username']
+        password = request.form['password']
+
+        print(f"Username: {username}, Password: {password}")
+        # Check if the username already exists
+        weather_app_db.connect()  # Connect to the database
+
+        existing_user_id = weather_app_db.get_userid(username)
+
+        if existing_user_id:  # If the username is already taken
+            weather_app_db.close()  # Close the database connection
+            error_message = "Username already exists. Please choose a different one."
+            session['userLoggedin'] = False
+            return redirect(url_for('register', alert_msg=error_message))
+        
+        new_user_id = weather_app_db.add_user({
+            'name': username,
+            'email': 'default@example.com', # keeping email in the database is tentative as we dont need it 
+            'theme': 1,
+            'temperatureUnit': 'C',
+            'password': password
+        })
+
+        if new_user_id:  # If the user was successfully registered
+            weather_app_db.close()  # Close the database connection
+            success_message = "Registration successful! Please log in." # Registering user doesn't log them in right away
+            return redirect(url_for('login', alert_msg=success_message))  # Redirect to the login page with a success message
+        
+        # If there was an error during registration
+        weather_app_db.close()  # Close the database connection
+        error_message = "Registration failed. Please try again later."
+        return redirect(url_for('register', alert_msg=error_message))
+
+    # Render the registration form for GET requests
+    return render_template('register.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -8,7 +8,12 @@
 </head>
 <body>
   <section class="dashboard">
-    <a href="/index?location={{  locations[0].name  }}" class="back-btn">Back to Home</a>  <!-- Back Button -->
+
+    {% if locations %}
+    <a href="/index?location={{ locations[0].name }}" class="back-btn">Back to Home</a>  <!-- Back Button -->
+    {% else%}
+    <a href="/index" class="back-btn">Back to Home</a>  <!-- Back Button -->
+    {% endif %}
     <h3>Dashboard</h3>
     <div class="dashboard-container">
       {% for location in locations %}

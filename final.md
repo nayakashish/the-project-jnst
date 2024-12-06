@@ -123,16 +123,17 @@ The application meets its primary goals, providing a robust and intuitive platfo
 - **Test Plan**:  
   We developed a test plan addressing both functional and non-functional requirements.  
 - **Testing Tools and Frameworks**:  
-  - **Pytest**: Used extensively to test
-    - **Functional Tests**: User requirements, weather data retrival, dashboard customization, CI/CD pipeline database testing.  
+  - **Pytest**: Used extensively to test frontend and backend, including:
+    - **Functional Tests**: User requirements, weather data retrival, dashboard customization, page contents, logged-in user vs logged-out user functionality.  
     - **Non Functional Tests**: Security, useability reliablity, performace, maintainability. 
     - **Component Testing**: Database, server, and UI were tested independently to isolate issues.
 - **Automation**:  
-  - All tests were manually initiated using Pytest. No automated CI tools (e.g., Jenkins or GitHub Actions) were employed to run tests automatically.  
+  - Our project heavily utilized manual tests using Pytest and our Models-Test Plan. We would frequently run through the test plan spreadsheet to ensure new features passed requirements as well as verify previous features continued functioning. We did not utilize automated tests, such as GitHub Actions unfortunately, due to lack of time and the lack of priority our team placed on it. 
 
 #### Reflection and Future Improvements
 - **Effectiveness**:  
-  The current approach effectively identified and resolved bugs. However, manually triggering tests was time-consuming.  
+   - The current approach effectively identified and resolved bugs. However, manually triggering tests was time-consuming.  
+   - The test spreadsheet visually showcases the features as they were implemented and prompted team members to test edge cases to validate previous functionality and ensure smooth integration.
 - **Future Changes**:  
   - Introduce **automated testing tools** (e.g., GitHub Actions) to streamline testing and integrate it into the CI pipeline.  
   - Expand the test suite to include performance tests and load testing.
@@ -142,34 +143,41 @@ The application meets its primary goals, providing a robust and intuitive platfo
 ### 2.2 Branching Workflow
 #### Workflow Implementation
 - **Branch Organization**:  
-  Separate branches were created for functional and non-functional tests, ensuring clarity and minimizing conflicts.  
+   - Separate branches were created for functional and non-functional tests, ensuring clarity and minimizing conflicts.  
+   - Branches were created and merged for each feature, which allowed us to asynchronously test and implement our features.
 - **Code Review Process**:  
   - A ruleset enforced mandatory reviews:  
     - At least **two team members** had to review and approve a test branch before merging it into the `development` branch.  
     - Direct merges to the `main` branch were blocked to maintain code quality.  
 - **Success**:  
   This workflow was highly effective in ensuring code integrity and avoiding untested code in the main branch.
+  Having the mandatory reviews ensured that code got inspected visually and was pulled and tested on separate machines than the one developed on to ensure functionality.
 
 ---
 
 ### 2.3 Deployment
 
 - **Docker Implementation**:  
-  The project is fully Dockerized, with a **Dockerfile** and services defined for deployment. Key configurations include:  
+  The project's database is fully Dockerized, with a Dockerfile and services defined for deployment. Along with the docker database, the front-end is launched through flask. Key configurations include:  
   - A MySQL database service with defined environment variables for database setup (e.g., user credentials and database initialization).  
-  - Volume mapping for persistent storage and automatic database initialization using `weatherAppDB.sql`.  
+  - Volume mapping for persistent storage and automatic database initialization using `weatherAppDB.sql`. 
+  - Flask app for launching a frontend server for app.py and front-end.
+
 - **Deployment Steps**:  
-  1. Build and start the Docker containers using the provided Dockerfile and `docker-compose` configuration.  
-  2. The application services will automatically connect to the MySQL container.  
-  3. Use GitHub Pages for front-end deployment.  
+  1. Install dependencies and requirements.
+  2. Build and start the Docker containers using the provided Dockerfile and `docker-compose` configuration.  
+  3. The application services will automatically connect to the MySQL container.  
+  4. Run app.py and route to the created localhost server.
 
 #### Deployment Testing
-The Dockerized environment was tested and is functional, ensuring smooth deployment on any compatible system.  
+ - The Dockerized environment was tested and is functional, ensuring smooth deployment on any compatible system.
+ - The frontend content and backend app.py were tested throughout development using pytests and the models-test plan.  
 
-#### Future Enhancements
-To enhance deployment reliability, consider integrating **Continuous Deployment tools** like Docker Hub or Kubernetes for scaling and automated updates.
+#### Future Improvements in Deployment
+ - To make deployment smoother, our team was presented with the idea of launching the flask server through the docker container itself, however due to our limited understanding of flask servers and lack of time, this feature could not be implemented.
+ - To enhance deployment reliability, we could integrate Continuous Deployment tools like DockerHub, Kubernetes, GitHub pages, or some other cloud server for scaling and automated updates.
 
-Reflections (Comment on the following items as a team):
+## Reflections:
 
 How did your project management work for the team?  What was the hardest thing and what would you do the same/differently the next time you plan to complete a project like this? 
 

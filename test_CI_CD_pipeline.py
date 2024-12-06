@@ -1,6 +1,5 @@
 import pytest
 from flask import session
-import os
 from app import app, weather_app_db
 
 @pytest.fixture

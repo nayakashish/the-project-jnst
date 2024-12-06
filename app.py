@@ -1,12 +1,13 @@
 # this is the server
 # use "pip install flask" to install flask, which is the python framework to run a server 
 # to run, type in python app.py in the terminal (dont forget to be in the project directory) 
-import os
+import os, sys
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session
 import requests
 from dotenv import load_dotenv
 from weather_app_db import app_DB
-
+# Get current time and date in PST
+from datetime import datetime, timedelta, timezone
 # Load environment variables from .env file
 load_dotenv()
 
@@ -153,8 +154,6 @@ def dashboards():
                         main_temp = "N/A"
                         weather_icon = '01d'  # Default icon if weather data is unavailable
 
-                    # Get current time and date in PST
-                    from datetime import datetime, timedelta, timezone
 
                     pst_offset = timedelta(hours=-8)  # PST is UTC-8
                     current_date = (datetime.now(timezone.utc) + pst_offset).strftime("%m/%d/%Y")
@@ -301,4 +300,10 @@ def register():
     return render_template('register.html')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = 5000  # Default port
+    if len(sys.argv) > 1:
+        try:
+            port = int(sys.argv[1])
+        except ValueError:
+            print("Port Number not specified. Using default port 5000.")
+    app.run(debug=True, port=port)

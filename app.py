@@ -309,7 +309,6 @@ def shared_dashboard(dash_id):
         # user_id = weather_app_db.get_userName(dash_id)  # Retrieve user ID
         locations = weather_app_db.get_dashboardLocations(dash_id)
         print(dash_id)
-        print("ASLFKHSADLFKJHDSF ")
 
         username = weather_app_db.get_user_info(dash_id)['name'] #get username from dash
     

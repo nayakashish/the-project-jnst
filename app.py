@@ -152,6 +152,8 @@ def dashboards():
                 print("Fetched locations for dashboard:", locations)
             else:
                 locations = []
+
+            print(locations)
         except Exception as e:
             print("Error fetching locations:", e)
         finally:
@@ -173,64 +175,66 @@ def get_weather():
 
     return jsonify(weather_data)
 
-if __name__ == "__main__":
-    app.run(debug=True)
-
-@app.route('/add_location', methods=['POST'])
+@app.route('/add_location', methods=["POST","GET"])
 def add_location():
-    db.connect()  # Connect to the database
+    print("ADD LOCATION")
+    weather_app_db.connect()  # Connect to the database
     try:
-        city_name = request.json.get('city')
+        city_name = request.args.get('city')
+        print(city_name)
         if not city_name:
             return jsonify(error="City name is required"), 400
 
-        user_id = db.get_user_id(session['userName'])  # Assuming session contains 'userName'
+        user_id = weather_app_db.get_userid(session['userName'])  # Assuming session contains 'userName'
         if not user_id:
             return jsonify(error="User not found"), 404
 
-        loc_id = db.add_location(city_name)  # Add city to locations table if not exists
-        db.add_dashboard_location(user_id, loc_id)  # Link the location to the user's dashboard
-
-        return jsonify(message="Location added successfully"), 200
+        loc_id = weather_app_db.add_location(city_name)  # Add city to locations table if not exists
+        weather_app_db.add_dashboardLocation(user_id, loc_id)  # Link the location to the user's dashboard
+        print("Added!!!!!!!")
+        return redirect(url_for('dashboards'))
     except Exception as e:
         return jsonify(error=str(e)), 500
     finally:
-        db.close()  # Ensure the connection is closed
+        weather_app_db.close()  # Ensure the connection is closed
 
-@app.route('/remove_location', methods=['DELETE'])
+@app.route('/remove_location', methods=["POST","GET"])
 def remove_location():
-    db.connect()
+    weather_app_db.connect()
     try:
-        city_name = request.json.get('city')
+        city_name = request.args.get('city')
         if not city_name:
             return jsonify(error="City name is required"), 400
 
-        user_id = db.get_user_id(session['userName'])
+        user_id = weather_app_db.get_userid(session['userName'])
         if not user_id:
             return jsonify(error="User not found"), 404
 
-        loc_id = db.get_location_id(city_name)  # Fetch the location ID for the given city
+        loc_id = weather_app_db.get_locationID(city_name)  # Fetch the location ID for the given city
         if not loc_id:
             return jsonify(error="Location not found"), 404
 
-        db.delete_dashboard_location(user_id, loc_id)  # Remove the location from user's dashboard
-        return jsonify(message="Location removed successfully"), 200
+        weather_app_db.delete_dashboardLocation(user_id, loc_id)  # Remove the location from user's dashboard
+        return redirect(url_for('dashboards'))
     except Exception as e:
         return jsonify(error=str(e)), 500
     finally:
-        db.close()
+        weather_app_db.close()
 
 @app.route('/load_saved_locations', methods=['GET'])
 def load_saved_locations():
-    db.connect()
+    weather_app_db.connect()
     try:
-        user_id = db.get_user_id(session['userName'])
+        user_id = weather_app_db.get_user_id(session['userName'])
         if not user_id:
             return jsonify(error="User not found"), 404
 
-        locations = db.get_dashboard_locations(user_id)  # Get all locations for the user's dashboard
+        locations = weather_app_db.get_dashboard_locations(user_id)  # Get all locations for the user's dashboard
         return jsonify(locations), 200  # Return as JSON
     except Exception as e:
         return jsonify(error=str(e)), 500
     finally:
-        db.close()
+        weather_app_db.close()
+
+if __name__ == "__main__":
+    app.run(debug=True)

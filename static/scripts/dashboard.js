@@ -5,6 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const addButtons = document.querySelectorAll('.add-btn');
   const dashboardCards = document.querySelectorAll('.dashboard-card');
 
+  const removeButtons = document.querySelectorAll('.remove-btn');
+  removeButtons.forEach(button => {
+      button.addEventListener('click', () => {
+          const cityName = button.getAttribute('data-city');
+          window.location.href = `/remove_location?city=${(cityName)}`;
+      });
+  });
+
   // Function to fetch and populate weather data for the city
   async function getWeather(city, card) {
       try {
@@ -43,11 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
 
       // Add event listener for the "Remove" button
-      const removeButton = card.querySelector('.remove-btn');
-      removeButton.addEventListener('click', () => {
-          // Reset the card to its original state with just the "Add" button
-          resetCardToAddButton(card);
-      });
+     
   }
 
   // Function to reset the card to the "Add" button state
@@ -61,7 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
       addButton.addEventListener('click', () => {
           const city = prompt('Enter city name:');
           if (city) {
-              getWeather(city, card);
+            window.location.href = `/add_location?city=${(city)}`;
+            //   getWeather(city, card);
           }
       });
   }
@@ -71,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
       button.addEventListener('click', () => {
           const city = prompt('Enter city name:');
           if (city) {
-              getWeather(city, dashboardCards[index]);
+            window.location.href = `/add_location?city=${(city)}`;
           }
       });
   });
@@ -145,5 +150,9 @@ async function removeLocation(city) {
 
 // Initial loading of saved locations
 loadSavedLocations();
+
+});
+
+document.addEventListener('DOMContentLoaded', () => {
 
 });

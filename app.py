@@ -54,7 +54,7 @@ def index():
         weather_app_db.connect()
         locations = weather_app_db.get_dashboardLocations(weather_app_db.get_userid(userName)) #get locations from db
         if locations:
-            locations = locations[:3] #get first 3 locations from user's dashboard
+            locations = locations[1:4] # get locations 2, 3, and 4 from user's dashboard
             for location in locations: #for each get temps and add to location array to be sent to frontend
                 city_weather = fetch_weather(location['name'])
                 if city_weather:
@@ -104,7 +104,21 @@ def login():
         weather_app_db.close() #close connection to DB
 
         if session['userLoggedin']:
-            return redirect(url_for('index', alert_msg="You've been logged in successfully!")) #redirect to index page with an alert
+            #update current location to most recent saved location
+            weather_app_db.connect()
+            saved_locations = weather_app_db.get_dashboardLocations(user_id)
+            if saved_locations:
+                city = saved_locations[0]['name']
+            else:
+                city = None
+            weather_app_db.close()
+
+            #redirect to index page with an alert and location if found
+            if city:
+                return redirect(url_for('index', alert_msg="You've been logged in successfully!", location=city))
+            else:
+                return redirect(url_for('index', alert_msg="You've been logged in successfully!")) 
+       
         return render_template('login.html', return_message=error_message) #go back to login page with an error message
     return render_template('login.html') # this is return statement if login.request.method is not POST
 
@@ -116,8 +130,50 @@ def logout():
 
 @app.route('/dashboards')
 def dashboards():
-    #TODO - check if user is logged in
-    return render_template('dashboard.html')
+    userLoggedin = session.get('userLoggedin', False)
+    userName = session.get('userName', None)
+    locations = None
+
+    if userLoggedin:
+        try:
+            weather_app_db.connect()
+            user_id = weather_app_db.get_userid(userName)  # Retrieve user ID
+            locations = weather_app_db.get_dashboardLocations(user_id)
+
+            if locations:
+                locations = locations[:5]  # Fetch up to 5 saved locations
+                for location in locations:
+                    city_weather = fetch_weather(location['name'])
+
+                    if city_weather:
+                        main_temp = round(city_weather.get('main', {}).get('temp'))
+                        weather_icon = city_weather.get('weather', [{}])[0].get('icon', '01d')
+                    else:
+                        main_temp = "N/A"
+                        weather_icon = '01d'  # Default icon if weather data is unavailable
+
+                    # Get current time and date
+                    from datetime import datetime
+                    current_time = datetime.now().strftime("%I:%M %p")
+                    current_date = datetime.now().strftime("%m/%d/%Y")
+
+                    # Add weather data and time/date to the location dictionary
+                    location['temperature'] = main_temp
+                    location['weather_icon'] = weather_icon
+                    location['time'] = current_time
+                    location['date'] = current_date
+
+                print("Fetched locations for dashboard:", locations)
+            else:
+                locations = []
+
+            print(locations)
+        except Exception as e:
+            print("Error fetching locations:", e)
+        finally:
+            weather_app_db.close()
+
+    return render_template('dashboard.html', userLoggedin=userLoggedin, locations=locations)
 
 @app.route("/weather", methods=["GET"])
 def get_weather():
@@ -132,6 +188,67 @@ def get_weather():
         return jsonify({"error": "Failed to fetch weather data"}), 500
 
     return jsonify(weather_data)
+
+@app.route('/add_location', methods=["POST","GET"])
+def add_location():
+    print("ADD LOCATION")
+    weather_app_db.connect()  # Connect to the database
+    try:
+        city_name = request.args.get('city')
+        print(city_name)
+        if not city_name:
+            return jsonify(error="City name is required"), 400
+
+        user_id = weather_app_db.get_userid(session['userName'])  # Assuming session contains 'userName'
+        if not user_id:
+            return jsonify(error="User not found"), 404
+
+        loc_id = weather_app_db.add_location(city_name)  # Add city to locations table if not exists
+        weather_app_db.add_dashboardLocation(user_id, loc_id)  # Link the location to the user's dashboard
+        print("Added!!!!!!!")
+        return redirect(url_for('dashboards'))
+    except Exception as e:
+        return jsonify(error=str(e)), 500
+    finally:
+        weather_app_db.close()  # Ensure the connection is closed
+
+@app.route('/remove_location', methods=["POST","GET"])
+def remove_location():
+    weather_app_db.connect()
+    try:
+        city_name = request.args.get('city')
+        if not city_name:
+            return jsonify(error="City name is required"), 400
+
+        user_id = weather_app_db.get_userid(session['userName'])
+        if not user_id:
+            return jsonify(error="User not found"), 404
+
+        loc_id = weather_app_db.get_locationID(city_name)  # Fetch the location ID for the given city
+        if not loc_id:
+            return jsonify(error="Location not found"), 404
+
+        weather_app_db.delete_dashboardLocation(user_id, loc_id)  # Remove the location from user's dashboard
+        return redirect(url_for('dashboards'))
+    except Exception as e:
+        return jsonify(error=str(e)), 500
+    finally:
+        weather_app_db.close()
+
+@app.route('/load_saved_locations', methods=['GET'])
+def load_saved_locations():
+    weather_app_db.connect()
+    try:
+        user_id = weather_app_db.get_user_id(session['userName'])
+        if not user_id:
+            return jsonify(error="User not found"), 404
+
+        locations = weather_app_db.get_dashboard_locations(user_id)  # Get all locations for the user's dashboard
+        return jsonify(locations), 200  # Return as JSON
+    except Exception as e:
+        return jsonify(error=str(e)), 500
+    finally:
+        weather_app_db.close()
 
 if __name__ == "__main__":
     app.run(debug=True)

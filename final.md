@@ -1,4 +1,5 @@
 # Weather App Final Review 
+## Milestone #7 - Final Delivery
 
 This markdown file contains the final review of the jnst project.
 
@@ -9,13 +10,17 @@ This markdown file contains the final review of the jnst project.
  - Ashish Nayak
 
 ## Table of Contents
-
+- [Video Walkthrough](#video-walkthrough)
 - [1 - General Requirements](#General-Requirements)
 - [Requirements](#requirements)
 - [Proto Personas](#proto-personas)
 - [Use Cases](#use-cases)
 - [Setup](#setup)
 - [License](#license)
+
+---
+## Video Walkthrough 
+```https://youtu.be/oklFDtifxXI```
 
 ---
 

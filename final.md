@@ -19,11 +19,42 @@ This markdown file contains the final review of the jnst project.
 
 ---
 
-## Overview
+## General Requirements
+1. We developed a **Weather Forecast Application** that provides real-time weather updates and a 5-day forecast for a user-selected location. Below is an overview of the features and their state:  
 
-**General Requirements -** \
-1. Our team built a weather app. It is mostly complete and it is running. Features: 
-- [ ] 5 day weather forcast
+
+#### Features Overview
+- **User Account Management**:  
+  - Users can create accounts, log in, and access their personalized dashboards.  
+  - **Status**: Fully implemented and functional.
+- **Location Search**:  
+  - Users can search for weather information by city name.  
+  - **Status**: Fully implemented and functional.
+- **Current Weather Display**:  
+  - Displays temperature, weather conditions, and an icon representing the current weather.  
+  - **Status**: Fully implemented and functional.
+- **5-Day Weather Forecast**:  
+  - Displays basic forecast information for the next five days.  
+  - **Status**: Fully implemented and functional.
+- **Dashboard Customization**:  
+  - Users can personalize their dashboards by adding/removing widgets and saving favorite locations.  
+  - **Status**: Fully implemented and functional.
+- **Sharing Dashboards**:  
+  - Users can share their dashboards with others.  
+  - **Status**: Not implemented (saving functionality is incomplete).
+
+### Initial Requirements: Delivered vs. Missing
+| **Requirement**                               | **Status**           |
+|-----------------------------------------------|----------------------|
+| User account creation and login               | Delivered           |
+| Location-based weather search                 | Delivered           |
+| Display of current weather with icon          | Delivered           |
+| 5-day weather forecast display                | Delivered           |
+| Dashboard sharing                       | Partially delivered |
+| Dashboard customization                              | Delivered           |
+
+- **Summary**: We delivered most of the requirements except for the dashboard saving functionality, which is still under development. Our initial requirements captured the necessary details to guide the project effectively.
+
 
 
 ---

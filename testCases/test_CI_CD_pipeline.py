@@ -16,3 +16,11 @@ def test_ci_pipeline(client):
     response = client.get("/ci/test")  # Mock endpoint to trigger the test pipeline.
     assert response.status_code == 200  # Ensure the pipeline starts without errors.
     assert b"Pipeline executed successfully" in response.data  # Confirm the pipeline ran.
+
+def test_failed_build_notification(client):
+    """
+    Test that notifications are sent for failed builds or tests.
+    """
+    response = client.get("/ci/notify?status=failed")  # Mock a failed pipeline notification.
+    assert response.status_code == 200  # Check if the notification request succeeds.
+    assert b"Build failed. Notification sent." in response.data  # Confirm the failure was notified.

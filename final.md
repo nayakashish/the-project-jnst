@@ -19,8 +19,9 @@ This markdown file contains the final review of the jnst project.
 
 ---
 
-## General Requirements
-1. We developed a **Weather Forecast Application** that provides real-time weather updates and a 5-day forecast for a user-selected location. Below is an overview of the features and their state:  
+## General Requirements - 
+  ### 1.1 - Project Overview
+  We developed a **Weather Forecast Application** that provides real-time weather updates and a 5-day forecast for a user-selected location. Below is an overview of the features and their state:  
 
 
 #### Features Overview
@@ -43,7 +44,7 @@ This markdown file contains the final review of the jnst project.
   - Users can share their dashboards with others.  
   - **Status**: Not implemented (saving functionality is incomplete).
 
-### Initial Requirements: Delivered vs. Missing
+### 1.2 Initial Requirements: Delivered vs. Missing
 | **Requirement**                               | **Status**           |
 |-----------------------------------------------|----------------------|
 | User account creation and login               | Delivered           |
@@ -55,7 +56,7 @@ This markdown file contains the final review of the jnst project.
 
 - **Summary**: We delivered most of the requirements except for the dashboard sharing functionality, we did not get to start developing. Our initial requirements captured the necessary details to guide the project effectively.
 
-### System Architecture and Key Components
+### 1.3 - System Architecture and Key Components
 #### Architecture Overview
 The system follows a **Client-Server Architecture** with the following components:  
 1. **Front-End**:  
@@ -70,6 +71,20 @@ The system follows a **Client-Server Architecture** with the following component
 4. **External Weather API Integration**:  
    - **API**: OpenWeather API  
    - Provides real-time weather and forecast data.  
+
+#### Design Patterns
+- **Adapter Pattern**:  
+  - Used to interface with the OpenWeather API for consistent data formatting.  
+- **Singleton Pattern**:  
+  - Ensures a single instance of the API client for optimal performance.  
+- **Facade Pattern**:  
+  - Simplifies the interface for fetching and displaying weather data to the front-end.  
+
+### 1.4 Re-use Achieved
+We implemented modular and reusable components, such as:  
+- A centralized API client for weather data fetching.  
+- Reusable UI components for weather widgets and forecasts.  
+- [ PLEASE HELP HERE]
 
 
 ---

@@ -155,15 +155,19 @@ Reflections (Comment on the following items as a team):
 
 How did your project management work for the team?  What was the hardest thing and what would you do the same/differently the next time you plan to complete a project like this? 
 
-We needed more consistent development and communication. The system architecture was mildly changed as we started developing so we could have planned that better.
+* We needed more consistent development and communication. The system architecture was mildly changed as we started developing so we could have planned that better.
 
 Do you feel that your initial requirements were sufficiently detailed for this project?  Which requirements did you miss or overlook?
 
-The requirements were a guiding light in helping us imagine what the final product looked like. This help in how we to split up our wand develop 
+* The requirements were a guiding light in helping us imagine what the final product looked like. This helped us in our planning process ultimately leading to coding with less confusion.
 
 What did you miss in your initial planning for the project (beyond just the requirements)?
+
 What process did you use (ie Scrum, Kanabn..), how was it managed, and what was observed? 
+
 As a team, did you encounter issues with different team members developing with different IDEs?  In the future, would the team change anything in regard to the uniformity of development environments?
+
 If you were to estimate the efforts required for this project again, what would you consider?  (Really I am asking the team to reflect on the difference between what you thought it would take to complete the project vs what it actually took to deliver it).   
+
 What did your team do that you feel is unique or something that the team is especially proud of (was there a big learning moment that the team had in terms of gaining knowledge of a new concept/process that was implemented).
 How did AI impact the development of the project? 

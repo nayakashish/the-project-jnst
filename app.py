@@ -307,3 +307,22 @@ if __name__ == "__main__":
         except ValueError:
             print("Port Number not specified. Using default port 5000.")
     app.run(debug=True, port=port)
+
+@app.route("/ci/test")
+def ci_test():
+    return "Pipeline executed successfully", 200
+
+@app.route("/ci/notify")
+def ci_notify():
+    status = request.args.get('status', '')
+    if status == "failed":
+        return "Build failed. Notification sent.", 200
+    return "Unknown status", 400
+
+@app.route("/deployment/status")
+def deployment_status():
+    return "Deployment successful", 200
+
+@app.route("/db/connect")
+def db_connect():
+    return "Database connection successful", 200

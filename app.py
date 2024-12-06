@@ -266,7 +266,6 @@ def load_saved_locations():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    print("AKSJHFDLKAJDHFLKSJHF")
     if request.method == 'POST':
         # Retrieve data from the request form
         username = request.form['username']
@@ -358,6 +357,20 @@ def shared_dashboard(dash_id):
         weather_app_db.close()
 
     return render_template('shared_dashboard.html', userLoggedin=userLoggedin, locations=locations, username=username)
+
+@app.route('/share_dashboard')
+def share_dashboard():
+    userLoggedin = session.get('userLoggedin', False)
+    userName = session.get('userName', None)
+    if userLoggedin and userName:
+        weather_app_db.connect()
+        user_id = weather_app_db.get_userid(userName)
+        weather_app_db.close()
+        if user_id:
+            share_link = url_for('shared_dashboard', dash_id=user_id, _external=True)
+            alert_msg = f"Send your friends this link: {share_link}"
+            return redirect(url_for('dashboards', alert_msg=alert_msg))
+    return redirect(url_for('index'))
 
 if __name__ == "__main__":
     port = 5000  # Default port

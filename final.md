@@ -112,7 +112,7 @@ The application meets its primary goals, providing a robust and intuitive platfo
 - **Automation**:  
   - All tests were manually initiated using Pytest. No automated CI tools (e.g., Jenkins or GitHub Actions) were employed to run tests automatically.  
 
-### Reflection and Future Improvements
+#### Reflection and Future Improvements
 - **Effectiveness**:  
   The current approach effectively identified and resolved bugs. However, manually triggering tests was time-consuming.  
 - **Future Changes**:  
@@ -121,8 +121,8 @@ The application meets its primary goals, providing a robust and intuitive platfo
 
 ---
 
-## Branching Workflow
-### Workflow Implementation
+### 2.2 Branching Workflow
+#### Workflow Implementation
 - **Branch Organization**:  
   Separate branches were created for functional and non-functional tests, ensuring clarity and minimizing conflicts.  
 - **Code Review Process**:  
@@ -134,8 +134,8 @@ The application meets its primary goals, providing a robust and intuitive platfo
 
 ---
 
-## Deployment
-### Docker Readiness
+### 2.3 Deployment
+
 - **Docker Implementation**:  
   The project is fully Dockerized, with a **Dockerfile** and services defined for deployment. Key configurations include:  
   - A MySQL database service with defined environment variables for database setup (e.g., user credentials and database initialization).  
@@ -145,10 +145,10 @@ The application meets its primary goals, providing a robust and intuitive platfo
   2. The application services will automatically connect to the MySQL container.  
   3. Use GitHub Pages for front-end deployment.  
 
-### Deployment Testing
+#### Deployment Testing
 The Dockerized environment was tested and is functional, ensuring smooth deployment on any compatible system.  
 
-### Future Enhancements
+#### Future Enhancements
 To enhance deployment reliability, consider integrating **Continuous Deployment tools** like Docker Hub or Kubernetes for scaling and automated updates.
 
 

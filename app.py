@@ -299,15 +299,6 @@ def register():
     # Render the registration form for GET requests
     return render_template('register.html')
 
-if __name__ == "__main__":
-    port = 5000  # Default port
-    if len(sys.argv) > 1:
-        try:
-            port = int(sys.argv[1])
-        except ValueError:
-            print("Port Number not specified. Using default port 5000.")
-    app.run(debug=True, port=port)
-
 @app.route("/ci/test")
 def ci_test():
     return "Pipeline executed successfully", 200
@@ -326,3 +317,12 @@ def deployment_status():
 @app.route("/db/connect")
 def db_connect():
     return "Database connection successful", 200
+
+if __name__ == "__main__":
+    port = 5000  # Default port
+    if len(sys.argv) > 1:
+        try:
+            port = int(sys.argv[1])
+        except ValueError:
+            print("Port Number not specified. Using default port 5000.")
+    app.run(debug=True, port=port)

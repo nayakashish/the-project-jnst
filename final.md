@@ -1,7 +1,7 @@
 # Weather App Final Review 
 ## Milestone #7 - Final Delivery
 
-This markdown file contains the final review of the jnst project.
+This markdown file contains the final review of the JNST project.
 
 #### Project Members
  - Jan Suratos
@@ -10,21 +10,27 @@ This markdown file contains the final review of the jnst project.
  - Ashish Nayak
 
 ## Table of Contents
+- [Project Members](#project-members)
 - [Video Walkthrough](#video-walkthrough)
-- [1 - General Requirements](#General-Requirements)
-- [Requirements](#requirements)
-- [Proto Personas](#proto-personas)
-- [Use Cases](#use-cases)
-- [Setup](#setup)
-- [License](#license)
-
+- [General Review](#general-review)
+  - [Project Overview](#11---project-overview)
+  - [Initial Requirements: Delivered vs. Missing](#12---initial-requirements-delivered-vs-missing)
+  - [System Architecture and Key Components](#13---system-architecture-and-key-components)
+  - [Re-use Achieved](#14---re-use-achieved)
+  - [Remaining Backlog Tasks](#15---remaining-backlog-tasks)
+  - [Weather Application Summary](#16---weather--application-summary)
+- [CI/CD Report](#2---cicd-report)
+  - [Testing Strategies](#21-testing-strategies)
+  - [Branching Workflow](#22-branching-workflow)
+  - [Deployment](#23-deployment)
+- [Reflections](#reflections)
 ---
 ## Video Walkthrough 
 ```https://youtu.be/oklFDtifxXI```
 
 ---
 
-## 1 - General Requirements
+## General Review
   ### 1.1 - Project Overview
   Our team developed a web-based **Weather Forecast Application** that provides user with real-time weather data and a 5-day forecast for the user-selected location. Below is an overview of the features and their state:  
 
@@ -52,7 +58,7 @@ This markdown file contains the final review of the jnst project.
   - Users can share their dashboards with others.  
   - **Status**: Fully implemented and functional.
 
-### 1.2 Initial Requirements: Delivered vs. Missing
+### 1.2 - Initial Requirements: Delivered vs. Missing
 | **Requirement**                               | **Status**           |
 |-----------------------------------------------|----------------------|
 | User account creation and login               | Delivered           |
@@ -93,7 +99,7 @@ The system follows a **Client-Server Architecture** with the following component
   - Simplifies the interface for fetching and displaying weather data to the front-end.  
   - The weather_app_DB.py also utilizes facade pattern as it hides the complexity of interacting with MySql from app.py and works as a black box in the perspective of app.py.
 
-### 1.4 Re-use Achieved
+### 1.4 - Re-use Achieved
 We implemented modular and reusable components, such as:  
 - A centralized API client for weather data fetching.  
 - Reusable UI components for weather widgets and forecasts.  
@@ -111,10 +117,10 @@ This approach facilitated clean code, reduced redundancy, and allowed for easier
    - The dashboard cards do not hold their position and will move on their own. This may be due to the way the db queries for saved locations.
    - Edge cases: There are some missed edge cases found that were not considered such as certain page routes.
 
-## Weather Forecast Application Summary
-The application meets its primary goals, providing a robust and intuitive platform for users to access weather information and forecasts. While some minor feature remains incomplete, the core functionality is operational and demonstrates the potential for real-world use.
+### 1.6 - Weather  Application Summary
 
----
+The application meets its primary goals, providing a robust and intuitive platform for users to access weather information and forecasts. While some minor features remain incomplete, the core functionality is operational and demonstrates the potential for real-world use.
+
 
 ## 2 - CI/CD Report
 
@@ -203,7 +209,13 @@ The application meets its primary goals, providing a robust and intuitive platfo
 * An issue however, was the initial setup for the environment. Installing python and getting all the dependencies, and launching the appliation initially was not documented very well. But through communication and help sessions between members we encoutered minimal further issues.
 
 #### If you were to estimate the efforts required for this project again, what would you consider?  (Really I am asking the team to reflect on the difference between what you thought it would take to complete the project vs what it actually took to deliver it).   
-Our team all agrees that if we were to look at the project as we see it now we would realize the changes we would make. We did not account for the effort and mostly time it would take in testing, developing, reviewing and launching. With the time constraint realized now, we would have reduced or removed some of the functional requirements such as dark mode, and put more emphasis on initial communication, planning, and documentation.
+Our team all agrees that we definitely underestimated the effort the project would take. We did not account for the effort and mostly time it would take in testing, developing, reviewing and launching. With the time constraint realized now, we would have reduced or removed some of the functional requirements such as dark mode, and put more emphasis on initial communication, planning, and documentation so that we could have had more consistent development right from the start. 
 
 #### What did your team do that you feel is unique or something that the team is especially proud of (was there a big learning moment that the team had in terms of gaining knowledge of a new concept/process that was implemented).
-How did AI impact the development of the project? 
+ * Utilizing the scrum-like proposed process really helped us pick up from the reading break and begin consistently implementing features. This change of process allowed members to stay up to date with the project status and what was required by a set date. 
+
+#### How did AI impact the development of the project? 
+GitHub Copilot and ChatGPT were both utilized through the development of this project. 
+ * Both systems helped not only in understanding components or proper syntax, but helped in generating code snippets for use in the application. Although the code snippets always required a code inspection by the team member and some refactoring, it greatly helped in generating the basic code structure and syntax. 
+ * The systems also greatly aided in debugging errors and providing potential solutions for problems. 
+ * Outside of development, these resources also aided in some problems with git and some errors we encountered during the git integration that some of us are new to.

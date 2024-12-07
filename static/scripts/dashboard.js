@@ -1,9 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
+    function getQueryParameter(name) { //for code reuse
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    
+    const alertMSG = getQueryParameter('alert_msg');
+    if (alertMSG) {
+        alert(alertMSG);
+    }
+
   const API_KEY = 'b5958d9b3908799da10532d190c26c36'; // Replace with your OpenWeather API key
   const WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather';
 
   const addButtons = document.querySelectorAll('.add-btn');
   const dashboardCards = document.querySelectorAll('.dashboard-card');
+
+  const removeButtons = document.querySelectorAll('.remove-btn');
+  removeButtons.forEach(button => {
+      button.addEventListener('click', () => {
+          const cityName = button.getAttribute('data-city');
+          window.location.href = `/remove_location?city=${(cityName)}`;
+      });
+  });
 
   // Function to fetch and populate weather data for the city
   async function getWeather(city, card) {
@@ -43,11 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
 
       // Add event listener for the "Remove" button
-      const removeButton = card.querySelector('.remove-btn');
-      removeButton.addEventListener('click', () => {
-          // Reset the card to its original state with just the "Add" button
-          resetCardToAddButton(card);
-      });
+     
   }
 
   // Function to reset the card to the "Add" button state
@@ -61,7 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
       addButton.addEventListener('click', () => {
           const city = prompt('Enter city name:');
           if (city) {
-              getWeather(city, card);
+            window.location.href = `/add_location?city=${(city)}`;
+            //   getWeather(city, card);
           }
       });
   }
@@ -71,8 +87,83 @@ document.addEventListener('DOMContentLoaded', () => {
       button.addEventListener('click', () => {
           const city = prompt('Enter city name:');
           if (city) {
-              getWeather(city, dashboardCards[index]);
+            window.location.href = `/add_location?city=${(city)}`;
           }
       });
   });
+
+   // Function to get the first available (empty) card to populate with weather data
+   function getAvailableCard() {
+    return Array.from(dashboardCards).find(card => !card.querySelector('h4'));
+}
+
+ // Load saved locations from the database (via Flask API)
+ async function loadSavedLocations() {
+    try {
+        const response = await fetch('/load_saved_locations');
+        if (response.ok) {
+            const locations = await response.json(); // Expect an array of cities
+            locations.forEach(city => {
+                const card = getAvailableCard();
+                if (card) {
+                    getWeather(city, card);
+                }
+            });
+        } else {
+            console.error('Failed to load saved locations');
+        }
+    } catch (error) {
+        console.error('Error loading locations:', error);
+    }
+}
+
+// Add a city to the saved locations (via Flask API)
+async function addLocation(city) {
+    try {
+        const response = await fetch('/add_location', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ city }),
+        });
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Error adding location:', errorData);
+            alert(`Failed to add ${city}: ${errorData.message}`);
+        }
+    } catch (error) {
+        console.error('Error adding location:', error);
+        alert('Failed to add the location.');
+    }
+}
+
+// Remove a city from the saved locations (via Flask API)
+async function removeLocation(city) {
+    try {
+        const response = await fetch('/remove_location', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ city }),
+        });
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Error removing location:', errorData);
+            alert(`Failed to remove ${city}: ${errorData.message}`);
+        }
+    } catch (error) {
+        console.error('Error removing location:', error);
+        alert('Failed to remove the location.');
+    }
+}
+
+// Initial loading of saved locations
+loadSavedLocations();
+
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+
 });

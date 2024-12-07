@@ -14,7 +14,7 @@
     {% else%}
     <a href="/index" class="back-btn">Back to Home</a>  <!-- Back Button -->
     {% endif %}
-    <h3>Dashboard</h3>
+    <h3>{{username}}'s Dashboard</h3>
     <div class="dashboard-container">
       {% for location in locations %}
       <div class="dashboard-card">
@@ -23,18 +23,15 @@
         <span>{{ location.date }}</span>
         <span>{{ location.temperature }}°C</span>
         <img src="https://openweathermap.org/img/wn/{{ location.weather_icon }}.png" alt="Weather Icon" class="weather-icon">
-        <button class="remove-btn" data-city="{{ location.name }}">Remove</button>
       </div>
       {% endfor %}
       <!-- Placeholder cards for adding new locations -->
       {% for _ in range(5 - locations|length) %}
       <div class="dashboard-card">
-        <button class="add-btn"></button>
       </div>
       {% endfor %}
     </div>
     <br>
-    <a href="/share_dashboard" class="share-btn">Share Dashboard</a>
   </section>
   
   <script src="../static/scripts/dashboard.js"></script>

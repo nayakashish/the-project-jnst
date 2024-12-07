@@ -213,6 +213,7 @@ Our team all agrees that we definitely underestimated the effort the project wou
 
 #### What did your team do that you feel is unique or something that the team is especially proud of (was there a big learning moment that the team had in terms of gaining knowledge of a new concept/process that was implemented).
  * Utilizing the scrum-like proposed process really helped us pick up from the reading break and begin consistently implementing features. This change of process allowed members to stay up to date with the project status and what was required by a set date. 
+ * We used a four layer architecture model where each layer was essentially (UI, front-end server, back-end server and database). Distinguishing between the two servers allowed each to focus on their own task (front-end server managing UI logic and backend server connecting to database). This model prevented the god class antipattern which would have happened had we not used this approach.
 
 #### How did AI impact the development of the project? 
 GitHub Copilot and ChatGPT were both utilized through the development of this project. 

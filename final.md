@@ -121,7 +121,7 @@ The application meets its primary goals, providing a robust and intuitive platfo
 ### 2.1 Testing Strategies
 #### Implemented Strategies
 - **Test Plan**:  
-  We developed a test plan addressing both functional and non-functional requirements.  
+  We developed a [test plan](/Documentation/Models-TestPlan/TestPlanAtDesignStage.pdf) addressing both functional and non-functional requirements. Linked [here](/Documentation/Models-TestPlan/TestPlanAtProjectDueDate.pdf) is the test plan at project completion.
 - **Testing Tools and Frameworks**:  
   - **Pytest**: Used extensively to test frontend and backend, including:
     - **Functional Tests**: User requirements, weather data retrival, dashboard customization, page contents, logged-in user vs logged-out user functionality.  
@@ -182,6 +182,7 @@ The application meets its primary goals, providing a robust and intuitive platfo
 How did your project management work for the team?  What was the hardest thing and what would you do the same/differently the next time you plan to complete a project like this? 
 
 * We needed more consistent development and communication. The system architecture was mildly changed as we started developing so we could have planned that better.
+* 
 
 Do you feel that your initial requirements were sufficiently detailed for this project?  Which requirements did you miss or overlook?
 

@@ -195,11 +195,15 @@ The application meets its primary goals, providing a robust and intuitive platfo
 * As well, halfway throughout the project we implemented a scrum-like process which greatly aided the team in  development and communication. Had we initially planned for this right from the start, the initial weeks of the project would have progressed smoother and more consistently.
 
 #### What process did you use (ie Scrum, Kanabn..), how was it managed, and what was observed? 
+* Our team utilized the GitHub Project KanBan board. This board tracked Backlog, In-Progress, Review, and Completed tasks. This board was super well received by the team members and allowed us to accurately see what was currently worked on, what was next and also who was working on what. The kanban board also allowed us to see what was actively in review and prompted team members to visit the PR to complete reviews. 
+* During the reading break our team lacked in communication and development, so on the Monday we all returned a Scrum-like process was proposed and incorporated into our flow. This process included near-daily check-ins through our team group chat and provided weekly goals and tasks for each team member. This workflow enabled us to speed up development and communication between team members.
 
+#### As a team, did you encounter issues with different team members developing with different IDEs?  In the future, would the team change anything in regard to the uniformity of development environments?
+* In our team, all members used VS Code, however some were on Apple Machines and some on Windows. This was not an issue in deploying however, and development across environments was smooth. 
+* An issue however, was the initial setup for the environment. Installing python and getting all the dependencies, and launching the appliation initially was not documented very well. But through communication and help sessions between members we encoutered minimal further issues.
 
-As a team, did you encounter issues with different team members developing with different IDEs?  In the future, would the team change anything in regard to the uniformity of development environments?
+#### If you were to estimate the efforts required for this project again, what would you consider?  (Really I am asking the team to reflect on the difference between what you thought it would take to complete the project vs what it actually took to deliver it).   
+Our team all agrees that if we were to look at the project as we see it now we would realize the changes we would make. We did not account for the effort and mostly time it would take in testing, developing, reviewing and launching. With the time constraint realized now, we would have reduced or removed some of the functional requirements such as dark mode, and put more emphasis on initial communication, planning, and documentation.
 
-If you were to estimate the efforts required for this project again, what would you consider?  (Really I am asking the team to reflect on the difference between what you thought it would take to complete the project vs what it actually took to deliver it).   
-
-What did your team do that you feel is unique or something that the team is especially proud of (was there a big learning moment that the team had in terms of gaining knowledge of a new concept/process that was implemented).
+#### What did your team do that you feel is unique or something that the team is especially proud of (was there a big learning moment that the team had in terms of gaining knowledge of a new concept/process that was implemented).
 How did AI impact the development of the project? 

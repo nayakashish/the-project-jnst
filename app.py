@@ -303,7 +303,28 @@ def register():
 
     # Render the registration form for GET requests
     return render_template('register.html')
+# CI tests
 
+@app.route("/ci/test")
+def ci_test():
+    return "Pipeline executed successfully", 200
+
+@app.route("/ci/notify")
+def ci_notify():
+    status = request.args.get('status', '')
+    if status == "failed":
+        return "Build failed. Notification sent.", 200
+    return "Unknown status", 400
+
+@app.route("/deployment/status")
+def deployment_status():
+    return "Deployment successful", 200
+
+@app.route("/db/connect")
+def db_connect():
+    return "Database connection successful", 200
+
+# shared dashboard functionality
 @app.route('/shared_dashboard/dash_<dash_id>')
 def shared_dashboard(dash_id):
     userLoggedin = session.get('userLoggedin', False)
@@ -374,6 +395,7 @@ def share_dashboard():
             alert_msg = f"Send your friends this link: {share_link}"
             return redirect(url_for('dashboards', alert_msg=alert_msg))
     return redirect(url_for('index'))
+
 
 if __name__ == "__main__":
     port = 5000  # Default port

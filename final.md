@@ -179,18 +179,23 @@ The application meets its primary goals, providing a robust and intuitive platfo
 
 ## Reflections:
 
-How did your project management work for the team?  What was the hardest thing and what would you do the same/differently the next time you plan to complete a project like this? 
+#### How did your project management work for the team?  What was the hardest thing and what would you do the same/differently the next time you plan to complete a project like this? 
 
 * We needed more consistent development and communication. The system architecture was mildly changed as we started developing so we could have planned that better.
-* 
+* If we were to do the same project again, next time we would place more priority on communication and understanding of the requirements and final goal. As the features were developed by different team memebers, the description of how it worked and would connect with other components lacked.
+* Placing more importance on the initial planning, documentation, and communication would have enabled us to implement the features more seamlessly as we would not have needed to confirm details with one another so frequently.
 
-Do you feel that your initial requirements were sufficiently detailed for this project?  Which requirements did you miss or overlook?
+#### Do you feel that your initial requirements were sufficiently detailed for this project?  Which requirements did you miss or overlook?
 
 * The requirements were a guiding light in helping us imagine what the final product looked like. This helped us in our planning process ultimately leading to coding with less confusion.
+* Some functional requirements could have included further detail so each team member would have knowledge on how the feature would function, regardless of whether they implemented it or not. 
 
-What did you miss in your initial planning for the project (beyond just the requirements)?
+#### What did you miss in your initial planning for the project (beyond just the requirements)?
+* If we had a prototype or mockup diagram of what the UI would look like and how it would funciton would have been very useful as the team would have a shared vision of what the app would look like. This would have prevented some button placement conflicts that we ran into during development. 
+* As well, halfway throughout the project we implemented a scrum-like process which greatly aided the team in  development and communication. Had we initially planned for this right from the start, the initial weeks of the project would have progressed smoother and more consistently.
 
-What process did you use (ie Scrum, Kanabn..), how was it managed, and what was observed? 
+#### What process did you use (ie Scrum, Kanabn..), how was it managed, and what was observed? 
+
 
 As a team, did you encounter issues with different team members developing with different IDEs?  In the future, would the team change anything in regard to the uniformity of development environments?
 

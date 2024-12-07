@@ -1,3 +1,4 @@
+#test database (maintainabilty)
 import pytest
 from weather_app_db import app_DB
 

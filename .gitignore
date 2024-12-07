@@ -5,3 +5,8 @@ src/scripts/test.js
 __pycache__
 .pytest_cache
 .DS_Store
+test_cases/tests/__pycache__/test_AuthIntegration.cpython-39-pytest-8.3.3.pyc
+test_cases/tests/__pycache__/test_dashboard_config.cpython-39-pytest-8.3.3.pyc
+test_cases/tests/__pycache__/test_security.cpython-39-pytest-8.3.3.pyc
+test_cases/tests/__pycache__/test_user_features.cpython-39-pytest-8.3.3.pyc
+test_cases/tests/__pycache__/test_weather_data_api.cpython-39-pytest-8.3.3.pyc

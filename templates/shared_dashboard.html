@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../static/styles/dashboard.css">
+</head>
+<body>
+  <section class="dashboard">
+
+    {% if locations %}
+    <a href="/index?location={{ locations[0].name }}" class="back-btn">Back to Home</a>  <!-- Back Button -->
+    {% else%}
+    <a href="/index" class="back-btn">Back to Home</a>  <!-- Back Button -->
+    {% endif %}
+    <h3>{{username}}'s Dashboard</h3>
+    <div class="dashboard-container">
+      {% for location in locations %}
+      <div class="dashboard-card">
+        <h4>{{ location.name }}</h4>
+        <span>{{ location.time }}</span>
+        <span>{{ location.date }}</span>
+        <span>{{ location.temperature }}°C</span>
+        <img src="https://openweathermap.org/img/wn/{{ location.weather_icon }}.png" alt="Weather Icon" class="weather-icon">
+      </div>
+      {% endfor %}
+      <!-- Placeholder cards for adding new locations -->
+      {% for _ in range(5 - locations|length) %}
+      <div class="dashboard-card">
+      </div>
+      {% endfor %}
+    </div>
+    <br>
+  </section>
+  
+  <script src="../static/scripts/dashboard.js"></script>
+
+  <script>
+    // Call loadSavedLocations function after page loads
+    document.addEventListener('DOMContentLoaded', loadSavedLocations);
+  </script>
+
+</body>
+</html>

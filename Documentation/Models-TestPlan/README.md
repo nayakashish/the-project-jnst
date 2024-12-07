@@ -9,7 +9,7 @@
 - [Test plan](#test-plan)
 
 
-![architectureDiagram](../images/architectureDiagram.png)
+![architectureDiagram](../images/architectureDiagram(Updated).png)
 
 ## Architecture diagram
 Presentation Layer (Manages front end):
@@ -32,12 +32,12 @@ Data Layer: Handles data storage
 
 ---
 ## Sequence Diagram:
-![SequenceDiagram](../images/SequenceDiagram.png)
+![SequenceDiagram](../images/SequenceDiagram(Updated).png)
 
 ---
 
 ## DFD
-![SequenceDiagram](../images/dataFlowDiagram.png)
+![SequenceDiagram](../images/dataFlowDiagram(Updated).png)
 ---
 ## Test plan
 ![testPlan1](../images/TestPlan1.png)

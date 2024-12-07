@@ -1,4 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
+    function getQueryParameter(name) { //for code reuse
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    
+    const alertMSG = getQueryParameter('alert_msg');
+    if (alertMSG) {
+        alert(alertMSG);
+    }
+
   const API_KEY = 'b5958d9b3908799da10532d190c26c36'; // Replace with your OpenWeather API key
   const WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather';
 

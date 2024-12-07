@@ -133,6 +133,12 @@ def logout():
 def dashboards():
     userLoggedin = session.get('userLoggedin', False)
     userName = session.get('userName', None)
+    userId = session.get('userId', 0)
+    if userLoggedin:
+        weather_app_db.connect()
+        userId = weather_app_db.get_userid(userName)
+        session['userId'] = userId
+        weather_app_db.close()
     locations = None
 
     if userLoggedin:
@@ -181,7 +187,7 @@ def dashboards():
         finally:
             weather_app_db.close()
 
-    return render_template('dashboard.html', userLoggedin=userLoggedin, locations=locations)
+    return render_template('dashboard.html', userLoggedin=userLoggedin, locations=locations, userId=userId)
 
 @app.route("/weather", methods=["GET"])
 def get_weather():
@@ -260,7 +266,6 @@ def load_saved_locations():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    print("AKSJHFDLKAJDHFLKSJHF")
     if request.method == 'POST':
         # Retrieve data from the request form
         username = request.form['username']
@@ -298,6 +303,77 @@ def register():
 
     # Render the registration form for GET requests
     return render_template('register.html')
+
+@app.route('/shared_dashboard/dash_<dash_id>')
+def shared_dashboard(dash_id):
+    userLoggedin = session.get('userLoggedin', False)
+    if (not userLoggedin):
+        return redirect(url_for('index', alert_msg="You must be logged in. Redirecting to index!"))
+
+    locations = None
+    try:
+        weather_app_db.connect()
+        # user_id = weather_app_db.get_userName(dash_id)  # Retrieve user ID
+        locations = weather_app_db.get_dashboardLocations(dash_id)
+        print(dash_id)
+
+        username = weather_app_db.get_user_info(dash_id)['name'] #get username from dash
+    
+        if locations:
+            locations = locations[:5]  # Fetch up to 5 saved locations
+            for location in locations:
+                city_weather = fetch_weather(location['name'])
+                tz_offset = 0
+                if city_weather:
+                    main_temp = round(city_weather.get('main', {}).get('temp'))
+                    weather_icon = city_weather.get('weather', [{}])[0].get('icon', '01d')
+                    tz_offset = city_weather.get('timezone', 0)
+                else:
+                    main_temp = "N/A"
+                    weather_icon = '01d'  # Default icon if weather data is unavailable
+
+                pst_offset = timedelta(hours=-8)  # PST is UTC-8
+                current_date = (datetime.now(timezone.utc) + pst_offset).strftime("%m/%d/%Y")
+
+                offset = timedelta(seconds=tz_offset)
+
+                # Apply the offset to the UTC time and convert to PST
+                local_time = datetime.now(timezone.utc) + offset
+                local_time_pst = local_time.astimezone(timezone(timedelta(hours=0)))
+                current_time = local_time_pst.strftime("%-I:%M %p")
+
+                # Add weather data and time/date to the location dictionary
+                location['temperature'] = main_temp
+                location['weather_icon'] = weather_icon
+                location['time'] = current_time
+                location['date'] = current_date
+
+
+            print("Fetched locations for shared dashboard:", locations)
+        else:
+            locations = []
+
+        print(locations)
+    except Exception as e:
+        print("Error fetching locations:", e)
+    finally:
+        weather_app_db.close()
+
+    return render_template('shared_dashboard.html', userLoggedin=userLoggedin, locations=locations, username=username)
+
+@app.route('/share_dashboard')
+def share_dashboard():
+    userLoggedin = session.get('userLoggedin', False)
+    userName = session.get('userName', None)
+    if userLoggedin and userName:
+        weather_app_db.connect()
+        user_id = weather_app_db.get_userid(userName)
+        weather_app_db.close()
+        if user_id:
+            share_link = url_for('shared_dashboard', dash_id=user_id, _external=True)
+            alert_msg = f"Send your friends this link: {share_link}"
+            return redirect(url_for('dashboards', alert_msg=alert_msg))
+    return redirect(url_for('index'))
 
 if __name__ == "__main__":
     port = 5000  # Default port

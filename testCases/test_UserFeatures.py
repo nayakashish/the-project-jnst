@@ -96,7 +96,7 @@ def test_logged_in_user_sees_saved_locations_weather(logged_in_client):
     """
     response = logged_in_client.get('/index')
     assert response.status_code == 200
-    assert b'New York' in response.data
+    #assert b'New York' in response.data #This was removed since the saved locations will show locations 2,3,4 and main will show 1
     assert b'Los Angeles' in response.data
     assert b'Chicago' in response.data
 
@@ -121,3 +121,19 @@ def test_logged_in_user_with_no_locations(logged_in_client):
     assert b'No saved locations' in response.data
     assert b'Follow the link below to add locations!' in response.data
 
+def test_shared_dashboard(logged_in_client):
+    """
+    Test that the shared dashboard displays the correct locations for the given dash_id.
+    """
+    response = logged_in_client.get('/shared_dashboard/dash_1') #enter the url for a shared dash for the logged_in_client
+    assert response.status_code == 200
+    assert b'New York' in response.data
+    assert b'Los Angeles' in response.data
+    assert b'Chicago' in response.data
+    
+def test_non_logged_in_user_cannot_access_shared_dashboard(client):
+    """
+    Test that a non-logged-in user cannot access the shared dashboard.
+    """
+    response = client.get('/shared_dashboard/dash_1')
+    assert response.status_code == 302  # Redirect to login page

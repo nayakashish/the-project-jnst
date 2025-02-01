@@ -1,4 +1,6 @@
 # Weather App Final Review 
+![Weather App Screenshot](/Documentation/images/310index.jpg)
+
 ## Milestone #7 - Final Delivery
 
 This markdown file contains the final review of the JNST project.

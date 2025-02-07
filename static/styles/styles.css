@@ -14,12 +14,13 @@ body {
     justify-content: center;
     align-items: flex-start;
     padding: 3rem 0;
-    height: 100vh;
+    height: 100vh; /* Adjust to 100vh for full height */
 }
 
+/* Container Class */
 .container {
     width: 90%;
-    max-width: 1000px;
+    max-width: 1200px;
     background: #e1f5fe;
     padding: 20px;
     border-radius: 20px;
@@ -27,8 +28,8 @@ body {
     flex-direction: column;
     gap: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    justify-content: flex-start; /* Ensure content starts from the top */
 }
-
 
 /* Header Section */
 header {
@@ -37,7 +38,9 @@ header {
     justify-content: space-between;
     padding: 10px 20px;
     background-color: inherit;
+    gap: 15px;
 }
+
 
 .header-middle {
     flex: 1;
@@ -409,44 +412,12 @@ input:checked + .slider::before {
 .slider:hover {
     background-color: #bbb; /* Slightly darker */
 }
-}/* General Reset */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto', Geneva, Tahoma, sans-serif;
-}
-
-/* Body and Container */
-body {
-    background-color: white;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 3rem 0;
-    height: 100vh;
-}
-
-.container {
-    width: 90%;
-    max-width: 1200px;
-    background: #e1f5fe; /* Soft light blue */
-    padding: 20px;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-
-/* Header Section */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
 }
 
 .search-bar {
@@ -781,3 +752,32 @@ header {
   .temperature {
     text-align: right; /* Ensures right alignment of temperature */
   }
+  
+/* License Section */
+.license-section {
+    position:fixed;
+    bottom:0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+    display: block; /* Block-level element to ensure full width */
+    clear: both; /* Prevent it from floating */
+    margin-top: 20px; /* Space between the app and the license section */
+}
+
+/* Center the text and handle the links */
+.license-section p {
+    margin: 0;
+    margin-right: 5px;
+}
+
+.license-section a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+.license-section a:hover {
+    text-decoration: underline;
+}

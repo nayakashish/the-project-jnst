@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleUnitBtn = document.getElementById('toggleUnit');
 
     // OpenWeather API details
-    const API_KEY = 'b5958d9b3908799da10532d190c26c36'; // Replace with your actual OpenWeather API key
+    const API_KEY = '5f84c1fa89735b4604dcb4bc200da0e3';
     const WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather';
     const FORECAST_URL = 'https://api.openweathermap.org/data/2.5/forecast';
 

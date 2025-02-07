@@ -15,7 +15,8 @@ app = Flask(__name__)
 app.secret_key = 'my_secret_key'
 
 # OpenWeather API key (To be added)
-API_KEY = os.getenv("API_KEY")
+API_KEY = "5f84c1fa89735b4604dcb4bc200da0e3"
+print(f"Got API {API_KEY}")
 weather_app_db = app_DB()
 
 # Reusable function to get weather data
@@ -24,7 +25,10 @@ def fetch_weather(city):
     response = requests.get(url)
 
     if response.status_code != 200:
-        return None  # or maybe change to raise an exception if needed?
+      print(f"fetch_weather response code != 200. Status code: {response.status_code}")
+      print(f"Response content: {response.text}")  # This will show the raw response body
+  
+      return None  # or maybe change to raise an exception if needed?
 
     return response.json()
 
@@ -57,13 +61,14 @@ def index():
         if locations:
             locations = locations[1:4] # get locations 2, 3, and 4 from user's dashboard
             for location in locations: #for each get temps and add to location array to be sent to frontend
+                print(f"Location: {location}")
                 city_weather = fetch_weather(location['name'])
                 if city_weather:
                     main_temp = city_weather.get('main', {}).get('temp')
                     location['temperature'] = round(main_temp)
                 else:
                     print("Failed to fetch weather data")
-                    return jsonify({"error": "Failed to fetch weather data"}), 500
+                    # return jsonify({"error": "Failed to fetch weather data"}), 500
         else:
             locations = None
         weather_app_db.close()

@@ -54,7 +54,7 @@
         <!-- Current Weather Section -->
         <section class="current-weather">
             <div class="weather-info-left">
-                <h2 id="cityName">Athens</h2>
+		<h2 id="cityName">Athens</h2>
                 <h1 id="time">11<span class="blinking">:</span>30</h1>
                 <p id="date">Thursday, 31 Aug</p>
             </div>
@@ -110,27 +110,27 @@
                 <div class="forecast-container">
                     <div class="forecast-day">
                         <span>Mon</span>
-                        <span>10°C - 15°C</span>
+                        <span>10°C to 15°C</span>
                         <img src="https://openweathermap.org/img/wn/04d.png" alt="Cloudy" class="weather-icon2">
                     </div>
                     <div class="forecast-day">
                         <span>Tue</span>
-                        <span>12°C - 18°C</span>
+                        <span>12°C to 18°C</span>
                         <img src="https://openweathermap.org/img/wn/01d.png" alt="Sunny" class="weather-icon2">
                     </div>
                     <div class="forecast-day">
                         <span>Wed</span>
-                        <span>8°C - 13°C</span>
+                        <span>8°C to 13°C</span>
                         <img src="https://openweathermap.org/img/wn/10d.png" alt="Rainy" class="weather-icon2">
                     </div>
                     <div class="forecast-day">
                         <span>Thu</span>
-                        <span>9°C - 14°C</span>
+                        <span>9°C to 14°C</span>
                         <img src="https://openweathermap.org/img/wn/02d.png" alt="Partly Cloudy" class="weather-icon2">
                     </div>
                     <div class="forecast-day">
                         <span>Fri</span>
-                        <span>7°C - 11°C</span>
+                        <span>7°C to 11°C</span>
                         <img src="https://openweathermap.org/img/wn/03d.png" alt="Cloudy" class="weather-icon2">
                     </div>
                 </div>
@@ -186,8 +186,10 @@
             <img src="settings-icon.png" alt="Settings Icon">
         </div> -->
     </div>
-
-    <script>
+      <!--  <div class="license-section">
+        <p xmlns:cc="http://creativecommons.org/ns#">Check out the <a href="https://github.com/nayakashish/the-project-jnst">source code</a> at Github. This work is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0</a></p>
+      </div> -->
+   <script>
         const dbConnectionFailed = {{ db_connection_failed|tojson|safe }}; //This line shows error in html, however it is working with flask.
     </script>
     <script src="../static/scripts/main.js"></script>

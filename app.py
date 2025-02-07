@@ -4,12 +4,12 @@
 import os, sys
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session
 import requests
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from weather_app_db import app_DB
 # Get current time and date in PST
 from datetime import datetime, timedelta, timezone
 # Load environment variables from .env file
-load_dotenv()
+#load_env()
 
 app = Flask(__name__)
 app.secret_key = 'my_secret_key'
@@ -398,10 +398,10 @@ def share_dashboard():
 
 
 if __name__ == "__main__":
-    port = 5000  # Default port
+    port = 80  # Default port
     if len(sys.argv) > 1:
         try:
             port = int(sys.argv[1])
         except ValueError:
             print("Port Number not specified. Using default port 5000.")
-    app.run(debug=True, port=port)
+    app.run(debug=False, host="0.0.0.0", port=port)

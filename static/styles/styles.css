@@ -755,16 +755,16 @@ input:checked + .slider::before {
   
 /* License Section */
 .license-section {
-    position:fixed;
-    bottom:0;
     width: 100%;
+    box-sizing: border-box;
+    background-color:#81d4fa;
+    border-radius: 7px;
     text-align: center;
-    padding: 10px;
-    font-size: 14px;
-    color: #333;
+    padding: 3px;
+    font-size: 11px;
+    color: #ffffff;
     display: block; /* Block-level element to ensure full width */
     clear: both; /* Prevent it from floating */
-    margin-top: 20px; /* Space between the app and the license section */
 }
 
 /* Center the text and handle the links */
@@ -774,8 +774,8 @@ input:checked + .slider::before {
 }
 
 .license-section a {
-    text-decoration: none;
-    color: #007BFF;
+    text-decoration:underline;
+    color: #03a9f4;
 }
 
 .license-section a:hover {

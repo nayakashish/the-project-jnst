@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
             dayElement.classList.add('forecast-day');
             dayElement.innerHTML = `
                 <span>${dayName}</span>
-                <span>${minTemp}${unitSymbol} - ${maxTemp}${unitSymbol}</span>
+                <span>${minTemp}${unitSymbol} to ${maxTemp}${unitSymbol}</span>
                 <img src="${iconBaseURL}${icon}.png" alt="Weather Icon" class="weather-icon">
             `;
             fiveDayForecastContainer.appendChild(dayElement);

@@ -30,8 +30,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const fiveDayForecastContainer = document.querySelector('.five-day-forecast .forecast-container');
     const toggleUnitBtn = document.getElementById('toggleUnit');
 
+    const darkModeSwitch = document.getElementById('darkModeSwitch');
+    let darkModeEnabled = false;
+    darkModeSwitch.addEventListener('change', function () {
+        darkModeEnabled = !darkModeEnabled;
+        console.log('Dark mode toggle clicked'); // This ensures the event is firing
+        console.log(darkModeEnabled)
+
+        if(darkModeEnabled) {
+            enableDarkMode();
+        } else {
+            disableDarkMode();
+        }
+
+        
+    });
+  
+
     // OpenWeather API details
-    const API_KEY = '5f84c1fa89735b4604dcb4bc200da0e3';
+    const API_KEY = 'b5958d9b3908799da10532d190c26c36'; // Replace with your actual OpenWeather API key
     const WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather';
     const FORECAST_URL = 'https://api.openweathermap.org/data/2.5/forecast';
 
@@ -123,11 +140,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    setInterval(() => {
-    if (currentCityData) {
-        updateTime(currentCityData.timezone); // Pass the city's timezone
-    }
-}, 1000);
+    // setInterval(() => {
+    // if (currentCityData) {
+        // updateTime(currentCityData.timezone); // Pass the city's timezone
+    // }
+// }, 1000);
 
 
     async function getFiveDayForecast(city) {
@@ -322,13 +339,6 @@ currentLocationBtn.addEventListener('click', () => {
 });
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    const darkModeSwitch = document.getElementById('darkModeSwitch');
-
-    darkModeSwitch.addEventListener('change', function () {
-        alert('Dark mode toggle clicked'); // This ensures the event is firing
-    });
-});
 
     // Check the user's location if geolocation is available
     document.addEventListener('DOMContentLoaded', () => {
@@ -370,3 +380,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     console.log("main.js loaded");
 });
+
+function enableDarkMode() {
+    document.documentElement.style.setProperty('--white', '#ffffff');
+    document.documentElement.style.setProperty('--lighterblue', '#005abe');
+    document.documentElement.style.setProperty('--lightblue', '#001e48');
+    document.documentElement.style.setProperty('--darkblue', '#002c63');
+    document.documentElement.style.setProperty('--background', '#000516');
+    document.documentElement.style.setProperty('----dark-to-light-txt', '#ffffff');
+}
+
+function disableDarkMode() {
+    document.documentElement.style.setProperty('--white', '#ffffff');
+    document.documentElement.style.setProperty('--lighterblue', '#e1f5fe');
+    document.documentElement.style.setProperty('--lightblue', '#81d4fa');
+    document.documentElement.style.setProperty('--darkblue', '#03a9f4');
+    document.documentElement.style.setProperty('--background', '#ffffff');
+    document.documentElement.style.setProperty('----dark-to-light-txt', '#000000');
+}

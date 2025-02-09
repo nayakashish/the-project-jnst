@@ -1,15 +1,27 @@
+:root {
+    --white:#ffffff;
+    --lighterblue: #e1f5fe;
+    --lightblue: #81d4fa;
+    --darkblue: #03a9f4;
+    --background: #ffffff;
+    --dark-to-light-txt: #ffffff;
+    
+    --transition-duration: 1s;
+  }
+
 /* General Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto', Geneva, Tahoma, sans-serif;
+    transition: var(--transition-duration);
 }
 
 /* Body and Container */
 body {
-    background-color: white;
-    color: white;
+    background-color: var(--background);
+    color: var(--white);
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -21,7 +33,7 @@ body {
 .container {
     width: 90%;
     max-width: 1200px;
-    background: #e1f5fe;
+    background: var(--lighterblue);
     padding: 20px;
     border-radius: 20px;
     display: flex;
@@ -29,6 +41,7 @@ body {
     gap: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     justify-content: flex-start; /* Ensure content starts from the top */
+    
 }
 
 /* Header Section */
@@ -37,7 +50,6 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
-    background-color: inherit;
     gap: 15px;
 }
 
@@ -52,7 +64,7 @@ header {
     width: 25rem;
     padding: 10px;
     border-radius: 10px;
-    border: 1px solid #b0bec5;
+    border: 1px solid var(--darkblue);
     border: none;
     outline: none;
     font-size: 1rem;
@@ -65,10 +77,10 @@ header {
 }
 .unit-toggle button {
     padding: 10px 15px;
-    border: 1px solid #81d4fa;
+    border: 1px solid var(--lightblue);
     border-radius: 0.5rem;
-    background-color: #ffffff;
-    color: #81d4fa;
+    background-color: var(--lightblue);
+    color: var(--dark-to-light-txt);
     font-weight: bold;
     font-size: 0.7rem;
     cursor: pointer;
@@ -76,7 +88,7 @@ header {
 }
 
 .current-location-btn {
-    background-color: #81d4fa;
+    background-color: var(--lighterblue);
     color: white;
     padding: 10px 20px;
     border-radius: 20px;
@@ -92,7 +104,6 @@ header {
 .current-weather {
     display: flex;
     justify-content: space-between;
-    background-color: #81d4fa;
     padding: 20px;
     border-radius: 10px;
     gap: 20px;
@@ -155,14 +166,14 @@ header {
 
 /* 5-Hour Forecast Section */
 .five-hour-forecast {
-    background-color: #81d4fa;
+    background-color: var(--lighterblue);
     padding: 20px;
     border-radius: 10px;
 }
 
 .five-hour-forecast h3 {
     font-size: 1.3rem;
-    color: #ffffff;
+    color: var(--white);
     text-align: center;
     margin-bottom: 15px;
 }
@@ -245,7 +256,7 @@ header {
 
 
 .five-day-forecast {
-    background-color: #03a9f4;
+    background-color: var(--darkblue);
     padding: 20px;
     border-radius: 10px;
     width: 100%;
@@ -302,7 +313,7 @@ header {
 
 /* Saved Locations Section */
 .saved-locations {
-    background-color: #03a9f4;
+    background-color: var(--darkblue);
     padding: 20px;
     border-radius: 10px;
     width: 48%;
@@ -372,7 +383,7 @@ header {
     cursor: pointer;
     font-size: 0.8rem;
     font-weight: bold;
-    color: #81d4fa; /* Adjust based on your theme */
+    color: var(--lightblue); /* Adjust based on your theme */
 }
 
 /* The slider itself */
@@ -401,7 +412,7 @@ header {
 
 /* When the checkbox is checked, move the circle and change background */
 input:checked + .slider {
-    background-color: #81d4fa; /* Active color */
+    background-color: var(--lightblue); /* Active color */
 }
 
 input:checked + .slider::before {
@@ -431,7 +442,7 @@ input:checked + .slider::before {
 }
 
 .current-location-btn {
-    background-color: #81d4fa;
+    background-color: var(--lightblue);
     color: white;
     padding: 10px 20px;
     border-radius: 20px;
@@ -441,7 +452,7 @@ input:checked + .slider::before {
     height: 2.4rem;
 }
 .login-btn {
-    background-color: #81d4fa;
+    background-color: var(--lightblue);
     color: white;
     padding: 10px 20px;
     border-radius: 20px;
@@ -450,7 +461,7 @@ input:checked + .slider::before {
     font-size: 1rem;
 }
 .welcome-btn {
-    background-color: #81d4fa;
+    background-color: var(--lightblue);
     color: white;
     padding: 10px 20px;
     border-radius: 20px;
@@ -462,7 +473,7 @@ input:checked + .slider::before {
 }
 
 .view-dashboards-btn {
-    background-color: #81d4fa;
+    background-color: var(--lightblue);
     color: white;
     padding: 5px 10px;
     border-radius: 10px;
@@ -472,7 +483,7 @@ input:checked + .slider::before {
 }
 
 .view-dashboards-btn-not-logged-in {
-    background-color: #81d4fa;
+    background-color: var(--lightblue);
     color: white;
     padding: 5px 10px;
     border-radius: 10px;
@@ -486,7 +497,7 @@ input:checked + .slider::before {
 .current-weather {
     display: flex;
     justify-content: space-between;
-    background-color: #81d4fa;
+    background-color: var(--lightblue);
     padding: 20px;
     border-radius: 10px;
     gap: 20px;
@@ -538,7 +549,7 @@ input:checked + .slider::before {
 
 /* 5-Hour Forecast Section */
 .five-hour-forecast {
-    background-color: #81d4fa;
+    background-color: var(--lightblue);
     padding: 20px;
     border-radius: 10px;
 }
@@ -628,7 +639,7 @@ input:checked + .slider::before {
 
 
 .five-day-forecast {
-    background-color: #03a9f4;
+    background-color: var(--darkblue);
     padding: 20px;
     border-radius: 10px;
     width: 100%;
@@ -685,7 +696,7 @@ input:checked + .slider::before {
 
 /* Saved Locations Section */
 .saved-locations {
-    background-color: #03a9f4;
+    background-color: var(--darkblue);
     padding: 20px;
     border-radius: 10px;
     width: 48%;
@@ -757,7 +768,7 @@ input:checked + .slider::before {
 .license-section {
     width: 100%;
     box-sizing: border-box;
-    background-color:#81d4fa;
+    background-color:var(--lightblue);
     border-radius: 7px;
     text-align: center;
     padding: 3px;
@@ -775,7 +786,7 @@ input:checked + .slider::before {
 
 .license-section a {
     text-decoration:underline;
-    color: #03a9f4;
+    color: var(--darkblue);
 }
 
 .license-section a:hover {
